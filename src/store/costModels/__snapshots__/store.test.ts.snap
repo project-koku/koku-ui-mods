@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`default state 1`] = `
+{
+  "costModels": {
+    "costModels": null,
+    "currentFilterType": "name",
+    "currentFilterValue": "",
+    "delete": {
+      "error": null,
+      "status": 0,
+    },
+    "dialogData": null,
+    "error": null,
+    "isDialogOpen": {
+      "addRate": false,
+      "addSource": false,
+      "createWizard": false,
+      "deleteCostModel": false,
+      "deleteDistribution": false,
+      "deleteMarkup": false,
+      "deleteRate": false,
+      "deleteSource": false,
+      "updateCostModel": false,
+      "updateDistribution": false,
+      "updateMarkup": false,
+      "updateRate": false,
+    },
+    "status": 0,
+    "update": {
+      "current": null,
+      "error": null,
+      "status": 0,
+    },
+  },
+}
+`;

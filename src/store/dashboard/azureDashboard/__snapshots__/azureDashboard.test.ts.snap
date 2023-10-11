@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetch widget reports 1`] = `
+[
+  [
+    "azure",
+    "cost",
+    "currency=USD&filter[resolution]=daily&filter[time_scope_units]=month&filter[time_scope_value]=-1",
+  ],
+  [
+    "azure",
+    "cost",
+    "currency=USD&filter[resolution]=daily&filter[time_scope_units]=month&filter[time_scope_value]=-2",
+  ],
+  [
+    "azure",
+    "cost",
+    "currency=USD&filter[limit]=3&filter[resolution]=monthly&filter[time_scope_units]=month&filter[time_scope_value]=-1&group_by[service_name]=*",
+  ],
+]
+`;
+
+exports[`getGroupByForTab accounts tab 1`] = `
+{
+  "subscription_guid": "*",
+}
+`;
+
+exports[`getGroupByForTab regions tab 1`] = `
+{
+  "resource_location": "*",
+}
+`;
+
+exports[`getGroupByForTab services tab 1`] = `
+{
+  "service_name": "*",
+}
+`;
+
+exports[`getGroupByForTab unknown tab 1`] = `{}`;

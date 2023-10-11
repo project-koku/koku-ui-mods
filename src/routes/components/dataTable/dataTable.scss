@@ -1,0 +1,38 @@
+@import url("~@patternfly/patternfly/base/patternfly-variables.css");
+
+.monthOverMonthOverride {
+  div {
+    display: block;
+    margin-right: 0;
+    margin-bottom: var(--pf-v5-global--spacer--xs);
+    &.iconOverride {
+      &.decrease {
+        color: var(--pf-v5-global--success-color--100);
+      }
+      &.increase {
+        color: var(--pf-v5-global--danger-color--100);
+      }
+      .fa-sort-up {
+        margin-left: 10px;
+      }
+      .fa-sort-down {
+        margin-left: 10px;
+      }
+      .fa-sort-up::before {
+        color: var(--pf-v5-global--danger-color--100);
+      }
+      .fa-sort-down::before {
+        color: var(--pf-v5-global--success-color--100);
+      }
+      span {
+        margin-right: -17px !important;
+      }
+    }
+  }
+}
+
+.tableOverride {
+  &.pf-v5-c-table tbody .pf-v5-c-table__check input {
+    margin-top: .40rem;
+  }
+}
