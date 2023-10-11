@@ -1,0 +1,11 @@
+.breadcrumbOverride {
+  .pf-v5-c-breadcrumb__item:not(:last-child) {
+    margin-left: var(--pf-v5-c-breadcrumb__item--MarginRight);
+    margin-right: 0;
+  }
+
+  .pf-v5-c-breadcrumb__item-divider {
+    margin-left: 0;
+    margin-right: var(--pf-v5-c-breadcrumb__item-divider--MarginLeft);
+  }
+}
