@@ -10561,6 +10561,36 @@
         "value": "Optimizations"
       }
     ],
+    "optimizationsBadgeAll": [
+      {
+        "type": 0,
+        "value": "No Filter"
+      }
+    ],
+    "optimizationsBadgeDemo": [
+      {
+        "type": 0,
+        "value": "Optimizations Badge Demo"
+      }
+    ],
+    "optimizationsBadgeGroupBy": [
+      {
+        "type": 0,
+        "value": "Filtered by "
+      },
+      {
+        "type": 1,
+        "value": "groupBy"
+      },
+      {
+        "type": 0,
+        "value": "="
+      },
+      {
+        "type": 1,
+        "value": "groupByValue"
+      }
+    ],
     "optimizationsDetails": [
       {
         "offset": 0,

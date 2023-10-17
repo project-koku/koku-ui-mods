@@ -2696,6 +2696,21 @@ export default defineMessages({
     description: 'Optimizations',
     id: 'optimizations',
   },
+  optimizationsBadgeDemo: {
+    defaultMessage: 'Optimizations Badge Demo',
+    description: 'Optimizations Badge Demo',
+    id: 'optimizationsBadgeDemo',
+  },
+  optimizationsBadgeDemoDefault: {
+    defaultMessage: 'No Filter',
+    description: 'No Filter',
+    id: 'optimizationsBadgeAll',
+  },
+  optimizationsBadgeDemoGroupBy: {
+    defaultMessage: 'Filtered by {groupBy}={groupByValue}',
+    description: 'Filtered by',
+    id: 'optimizationsBadgeGroupBy',
+  },
   optimizationsDetails: {
     defaultMessage: '{count, plural, =0 {No optimizations} =1 {{count} optimization} other {{count} optimizations}}',
     description: 'Recommendation details',

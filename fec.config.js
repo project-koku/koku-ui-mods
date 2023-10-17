@@ -62,7 +62,7 @@ module.exports = {
     exposes: {
       './RootApp': path.resolve(__dirname, './src/appEntry.tsx'),
       // Shared component module path. Must include default export!
-      './OptimizationsBadge': path.resolve(__dirname, './src/modules/optimizationsBadge.tsx'),
+      './OptimizationsBadge': path.resolve(__dirname, './src/fed-modules/optimizationsBadge.tsx'),
     },
     shared: [
       { 'react-redux': { version: dependencies['react-redux'] } },

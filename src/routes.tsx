@@ -18,6 +18,10 @@ const OciBreakdown = lazy(() => import(/* webpackChunkName: "ociBreakdown" */ 'r
 const OciDetails = lazy(() => import(/* webpackChunkName: "ociDetails" */ 'routes/details/ociDetails'));
 const OcpBreakdown = lazy(() => import(/* webpackChunkName: "ocpBreakdown" */ 'routes/details/ocpBreakdown'));
 const OcpDetails = lazy(() => import(/* webpackChunkName: "ocpDetails" */ 'routes/details/ocpDetails'));
+const OptimizationsBadgeDemo = lazy(
+  () =>
+    import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsBadge/optimizationsBadgeDemo')
+);
 const OptimizationsBreakdown = lazy(
   () => import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsBreakdown')
 );
@@ -91,6 +95,10 @@ const routes = {
   ocpDetails: {
     element: userAccess(OcpDetails),
     path: '/ocp',
+  },
+  optimizationsBadgeDemo: {
+    element: userAccess(OptimizationsBadgeDemo),
+    path: '/optimizations/badge',
   },
   optimizationsBreakdown: {
     element: userAccess(OptimizationsBreakdown),
