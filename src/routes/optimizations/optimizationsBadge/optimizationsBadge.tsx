@@ -36,7 +36,7 @@ const OptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({ filter, filterV
 
   const count = report?.meta ? report.meta.count : 0;
 
-  return <Badge screenReaderText={intl.formatMessage(messages.optimizationsDetails, { count })}>{count}</Badge>;
+  return <Badge screenReaderText={intl.formatMessage(messages.optimizationsDetails, { count })}>{count} Test</Badge>;
 };
 
 const useMapToProps = ({ filter, filterValue }: OptimizationsBadgeOwnProps): OptimizationsBadgeStateProps => {

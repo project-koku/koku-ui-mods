@@ -28,7 +28,13 @@ const OptimizationsBreakdown = lazy(
 const OptimizationsDetails = lazy(
   () => import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsDetails')
 );
-const Overview = lazy(() => import(/* webpackChunkName: "overview" */ 'routes/overview'));
+const OptimizationsSummaryDemo = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsSummary/optimizationsSummaryDemo'
+    )
+);
+// const Overview = lazy(() => import(/* webpackChunkName: "overview" */ 'routes/overview'));
 const RhelDetails = lazy(() => import(/* webpackChunkName: "rhelDetails" */ 'routes/details/rhelDetails'));
 const RhelBreakdown = lazy(() => import(/* webpackChunkName: "rhelBreakdown" */ 'routes/details/rhelBreakdown'));
 const Settings = lazy(() => import(/* webpackChunkName: "overview" */ 'routes/settings'));
@@ -96,7 +102,7 @@ const routes = {
     element: userAccess(OcpDetails),
     path: '/ocp',
   },
-  optimizationsBadgeDemo: {
+  optimizationsBadge: {
     element: userAccess(OptimizationsBadgeDemo),
     path: '/optimizations/badge',
   },
@@ -108,8 +114,12 @@ const routes = {
     element: userAccess(OptimizationsDetails),
     path: '/optimizations',
   },
+  optimizationsSummary: {
+    element: userAccess(OptimizationsSummaryDemo),
+    path: '/optimizations/summary',
+  },
   overview: {
-    element: userAccess(Overview),
+    element: userAccess(OptimizationsBadgeDemo),
     path: '/',
   },
   rhelBreakdown: {

@@ -32,7 +32,7 @@ class WatchRunPlugin {
 }
 
 module.exports = {
-  appUrl: '/openshift/cost-management-mfe',
+  appUrl: '/microfrontend/cost-management',
   debug: true,
   interceptChromeConfig: false, // Change to false after your app is registered in configuration files
   proxyVerbose: true,
@@ -63,6 +63,7 @@ module.exports = {
       './RootApp': path.resolve(__dirname, './src/appEntry.tsx'),
       // Shared component module path. Must include default export!
       './OptimizationsBadge': path.resolve(__dirname, './src/fed-modules/optimizationsBadge.tsx'),
+      './OptimizationsSummary': path.resolve(__dirname, './src/fed-modules/optimizationsSummary.tsx'),
     },
     shared: [
       { 'react-redux': { version: dependencies['react-redux'] } },

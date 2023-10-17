@@ -10746,6 +10746,12 @@
         "value": "Last 24 hrs"
       }
     ],
+    "optimizationsSummaryDemo": [
+      {
+        "type": 0,
+        "value": "Optimizations Summary Demo"
+      }
+    ],
     "optimizationsTableAriaLabel": [
       {
         "type": 0,

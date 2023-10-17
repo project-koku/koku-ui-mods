@@ -2713,7 +2713,7 @@ export default defineMessages({
   },
   optimizationsDetails: {
     defaultMessage: '{count, plural, =0 {No optimizations} =1 {{count} optimization} other {{count} optimizations}}',
-    description: 'Recommendation details',
+    description: 'Optimization details',
     id: 'optimizationsDetails',
   },
   optimizationsInfo: {
@@ -2773,6 +2773,11 @@ export default defineMessages({
     defaultMessage: 'Last 24 hrs',
     description: 'Last 24 hrs',
     id: 'optimizationsShortTerm',
+  },
+  optimizationsSummaryDemo: {
+    defaultMessage: 'Optimizations Summary Demo',
+    description: 'Optimizations Summary Demo',
+    id: 'optimizationsSummaryDemo',
   },
   optimizationsTableAriaLabel: {
     defaultMessage: 'Optimizations table',

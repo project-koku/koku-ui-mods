@@ -166,7 +166,15 @@ class BreakdownBase extends React.Component<BreakdownProps, BreakdownState> {
           <>
             <TabTitleText>{this.getTabTitle(tab)}</TabTitleText>
             {badge && (
-              <span>{<AsyncComponent scope="costManagementMfe" appName="cost-management-mfe" module="./Badge" />}</span>
+              <span>
+                {
+                  <AsyncComponent
+                    scope="costManagementMfe"
+                    appName="cost-management-mfe"
+                    module="./OptimizationsBadge"
+                  />
+                }
+              </span>
             )}
           </>
         }

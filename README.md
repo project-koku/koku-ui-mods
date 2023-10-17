@@ -56,7 +56,7 @@ Follow the prompts that follow.
 
 2. Open the following URL
 ```
-https://stage.foo.redhat.com:1337/beta/openshift/cost-management-mfe
+https://stage.foo.redhat.com:1337/beta/microfrontend/cost-management
 ```
 
 ## Releasing the Koku-ui MFE

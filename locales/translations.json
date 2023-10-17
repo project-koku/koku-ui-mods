@@ -442,6 +442,7 @@
   "optimizationsNames": "{value, select, cluster {Cluster names} container {Container names} last_reported {Last reported} project {Project names} workload {Workload names} workload_type {Workload types} other {}}",
   "optimizationsPerspective": "View optimizations based on",
   "optimizationsShortTerm": "Last 24 hrs",
+  "optimizationsSummaryDemo": "Optimizations Summary Demo",
   "optimizationsTableAriaLabel": "Optimizations table",
   "optimizationsValue": "{value}{units}",
   "optimizationsValues": "{value, select, cluster {Cluster name} container {Container name} last_reported {Last reported} project {Project name} workload {Workload name} workload_type {Workload type} other {}}",

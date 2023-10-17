@@ -24,17 +24,17 @@ objects:
           routes:
             - appId: 'cost-management-mfe'
               title: Overview
-              href: "/openshift/cost-management-mfe"
+              href: "/microfrontend/cost-management"
             - appId: 'cost-management-mfe'
               title: 'OpenShift'
-              href: '/openshift/cost-management-mfe/ocp'
+              href: '/microfrontend/cost-management/ocp'
       module:
         manifestLocation: "/apps/cost-management-mfe/fed-mods.json"
         modules:
           - id: "cost-management-mfe"
             module: "./RootApp"
             routes:
-              - pathname: /openshift/cost-management-mfe
+              - pathname: /microfrontend/cost-management
 parameters:
   - name: ENV_NAME
     required: true
