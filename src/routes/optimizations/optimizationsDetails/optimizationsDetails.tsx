@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import type { AnyAction } from 'redux';
 import type { ThunkDispatch } from 'redux-thunk';
-import { routes } from 'routes';
 import { OptimizationsTable, OptimizationsToolbar } from 'routes/components/optimizations';
 import { Loading } from 'routes/components/page/loading';
 import { NoOptimizations } from 'routes/components/page/noOptimizations';
@@ -24,13 +23,14 @@ import { clearQueryState, getQueryState } from 'routes/utils/queryState';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
-import { formatPath } from 'utils/paths';
 
 import { styles } from './optimizationsDetails.styles';
 import { OptimizationsDetailsHeader } from './optimizationsDetailsHeader';
 
 interface OptimizationsDetailsOwnProps {
-  // TBD...
+  breadcrumbLabel?: string;
+  breadcrumbPath?: string;
+  toPath?: string;
 }
 
 export interface OptimizationsDetailsStateProps {
@@ -58,7 +58,7 @@ const baseQuery: RosQuery = {
 const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendations as any;
 
-const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = () => {
+const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({ breadcrumbLabel, breadcrumbPath, toPath }) => {
   const intl = useIntl();
   const location = useLocation();
 
@@ -103,9 +103,8 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = () => {
   const getTable = () => {
     return (
       <OptimizationsTable
-        basePath={formatPath(routes.optimizationsBreakdown.path)}
-        breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizations)}
-        breadcrumbPath={formatPath(`${routes.optimizationsDetails.path}${location.search}`)}
+        breadcrumbLabel={breadcrumbLabel}
+        breadcrumbPath={breadcrumbPath}
         filterBy={query.filter_by}
         groupBy={groupBy}
         isLoading={reportFetchStatus === FetchStatus.inProgress}
@@ -114,6 +113,7 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = () => {
         query={query}
         report={report}
         reportQueryString={reportQueryString}
+        toPath={toPath}
       />
     );
   };
@@ -175,7 +175,6 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = () => {
   }
   return (
     <div style={styles.container}>
-      TEST
       <OptimizationsDetailsHeader />
       <PageSection isFilled>
         {getToolbar()}
@@ -246,4 +245,4 @@ const useMapToProps = ({ query }: OptimizationsDetailsMapProps): OptimizationsDe
   };
 };
 
-export default OptimizationsDetails;
+export { OptimizationsDetails };

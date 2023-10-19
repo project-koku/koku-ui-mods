@@ -16,7 +16,6 @@ import { getTimeFromNow } from 'utils/dates';
 import { hasWarning } from 'utils/recomendations';
 
 interface OptimizationsTableOwnProps {
-  basePath?: string;
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
   filterBy?: any;
@@ -27,12 +26,12 @@ interface OptimizationsTableOwnProps {
   query?: Query;
   report: RecommendationReport;
   reportQueryString: string;
+  toPath?: string;
 }
 
 type OptimizationsTableProps = OptimizationsTableOwnProps;
 
 const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
-  basePath,
   breadcrumbLabel,
   breadcrumbPath,
   filterBy,
@@ -42,6 +41,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
   orderBy,
   query,
   report,
+  toPath,
 }) => {
   const intl = useIntl();
   const location = useLocation();
@@ -108,7 +108,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
               value: (
                 <Link
                   to={getOptimizationsBreakdownPath({
-                    basePath,
+                    basePath: toPath,
                     breadcrumbLabel,
                     id: item.id,
                     title: container,

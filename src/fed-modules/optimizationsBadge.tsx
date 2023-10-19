@@ -8,21 +8,21 @@ import { OptimizationsBadge } from 'routes/optimizations/optimizationsBadge';
 import messages from '../../locales/data.json';
 
 export interface OptimizationsBadgeOwnProps {
-  filter?: string;
-  filterValue?: string;
+  groupBy?: string;
+  groupByValue?: string;
 }
 
 type OptimizationsBadgeProps = OptimizationsBadgeOwnProps;
 
 const MfeOptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({
-  filter,
-  filterValue,
+  groupBy,
+  groupByValue,
 }: OptimizationsBadgeOwnProps) => {
   const locale = getLocale();
 
   return (
     <IntlProvider defaultLocale="en" locale={locale} messages={messages[locale]} onError={console.log}>
-      <OptimizationsBadge filter={filter} filterValue={filterValue} />
+      <OptimizationsBadge groupBy={groupBy} groupByValue={groupByValue} />
     </IntlProvider>
   );
 };

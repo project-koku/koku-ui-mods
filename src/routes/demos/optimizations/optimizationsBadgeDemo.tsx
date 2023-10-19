@@ -3,28 +3,25 @@ import { PageHeader, PageHeaderTitle } from '@redhat-cloud-services/frontend-com
 import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { routes } from 'routes';
-import { formatPath } from 'utils/paths';
+import { OptimizationsBadge } from 'routes/optimizations/optimizationsBadge';
 
-import { OptimizationsSummary } from './optimizationsSummary';
-
-interface OptimizationsSummaryOwnProps {
+interface OptimizationsBadgeDemoOwnProps {
   // TBD...
 }
 
-type OptimizationsSummaryProps = OptimizationsSummaryOwnProps;
+type OptimizationsBadgeDemoProps = OptimizationsBadgeDemoOwnProps;
 
-const OptimizationsSummaryDemo: React.FC<OptimizationsSummaryProps> = () => {
+const OptimizationsBadgeDemo: React.FC<OptimizationsBadgeDemoProps> = () => {
   const intl = useIntl();
 
   return (
     <>
       <PageHeader>
-        <PageHeaderTitle title={intl.formatMessage(messages.optimizationsSummaryDemo)} />
+        <PageHeaderTitle title={intl.formatMessage(messages.optimizationsBadgeDemo)} />
       </PageHeader>
       <PageSection isFilled>
-        <Grid hasGutter>
-          <GridItem>
+        <Grid hasGutter md={6}>
+          <GridItem span={6}>
             <Card>
               <CardTitle>
                 <Title headingLevel="h2" size={TitleSizes.lg}>
@@ -35,7 +32,19 @@ const OptimizationsSummaryDemo: React.FC<OptimizationsSummaryProps> = () => {
                 </Title>
               </CardTitle>
               <CardBody>
-                <OptimizationsSummary toPath={formatPath(routes.optimizationsSummary.path)} />
+                <OptimizationsBadge groupBy="project" groupByValue="openshift" />
+              </CardBody>
+            </Card>
+          </GridItem>
+          <GridItem span={6}>
+            <Card>
+              <CardTitle>
+                <Title headingLevel="h2" size={TitleSizes.lg}>
+                  {intl.formatMessage(messages.optimizationsBadgeDemoDefault)}
+                </Title>
+              </CardTitle>
+              <CardBody>
+                <OptimizationsBadge />
               </CardBody>
             </Card>
           </GridItem>
@@ -45,4 +54,4 @@ const OptimizationsSummaryDemo: React.FC<OptimizationsSummaryProps> = () => {
   );
 };
 
-export default OptimizationsSummaryDemo;
+export default OptimizationsBadgeDemo;

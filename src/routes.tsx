@@ -19,20 +19,20 @@ const OciDetails = lazy(() => import(/* webpackChunkName: "ociDetails" */ 'route
 const OcpBreakdown = lazy(() => import(/* webpackChunkName: "ocpBreakdown" */ 'routes/details/ocpBreakdown'));
 const OcpDetails = lazy(() => import(/* webpackChunkName: "ocpDetails" */ 'routes/details/ocpDetails'));
 const OptimizationsBadgeDemo = lazy(
-  () =>
-    import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsBadge/optimizationsBadgeDemo')
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsBadgeDemo')
 );
 const OptimizationsBreakdown = lazy(
   () => import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsBreakdown')
 );
-const OptimizationsDetails = lazy(
-  () => import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsDetails')
+// const OptimizationsDetails = lazy(
+//   () =>
+//     import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsDetails/optimizationsDetails')
+// );
+const OptimizationsDetailsDemo = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsDetailsDemo')
 );
 const OptimizationsSummaryDemo = lazy(
-  () =>
-    import(
-      /* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsSummary/optimizationsSummaryDemo'
-    )
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsSummaryDemo')
 );
 // const Overview = lazy(() => import(/* webpackChunkName: "overview" */ 'routes/overview'));
 const RhelDetails = lazy(() => import(/* webpackChunkName: "rhelDetails" */ 'routes/details/rhelDetails'));
@@ -110,9 +110,13 @@ const routes = {
     element: userAccess(OptimizationsBreakdown),
     path: '/optimizations/breakdown',
   },
+  // optimizationsDetails: {
+  //   element: userAccess(OptimizationsDetails),
+  //   path: '/optimizations',
+  // },
   optimizationsDetails: {
-    element: userAccess(OptimizationsDetails),
-    path: '/optimizations',
+    element: userAccess(OptimizationsDetailsDemo),
+    path: '/optimizations/details',
   },
   optimizationsSummary: {
     element: userAccess(OptimizationsSummaryDemo),

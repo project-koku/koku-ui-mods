@@ -103,7 +103,6 @@ const OcpBreakdownOptimizations: React.FC<OcpOptimizationsBreakdownProps> = () =
   const getTable = () => {
     return (
       <OptimizationsTable
-        basePath={formatPath(routes.ocpBreakdownOptimizations.path)}
         breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: project })}
         breadcrumbPath={formatPath(`${routes.ocpBreakdown.path}${location.search}&optimizationsTab=true`)}
         filterBy={query.filter_by}
@@ -114,6 +113,7 @@ const OcpBreakdownOptimizations: React.FC<OcpOptimizationsBreakdownProps> = () =
         query={query}
         report={report}
         reportQueryString={reportQueryString}
+        toPath={formatPath(routes.ocpBreakdownOptimizations.path)}
       />
     );
   };

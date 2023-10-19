@@ -10570,7 +10570,7 @@
     "optimizationsBadgeDemo": [
       {
         "type": 0,
-        "value": "Optimizations Badge Demo"
+        "value": "Optimizations badge demo"
       }
     ],
     "optimizationsBadgeGroupBy": [
@@ -10631,6 +10631,12 @@
         "pluralType": "cardinal",
         "type": 6,
         "value": "count"
+      }
+    ],
+    "optimizationsDetailsDemo": [
+      {
+        "type": 0,
+        "value": "Optimizations details demo"
       }
     ],
     "optimizationsInfo": [
@@ -10749,13 +10755,19 @@
     "optimizationsSummaryDemo": [
       {
         "type": 0,
-        "value": "Optimizations Summary Demo"
+        "value": "Optimizations summary demo"
       }
     ],
     "optimizationsTableAriaLabel": [
       {
         "type": 0,
         "value": "Optimizations table"
+      }
+    ],
+    "optimizationsTableDemo": [
+      {
+        "type": 0,
+        "value": "Optimizations table demo"
       }
     ],
     "optimizationsValue": [

@@ -63,6 +63,7 @@ module.exports = {
       './RootApp': path.resolve(__dirname, './src/appEntry.tsx'),
       // Shared component module path. Must include default export!
       './OptimizationsBadge': path.resolve(__dirname, './src/fed-modules/optimizationsBadge.tsx'),
+      './OptimizationsDetails': path.resolve(__dirname, './src/fed-modules/optimizationsDetails.tsx'),
       './OptimizationsSummary': path.resolve(__dirname, './src/fed-modules/optimizationsSummary.tsx'),
     },
     shared: [

@@ -14,8 +14,8 @@ import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
 
 export interface OptimizationsBadgeOwnProps {
-  filter?: string;
-  filterValue?: string;
+  groupBy?: string;
+  groupByValue?: string;
 }
 
 export interface OptimizationsBadgeStateProps {
@@ -30,8 +30,8 @@ type OptimizationsBadgeProps = OptimizationsBadgeOwnProps & OptimizationsBadgeSt
 const reportPathsType = RosPathsType.recommendations;
 const reportType = RosType.ros;
 
-const OptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({ filter, filterValue }: OptimizationsBadgeOwnProps) => {
-  const { report } = useMapToProps({ filter, filterValue });
+const OptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({ groupBy, groupByValue }: OptimizationsBadgeOwnProps) => {
+  const { report } = useMapToProps({ groupBy, groupByValue });
   const intl = useIntl();
 
   const count = report?.meta ? report.meta.count : 0;
@@ -39,13 +39,13 @@ const OptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({ filter, filterV
   return <Badge screenReaderText={intl.formatMessage(messages.optimizationsDetails, { count })}>{count} Test</Badge>;
 };
 
-const useMapToProps = ({ filter, filterValue }: OptimizationsBadgeOwnProps): OptimizationsBadgeStateProps => {
+const useMapToProps = ({ groupBy, groupByValue }: OptimizationsBadgeOwnProps): OptimizationsBadgeStateProps => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
 
   // Don't need pagination here
   const reportQuery: any = {
-    ...(filter && {
-      [filter]: filterValue, // project filter
+    ...(groupBy && {
+      [groupBy]: groupByValue, // project filter
     }),
   };
 

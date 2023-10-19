@@ -2697,8 +2697,8 @@ export default defineMessages({
     id: 'optimizations',
   },
   optimizationsBadgeDemo: {
-    defaultMessage: 'Optimizations Badge Demo',
-    description: 'Optimizations Badge Demo',
+    defaultMessage: 'Optimizations badge demo',
+    description: 'Optimizations badge demo',
     id: 'optimizationsBadgeDemo',
   },
   optimizationsBadgeDemoDefault: {
@@ -2715,6 +2715,11 @@ export default defineMessages({
     defaultMessage: '{count, plural, =0 {No optimizations} =1 {{count} optimization} other {{count} optimizations}}',
     description: 'Optimization details',
     id: 'optimizationsDetails',
+  },
+  optimizationsDetailsDemo: {
+    defaultMessage: 'Optimizations details demo',
+    description: 'Optimizations details demo',
+    id: 'optimizationsDetailsDemo',
   },
   optimizationsInfo: {
     defaultMessage: 'Assess and monitor your usage so you can optimize your OpenShift resources.',
@@ -2775,14 +2780,19 @@ export default defineMessages({
     id: 'optimizationsShortTerm',
   },
   optimizationsSummaryDemo: {
-    defaultMessage: 'Optimizations Summary Demo',
-    description: 'Optimizations Summary Demo',
+    defaultMessage: 'Optimizations summary demo',
+    description: 'Optimizations summary demo',
     id: 'optimizationsSummaryDemo',
   },
   optimizationsTableAriaLabel: {
     defaultMessage: 'Optimizations table',
     description: 'Optimizations table',
     id: 'optimizationsTableAriaLabel',
+  },
+  optimizationsTableDemo: {
+    defaultMessage: 'Optimizations table demo',
+    description: 'Optimizations table demo',
+    id: 'optimizationsTableDemo',
   },
   optimizationsValue: {
     defaultMessage: '{value}{units}',

@@ -19,7 +19,7 @@ const OptimizationsDetailsHeader: React.FC<OptimizationsDetailsHeaderProps> = ()
     <header style={styles.header}>
       <div style={styles.headerContent}>
         <Title headingLevel="h1" style={styles.title} size={TitleSizes['2xl']}>
-          {intl.formatMessage(messages.optimizations)}
+          {intl.formatMessage(messages.optimizations)} TEST
           <span style={styles.infoIcon}>
             <Popover
               aria-label={intl.formatMessage(messages.optimizationsInfoArialLabel)}
