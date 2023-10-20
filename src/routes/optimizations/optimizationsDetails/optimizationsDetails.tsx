@@ -1,6 +1,5 @@
 import { PageSection, Pagination, PaginationVariant } from '@patternfly/react-core';
-import type { Query } from 'api/queries/query';
-import { getQuery, parseQuery } from 'api/queries/query';
+import { getQuery } from 'api/queries/query';
 import type { RosQuery } from 'api/queries/rosQuery';
 import type { RosReport } from 'api/ros/ros';
 import { RosPathsType, RosType } from 'api/ros/ros';
@@ -16,7 +15,6 @@ import { OptimizationsTable, OptimizationsToolbar } from 'routes/components/opti
 import { Loading } from 'routes/components/page/loading';
 import { NoOptimizations } from 'routes/components/page/noOptimizations';
 import { NotAvailable } from 'routes/components/page/notAvailable';
-import { getGroupById, getGroupByValue } from 'routes/utils/groupBy';
 import { getOrderById, getOrderByValue } from 'routes/utils/orderBy';
 import * as queryUtils from 'routes/utils/query';
 import { clearQueryState, getQueryState } from 'routes/utils/queryState';
@@ -34,7 +32,6 @@ interface OptimizationsDetailsOwnProps {
 }
 
 export interface OptimizationsDetailsStateProps {
-  groupBy?: string;
   report: RosReport;
   reportError: AxiosError;
   reportFetchStatus: FetchStatus;
@@ -42,7 +39,7 @@ export interface OptimizationsDetailsStateProps {
 }
 
 export interface OptimizationsDetailsMapProps {
-  query?: RosQuery;
+  query?: any;
 }
 
 type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
@@ -64,7 +61,7 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({ breadcrumbL
 
   const queryState = getQueryState(location, 'optimizations');
   const [query, setQuery] = useState({ ...baseQuery, ...(queryState && queryState) });
-  const { groupBy, report, reportError, reportFetchStatus, reportQueryString } = useMapToProps({
+  const { report, reportError, reportFetchStatus, reportQueryString } = useMapToProps({
     query,
   });
 
@@ -106,7 +103,6 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({ breadcrumbL
         breadcrumbLabel={breadcrumbLabel}
         breadcrumbPath={breadcrumbPath}
         filterBy={query.filter_by}
-        groupBy={groupBy}
         isLoading={reportFetchStatus === FetchStatus.inProgress}
         onSort={(sortType, isSortAscending) => handleOnSort(sortType, isSortAscending)}
         orderBy={query.order_by}
@@ -194,25 +190,14 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({ breadcrumbL
   );
 };
 
-const useQueryFromRoute = () => {
-  const location = useLocation();
-  return parseQuery<Query>(location.search);
-};
-
 // eslint-disable-next-line no-empty-pattern
 const useMapToProps = ({ query }: OptimizationsDetailsMapProps): OptimizationsDetailsStateProps => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
-  const queryFromRoute = useQueryFromRoute();
 
-  const groupBy = getGroupById(queryFromRoute);
-  const groupByValue = getGroupByValue(queryFromRoute);
   const order_by = getOrderById(query) || getOrderById(baseQuery);
   const order_how = getOrderByValue(query) || getOrderByValue(baseQuery);
 
   const reportQuery = {
-    ...(groupBy && {
-      [groupBy]: groupByValue, // Flattened project filter
-    }),
     ...query.filter_by, // Flattened filter by
     limit: query.limit,
     offset: query.offset,
@@ -237,7 +222,6 @@ const useMapToProps = ({ query }: OptimizationsDetailsMapProps): OptimizationsDe
   }, [query]);
 
   return {
-    groupBy,
     report,
     reportError,
     reportFetchStatus,
