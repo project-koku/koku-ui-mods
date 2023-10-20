@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import type { AnyAction } from 'redux';
 import type { ThunkDispatch } from 'redux-thunk';
-import { OptimizationsTable, OptimizationsToolbar } from 'routes/components/optimizations';
+import { OptimizationsDataTable, OptimizationsToolbar } from 'routes/components/optimizations';
 import { Loading } from 'routes/components/page/loading';
 import { NoOptimizations } from 'routes/components/page/noOptimizations';
 import { NotAvailable } from 'routes/components/page/notAvailable';
@@ -99,7 +99,7 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({ breadcrumbL
 
   const getTable = () => {
     return (
-      <OptimizationsTable
+      <OptimizationsDataTable
         breadcrumbLabel={breadcrumbLabel}
         breadcrumbPath={breadcrumbPath}
         filterBy={query.filter_by}

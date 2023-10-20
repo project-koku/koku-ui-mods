@@ -37,6 +37,9 @@ const OptimizationsDetailsDemo = lazy(
 const OptimizationsSummaryDemo = lazy(
   () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsSummaryDemo')
 );
+const OptimizationsTableDemo = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsTableDemo')
+);
 // const Overview = lazy(() => import(/* webpackChunkName: "overview" */ 'routes/overview'));
 const RhelDetails = lazy(() => import(/* webpackChunkName: "rhelDetails" */ 'routes/details/rhelDetails'));
 const RhelBreakdown = lazy(() => import(/* webpackChunkName: "rhelBreakdown" */ 'routes/details/rhelBreakdown'));
@@ -120,6 +123,10 @@ const routes = {
   optimizationsSummary: {
     element: userAccess(OptimizationsSummaryDemo),
     path: '/optimizations/summary',
+  },
+  optimizationsTable: {
+    element: userAccess(OptimizationsTableDemo),
+    path: '/optimizations/table',
   },
   overview: {
     element: userAccess(OptimizationsBadgeDemo),

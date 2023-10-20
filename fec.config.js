@@ -66,6 +66,7 @@ module.exports = {
       './OptimizationsBreakdown': path.resolve(__dirname, './src/fed-modules/optimizationsBreakdown.tsx'),
       './OptimizationsDetails': path.resolve(__dirname, './src/fed-modules/optimizationsDetails.tsx'),
       './OptimizationsSummary': path.resolve(__dirname, './src/fed-modules/optimizationsSummary.tsx'),
+      './OptimizationsTable': path.resolve(__dirname, './src/fed-modules/optimizationsTable.tsx'),
     },
     shared: [
       { 'react-redux': { version: dependencies['react-redux'] } },

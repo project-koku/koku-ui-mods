@@ -1,2 +1,2 @@
-export * from './optimizationsTable';
+export * from './optimizationsDataTable';
 export * from './optimizationsToolbar';

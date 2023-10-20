@@ -30,7 +30,10 @@ type OptimizationsBadgeProps = OptimizationsBadgeOwnProps & OptimizationsBadgeSt
 const reportPathsType = RosPathsType.recommendations;
 const reportType = RosType.ros;
 
-const OptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({ groupBy, groupByValue }: OptimizationsBadgeOwnProps) => {
+const OptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({
+  groupBy,
+  groupByValue,
+}: OptimizationsBadgeOwnProps) => {
   const { report } = useMapToProps({ groupBy, groupByValue });
   const intl = useIntl();
 

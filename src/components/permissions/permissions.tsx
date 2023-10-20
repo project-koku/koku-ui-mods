@@ -98,6 +98,7 @@ const PermissionsBase: React.FC<PermissionsProps> = ({
       case formatPath(routes.optimizationsBreakdown.path):
       case formatPath(routes.optimizationsDetails.path):
       case formatPath(routes.optimizationsSummary.path):
+      case formatPath(routes.optimizationsTable.path):
         return ros;
       case formatPath(routes.rhelBreakdown.path):
       case formatPath(routes.rhelDetails.path):

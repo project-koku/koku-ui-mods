@@ -1,6 +1,5 @@
 import { Pagination, PaginationVariant } from '@patternfly/react-core';
-import type { Query } from 'api/queries/query';
-import { getQuery, parseQuery } from 'api/queries/query';
+import { getQuery } from 'api/queries/query';
 import type { RosQuery } from 'api/queries/rosQuery';
 import type { RosReport } from 'api/ros/ros';
 import { RosPathsType, RosType } from 'api/ros/ros';
@@ -13,12 +12,14 @@ import { useLocation } from 'react-router-dom';
 import type { AnyAction } from 'redux';
 import type { ThunkDispatch } from 'redux-thunk';
 import { routes } from 'routes';
-import { OptimizationsDataTable, OptimizationsToolbar } from 'routes/components/optimizations';
+import {
+  OptimizationsDataTable as OptimizationsDataTable,
+  OptimizationsToolbar,
+} from 'routes/components/optimizations';
 import { Loading } from 'routes/components/page/loading';
 import { NoOptimizations } from 'routes/components/page/noOptimizations';
 import { NotAvailable } from 'routes/components/page/notAvailable';
 import { styles } from 'routes/optimizations/optimizationsBreakdown/optimizationsBreakdown.styles';
-import { getGroupById, getGroupByValue } from 'routes/utils/groupBy';
 import { getOrderById, getOrderByValue } from 'routes/utils/orderBy';
 import * as queryUtils from 'routes/utils/query';
 import { clearQueryState, getQueryState } from 'routes/utils/queryState';
@@ -26,26 +27,29 @@ import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
 import { formatPath } from 'utils/paths';
-import { breakdownTitleKey } from 'utils/props';
 
-interface OcpOptimizationsBreakdownOwnProps {
-  // TBD...
+interface OptimizationsTableOwnProps {
+  breadcrumbLabel?: string;
+  breadcrumbPath?: string;
+  groupBy?: string;
+  groupByValue?: string;
+  toPath?: string;
 }
 
-export interface OcpOptimizationsBreakdownStateProps {
-  groupBy?: string;
-  project?: number | string;
+export interface OptimizationsTableStateProps {
   report: RosReport;
   reportError: AxiosError;
   reportFetchStatus: FetchStatus;
   reportQueryString: string;
 }
 
-export interface OcpOptimizationsBreakdownMapProps {
+export interface OptimizationsTableMapProps {
+  groupBy?: string;
+  groupByValue?: string;
   query?: RosQuery;
 }
 
-type OcpOptimizationsBreakdownProps = OcpOptimizationsBreakdownOwnProps;
+type OptimizationsTableProps = OptimizationsTableOwnProps;
 
 const baseQuery: RosQuery = {
   limit: 10,
@@ -58,13 +62,20 @@ const baseQuery: RosQuery = {
 const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendations as any;
 
-const OcpBreakdownOptimizations: React.FC<OcpOptimizationsBreakdownProps> = () => {
+const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
+  breadcrumbLabel,
+  breadcrumbPath,
+  groupBy,
+  groupByValue,
+}) => {
   const intl = useIntl();
   const location = useLocation();
 
   const queryState = getQueryState(location, 'optimizations');
   const [query, setQuery] = useState({ ...baseQuery, ...(queryState && queryState) });
-  const { groupBy, project, report, reportError, reportFetchStatus, reportQueryString } = useMapToProps({
+  const { report, reportError, reportFetchStatus, reportQueryString } = useMapToProps({
+    groupBy,
+    groupByValue,
     query,
   });
 
@@ -103,8 +114,8 @@ const OcpBreakdownOptimizations: React.FC<OcpOptimizationsBreakdownProps> = () =
   const getTable = () => {
     return (
       <OptimizationsDataTable
-        breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: project })}
-        breadcrumbPath={formatPath(`${routes.ocpBreakdown.path}${location.search}&optimizationsTab=true`)}
+        breadcrumbLabel={breadcrumbLabel}
+        breadcrumbPath={breadcrumbPath}
         filterBy={query.filter_by}
         groupBy={groupBy}
         isLoading={reportFetchStatus === FetchStatus.inProgress}
@@ -189,18 +200,10 @@ const OcpBreakdownOptimizations: React.FC<OcpOptimizationsBreakdownProps> = () =
   );
 };
 
-const useQueryFromRoute = () => {
-  const location = useLocation();
-  return parseQuery<Query>(location.search);
-};
-
 // eslint-disable-next-line no-empty-pattern
-const useMapToProps = ({ query }: OcpOptimizationsBreakdownMapProps): OcpOptimizationsBreakdownStateProps => {
+const useMapToProps = ({ groupBy, groupByValue, query }: OptimizationsTableMapProps): OptimizationsTableStateProps => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
-  const queryFromRoute = useQueryFromRoute();
 
-  const groupBy = getGroupById(queryFromRoute);
-  const groupByValue = getGroupByValue(queryFromRoute);
   const order_by = getOrderById(query) || getOrderById(baseQuery);
   const order_how = getOrderByValue(query) || getOrderByValue(baseQuery);
 
@@ -232,8 +235,6 @@ const useMapToProps = ({ query }: OcpOptimizationsBreakdownMapProps): OcpOptimiz
   }, [query]);
 
   return {
-    groupBy,
-    project: queryFromRoute[breakdownTitleKey],
     report,
     reportError,
     reportFetchStatus,
@@ -241,4 +242,4 @@ const useMapToProps = ({ query }: OcpOptimizationsBreakdownMapProps): OcpOptimiz
   };
 };
 
-export { OcpBreakdownOptimizations };
+export { OptimizationsTable };

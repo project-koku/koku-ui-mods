@@ -359,7 +359,8 @@ export class BasicToolbarBase extends React.Component<BasicToolbarProps, BasicTo
                   {options && options.map(option => this.getCustomSelectComponent(option))}
                 </ToolbarGroup>
               </ToolbarToggleGroup>
-            )}
+            )}{' '}
+            TEST
             {actions && <ToolbarGroup>{actions}</ToolbarGroup>}
             <ToolbarItem align={{ default: 'alignRight' }} variant="pagination">
               {pagination}
