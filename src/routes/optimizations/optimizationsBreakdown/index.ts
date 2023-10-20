@@ -1,1 +1,1 @@
-export { default } from './optimizationsBreakdown';
+export * from './optimizationsBreakdown';
