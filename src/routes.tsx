@@ -21,16 +21,16 @@ const OcpDetails = lazy(() => import(/* webpackChunkName: "ocpDetails" */ 'route
 const OptimizationsBadgeDemo = lazy(
   () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsBadgeDemo')
 );
-// const OptimizationsBreakdown = lazy(
-//   () => import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsBreakdown')
-// );
+const OptimizationsBreakdown = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsBreakdown/optimizationsBreakdown'
+    )
+);
 // const OptimizationsDetails = lazy(
 //   () =>
 //     import(/* webpackChunkName: "recommendations" */ 'routes/optimizations/optimizationsDetails/optimizationsDetails')
 // );
-const OptimizationsBreakdownDemo = lazy(
-  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsBreakdownDemo')
-);
 const OptimizationsDetailsDemo = lazy(
   () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsDetailsDemo')
 );
@@ -101,7 +101,7 @@ const routes = {
     path: '/ocp/breakdown',
   },
   ocpBreakdownOptimizations: {
-    element: userAccess(OptimizationsBreakdownDemo),
+    element: userAccess(OptimizationsBreakdown),
     path: '/ocp/breakdown/optimizations',
   },
   ocpDetails: {
@@ -113,7 +113,7 @@ const routes = {
     path: '/optimizations/badge',
   },
   optimizationsBreakdown: {
-    element: userAccess(OptimizationsBreakdownDemo),
+    element: userAccess(OptimizationsBreakdown),
     path: '/optimizations/breakdown',
   },
   optimizationsDetails: {

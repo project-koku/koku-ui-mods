@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import type { AnyAction } from 'redux';
 import type { ThunkDispatch } from 'redux-thunk';
-import { routes } from 'routes';
 import {
   OptimizationsDataTable as OptimizationsDataTable,
   OptimizationsToolbar,
@@ -26,7 +25,6 @@ import { clearQueryState, getQueryState } from 'routes/utils/queryState';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
-import { formatPath } from 'utils/paths';
 
 interface OptimizationsTableOwnProps {
   breadcrumbLabel?: string;
@@ -67,6 +65,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
   breadcrumbPath,
   groupBy,
   groupByValue,
+  toPath,
 }) => {
   const intl = useIntl();
   const location = useLocation();
@@ -124,7 +123,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
         query={query}
         report={report}
         reportQueryString={reportQueryString}
-        toPath={formatPath(routes.ocpBreakdownOptimizations.path)}
+        toPath={toPath}
       />
     );
   };
@@ -242,4 +241,4 @@ const useMapToProps = ({ groupBy, groupByValue, query }: OptimizationsTableMapPr
   };
 };
 
-export { OptimizationsTable };
+export default OptimizationsTable;

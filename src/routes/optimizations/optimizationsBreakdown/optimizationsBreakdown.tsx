@@ -1,6 +1,8 @@
 import './optimizationsBreakdown.scss';
 
 import { Alert, List, ListItem, PageSection } from '@patternfly/react-core';
+import type { Query } from 'api/queries/query';
+import { parseQuery } from 'api/queries/query';
 import type { RecommendationItem, RecommendationReportData } from 'api/ros/recommendations';
 import { RosPathsType, RosType } from 'api/ros/ros';
 import type { AxiosError } from 'axios';
@@ -8,12 +10,14 @@ import messages from 'locales/messages';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import type { AnyAction } from 'redux';
 import type { ThunkDispatch } from 'redux-thunk';
 import { Loading } from 'routes/components/page/loading';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
+import { breadcrumbLabelKey } from 'utils/props';
 import { getNotifications, hasRecommendation } from 'utils/recomendations';
 
 import { styles } from './optimizationsBreakdown.styles';
@@ -21,20 +25,16 @@ import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownCon
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
 
 interface OptimizationsBreakdownOwnProps {
-  breadcrumbLabel?: string;
-  breadcrumbPath?: string;
-  id?: string;
+  // TBD...
 }
 
 interface OptimizationsBreakdownStateProps {
+  breadcrumbLabel?: string;
+  breadcrumbPath?: string;
   report?: RecommendationReportData;
   reportError?: AxiosError;
   reportFetchStatus?: FetchStatus;
   reportQueryString?: string;
-}
-
-export interface OptimizationsBreakdownMapProps {
-  id?: string;
 }
 
 type OptimizationsBreakdownProps = OptimizationsBreakdownOwnProps & OptimizationsBreakdownStateProps;
@@ -49,8 +49,8 @@ export const enum Interval {
 const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendation as any;
 
-const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = ({ breadcrumbLabel, breadcrumbPath, id }) => {
-  const { report, reportFetchStatus } = useMapToProps({ id });
+const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
+  const { breadcrumbLabel, breadcrumbPath, report, reportFetchStatus } = useMapToProps();
   const intl = useIntl();
 
   const getDefaultTerm = () => {
@@ -148,11 +148,18 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = ({ breadcr
   );
 };
 
-// eslint-disable-next-line no-empty-pattern
-const useMapToProps = ({ id }: OptimizationsBreakdownMapProps): OptimizationsBreakdownStateProps => {
-  const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
+const useQueryFromRoute = () => {
+  const location = useLocation();
+  return parseQuery<Query>(location.search);
+};
 
-  const reportQueryString = id ? id : ''; // Flatten ID
+// eslint-disable-next-line no-empty-pattern
+const useMapToProps = (): OptimizationsBreakdownStateProps => {
+  const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
+  const queryFromRoute = useQueryFromRoute();
+  const location = useLocation();
+
+  const reportQueryString = queryFromRoute ? queryFromRoute.id : ''; // Flatten ID
   const report: any = useSelector((state: RootState) =>
     rosSelectors.selectRos(state, reportPathsType, reportType, reportQueryString)
   );
@@ -170,6 +177,8 @@ const useMapToProps = ({ id }: OptimizationsBreakdownMapProps): OptimizationsBre
   }, [reportQueryString]);
 
   return {
+    breadcrumbLabel: queryFromRoute[breadcrumbLabelKey],
+    breadcrumbPath: location?.state?.optimizations ? location.state.optimizations.breadcrumbPath : undefined,
     report,
     reportError,
     reportFetchStatus,
@@ -177,4 +186,4 @@ const useMapToProps = ({ id }: OptimizationsBreakdownMapProps): OptimizationsBre
   };
 };
 
-export { OptimizationsBreakdown };
+export default OptimizationsBreakdown;

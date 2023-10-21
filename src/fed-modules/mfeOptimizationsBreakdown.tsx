@@ -8,23 +8,17 @@ import { OptimizationsBreakdown } from 'routes/optimizations/optimizationsBreakd
 import messages from '../../locales/data.json';
 
 export interface OptimizationsBreakdownOwnProps {
-  breadcrumbLabel?: string;
-  breadcrumbPath?: string;
-  id?: string;
+  // TBD...
 }
 
 type OptimizationsBreakdownProps = OptimizationsBreakdownOwnProps;
 
-const MfeOptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = ({
-  breadcrumbLabel,
-  breadcrumbPath,
-  id,
-}: OptimizationsBreakdownOwnProps) => {
+const MfeOptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
   const locale = getLocale();
 
   return (
     <IntlProvider defaultLocale="en" locale={locale} messages={messages[locale]} onError={console.log}>
-      <OptimizationsBreakdown breadcrumbLabel={breadcrumbLabel} breadcrumbPath={breadcrumbPath} id={id} />
+      <OptimizationsBreakdown />
     </IntlProvider>
   );
 };

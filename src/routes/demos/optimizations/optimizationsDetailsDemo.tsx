@@ -18,7 +18,7 @@ const OptimizationsDetailsDemo: React.FC<OptimizationsDetailsDemoProps> = () => 
     <OptimizationsDetails
       breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizations)}
       breadcrumbPath={formatPath(`${routes.optimizationsDetails.path}${location.search}`)}
-      toPath={formatPath(routes.optimizationsDetails.path)}
+      toPath={formatPath(routes.optimizationsBreakdown.path)}
     />
   );
 };

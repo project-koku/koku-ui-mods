@@ -22,7 +22,7 @@ const OptimizationsSummaryDemo: React.FC<OptimizationsSummaryDemoProps> = () => 
         <PageHeaderTitle title={intl.formatMessage(messages.optimizationsSummaryDemo)} />
       </PageHeader>
       <PageSection isFilled>
-        <OptimizationsSummary toPath={formatPath(routes.optimizationsSummary.path)} />
+        <OptimizationsSummary toPath={formatPath(routes.optimizationsDetails.path)} />
       </PageSection>
     </>
   );

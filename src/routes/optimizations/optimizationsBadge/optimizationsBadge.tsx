@@ -77,4 +77,4 @@ const useMapToProps = ({ groupBy, groupByValue }: OptimizationsBadgeOwnProps): O
   };
 };
 
-export { OptimizationsBadge };
+export default OptimizationsBadge;
