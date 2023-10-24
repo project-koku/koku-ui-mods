@@ -103,13 +103,13 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
     let result;
     switch (currentInterval) {
       case Interval.short_term:
-        result = report.recommendations.duration_based.short_term;
+        result = report?.recommendations?.duration_based?.short_term;
         break;
       case Interval.medium_term:
-        result = report.recommendations.duration_based.medium_term;
+        result = report?.recommendations?.duration_based?.medium_term;
         break;
       case Interval.long_term:
-        result = report.recommendations.duration_based.long_term;
+        result = report?.recommendations?.duration_based?.long_term;
         break;
     }
     return result;

@@ -42,7 +42,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
   const intl = useIntl();
   const location = useLocation();
 
-  const recommendations = report ? report.recommendations.duration_based : undefined;
+  const recommendations = report?.recommendations ? report.recommendations.duration_based : undefined;
   const showWarningIcon = hasWarning(recommendations);
 
   const getBackToLink = () => {

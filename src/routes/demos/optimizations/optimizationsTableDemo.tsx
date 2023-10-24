@@ -24,16 +24,16 @@ const OptimizationsDetailsDemo: React.FC<OptimizationsDetailsDemoProps> = () => 
   const intl = useIntl();
   const queryFromRoute = useQueryFromRoute();
 
-  const groupBy = getGroupById(queryFromRoute);
-  const groupByValue = getGroupByValue(queryFromRoute);
+  const groupBy = queryFromRoute?.group_by ? getGroupById(queryFromRoute) : 'project';
+  const groupByValue = queryFromRoute?.group_by ? getGroupByValue(queryFromRoute) : 'openshift';
 
   return (
     <PageSection isFilled>
       <OptimizationsTable
         breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: groupByValue })}
         breadcrumbPath={formatPath(`${routes.optimizationsTable.path}${location.search}`)}
-        groupBy={groupBy || 'project'}
-        groupByValue={groupByValue || 'openshift'}
+        groupBy={groupBy}
+        groupByValue={groupByValue}
         toPath={formatPath(routes.optimizationsBreakdown.path)}
       />
     </PageSection>

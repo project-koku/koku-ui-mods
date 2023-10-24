@@ -1,4 +1,4 @@
-import { Card, CardBody, PageSection } from '@patternfly/react-core';
+import { PageSection } from '@patternfly/react-core';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { routes } from 'routes';
@@ -16,7 +16,7 @@ const OptimizationsLinkDemo: React.FC<OptimizationsLinkDemoProps> = () => {
   const location = useLocation();
 
   const groupBy = 'project';
-  const groupByValue = 'cost-management';
+  const groupByValue = 'kube-system';
 
   const state = {
     ...(location.state && location.state),
@@ -33,11 +33,7 @@ const OptimizationsLinkDemo: React.FC<OptimizationsLinkDemoProps> = () => {
 
   return (
     <PageSection isFilled>
-      <Card>
-        <CardBody>
-          <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} state={state} toPath={toPath} />
-        </CardBody>
-      </Card>
+      <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} state={state} toPath={toPath} />
     </PageSection>
   );
 };
