@@ -200,11 +200,6 @@ export default defineMessages({
     description: 'Cancel',
     id: 'cancel',
   },
-  change: {
-    defaultMessage: 'Change',
-    description: 'Change',
-    id: 'change',
-  },
   chartCostForecastConeLegendLabel: {
     defaultMessage: 'Cost confidence ({dateRange})',
     description: 'Cost confidence (Jan 1-31)',
@@ -2194,11 +2189,6 @@ export default defineMessages({
     description: 'Learn more',
     id: 'learnMore',
   },
-  limits: {
-    defaultMessage: 'Limits',
-    description: 'Limits',
-    id: 'limits',
-  },
   loadingStateDesc: {
     defaultMessage: 'Searching for your sources. Do not refresh the browser',
     description: 'Searching for your sources. Do not refresh the browser',
@@ -2696,30 +2686,25 @@ export default defineMessages({
     description: 'Optimizations',
     id: 'optimizations',
   },
-  optimizationsBadgeDemo: {
-    defaultMessage: 'Optimizations badge demo',
-    description: 'Optimizations badge demo',
-    id: 'optimizationsBadgeDemo',
+  optimizationsBadgeTitle: {
+    defaultMessage: 'Optimizations badge',
+    description: 'Optimizations badge',
+    id: 'optimizationsBadgeTitle',
   },
-  optimizationsBadgeDemoDefault: {
+  optimizationsBadgeTitleDefault: {
     defaultMessage: 'No Filter',
     description: 'No Filter',
-    id: 'optimizationsBadgeAll',
+    id: 'optimizationsBadgeTitleDefault',
   },
-  optimizationsBadgeDemoGroupBy: {
+  optimizationsBadgeTitleGroupBy: {
     defaultMessage: 'Filtered by {groupBy}={groupByValue}',
     description: 'Filtered by',
-    id: 'optimizationsBadgeGroupBy',
+    id: 'optimizationsBadgeTitleGroupBy',
   },
   optimizationsDetails: {
     defaultMessage: '{count, plural, =0 {No optimizations} =1 {{count} optimization} other {{count} optimizations}}',
     description: 'Optimization details',
     id: 'optimizationsDetails',
-  },
-  optimizationsDetailsDemo: {
-    defaultMessage: 'Optimizations details demo',
-    description: 'Optimizations details demo',
-    id: 'optimizationsDetailsDemo',
   },
   optimizationsInfo: {
     defaultMessage: 'Assess and monitor your usage so you can optimize your OpenShift resources.',
@@ -2779,21 +2764,6 @@ export default defineMessages({
     description: 'Last 24 hrs',
     id: 'optimizationsShortTerm',
   },
-  optimizationsSummaryDemo: {
-    defaultMessage: 'Optimizations summary demo',
-    description: 'Optimizations summary demo',
-    id: 'optimizationsSummaryDemo',
-  },
-  optimizationsTableAriaLabel: {
-    defaultMessage: 'Optimizations table',
-    description: 'Optimizations table',
-    id: 'optimizationsTableAriaLabel',
-  },
-  optimizationsTableDemo: {
-    defaultMessage: 'Optimizations table demo',
-    description: 'Optimizations table demo',
-    id: 'optimizationsTableDemo',
-  },
   optimizationsValue: {
     defaultMessage: '{value}{units}',
     description: '2 GiB',
@@ -2811,16 +2781,6 @@ export default defineMessages({
       'other {}}',
     description: 'Selected items for export',
     id: 'optimizationsValues',
-  },
-  optimizationsViewAll: {
-    defaultMessage: 'View all optimizations for this project',
-    description: 'View all optimizations for this project',
-    id: 'optimizationsViewAll',
-  },
-  optimizationsViewAllDisabled: {
-    defaultMessage: 'This project has not reported data this month.',
-    description: 'This project has not reported data this month.',
-    id: 'optimizationsViewAllDisabled',
   },
   overhead: {
     defaultMessage: 'Overhead',

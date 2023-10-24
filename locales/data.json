@@ -665,12 +665,6 @@
         "value": "Cancel"
       }
     ],
-    "change": [
-      {
-        "type": 0,
-        "value": "Change"
-      }
-    ],
     "chartCostForecastConeLegendLabel": [
       {
         "type": 0,
@@ -9669,12 +9663,6 @@
         "value": "Learn more"
       }
     ],
-    "limits": [
-      {
-        "type": 0,
-        "value": "Limits"
-      }
-    ],
     "loadingStateDesc": [
       {
         "type": 0,
@@ -10561,19 +10549,19 @@
         "value": "Optimizations"
       }
     ],
-    "optimizationsBadgeAll": [
+    "optimizationsBadgeTitle": [
+      {
+        "type": 0,
+        "value": "Optimizations badge"
+      }
+    ],
+    "optimizationsBadgeTitleDefault": [
       {
         "type": 0,
         "value": "No Filter"
       }
     ],
-    "optimizationsBadgeDemo": [
-      {
-        "type": 0,
-        "value": "Optimizations badge demo"
-      }
-    ],
-    "optimizationsBadgeGroupBy": [
+    "optimizationsBadgeTitleGroupBy": [
       {
         "type": 0,
         "value": "Filtered by "
@@ -10631,12 +10619,6 @@
         "pluralType": "cardinal",
         "type": 6,
         "value": "count"
-      }
-    ],
-    "optimizationsDetailsDemo": [
-      {
-        "type": 0,
-        "value": "Optimizations details demo"
       }
     ],
     "optimizationsInfo": [
@@ -10752,24 +10734,6 @@
         "value": "Last 24 hrs"
       }
     ],
-    "optimizationsSummaryDemo": [
-      {
-        "type": 0,
-        "value": "Optimizations summary demo"
-      }
-    ],
-    "optimizationsTableAriaLabel": [
-      {
-        "type": 0,
-        "value": "Optimizations table"
-      }
-    ],
-    "optimizationsTableDemo": [
-      {
-        "type": 0,
-        "value": "Optimizations table demo"
-      }
-    ],
     "optimizationsValue": [
       {
         "type": 1,
@@ -10837,18 +10801,6 @@
         },
         "type": 5,
         "value": "value"
-      }
-    ],
-    "optimizationsViewAll": [
-      {
-        "type": 0,
-        "value": "View all optimizations for this project"
-      }
-    ],
-    "optimizationsViewAllDisabled": [
-      {
-        "type": 0,
-        "value": "This project has not reported data this month."
       }
     ],
     "overhead": [

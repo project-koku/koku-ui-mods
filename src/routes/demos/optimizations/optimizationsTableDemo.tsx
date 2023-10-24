@@ -1,5 +1,4 @@
 import { PageSection } from '@patternfly/react-core';
-import { PageHeader, PageHeaderTitle } from '@redhat-cloud-services/frontend-components/PageHeader';
 import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
@@ -19,20 +18,15 @@ const OptimizationsDetailsDemo: React.FC<OptimizationsDetailsDemoProps> = () => 
   const groupByValue = 'openshift';
 
   return (
-    <>
-      <PageHeader>
-        <PageHeaderTitle title={intl.formatMessage(messages.optimizationsTableDemo)} />
-      </PageHeader>
-      <PageSection isFilled>
-        <OptimizationsTable
-          breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: groupByValue })}
-          breadcrumbPath={formatPath(`${routes.optimizationsTable.path}${location.search}`)}
-          groupBy={groupBy}
-          groupByValue={groupByValue}
-          toPath={formatPath(routes.optimizationsBreakdown.path)}
-        />
-      </PageSection>
-    </>
+    <PageSection isFilled>
+      <OptimizationsTable
+        breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: groupByValue })}
+        breadcrumbPath={formatPath(`${routes.optimizationsTable.path}${location.search}`)}
+        groupBy={groupBy}
+        groupByValue={groupByValue}
+        toPath={formatPath(routes.optimizationsBreakdown.path)}
+      />
+    </PageSection>
   );
 };
 
