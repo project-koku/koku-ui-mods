@@ -3,34 +3,36 @@ import IntlProvider from '@redhat-cloud-services/frontend-components-translation
 import { getLocale } from 'components/i18n';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { OptimizationsTable } from 'routes/optimizations/optimizationsTable';
+import { OptimizationsLink } from 'routes/optimizations/optimizationsLink';
 import { mfeStore } from 'store';
 
 // eslint-disable-next-line no-restricted-imports
 import messages from '../../locales/data.json';
 
-export interface OptimizationsDetailsOwnProps {
-  breadcrumbLabel?: string;
-  breadcrumbPath?: string;
+export interface OptimizationsBadgeOwnProps {
+  groupBy?: string;
+  groupByValue?: string;
+  state?: any;
   toPath?: string;
 }
 
-type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
+type OptimizationsBadgeProps = OptimizationsBadgeOwnProps;
 
-const MfeOptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
-  breadcrumbLabel,
-  breadcrumbPath,
+const MfeOptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({
+  groupBy,
+  groupByValue,
+  state,
   toPath,
-}: OptimizationsDetailsOwnProps) => {
+}: OptimizationsBadgeOwnProps) => {
   const locale = getLocale();
 
   return (
     <IntlProvider defaultLocale="en" locale={locale} messages={messages[locale]} onError={console.log}>
       <Provider store={mfeStore as any}>
-        <OptimizationsTable breadcrumbLabel={breadcrumbLabel} breadcrumbPath={breadcrumbPath} toPath={toPath} />
+        <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} state={state} toPath={toPath} />
       </Provider>
     </IntlProvider>
   );
 };
 
-export default MfeOptimizationsDetails;
+export default MfeOptimizationsBadge;

@@ -18,7 +18,7 @@ export const getBreakdownPath = ({
   isPlatformCosts?: boolean;
   isOptimizationsPath?: boolean;
   isOptimizationsTab?: boolean;
-  title: string | number; // Used to display a title in the breakdown header
+  title?: string | number; // Used to display a title in the breakdown header
 }) => {
   const newQuery: any = {
     ...(description && description !== title && { [breakdownDescKey]: description }),

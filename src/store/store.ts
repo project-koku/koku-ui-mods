@@ -31,3 +31,5 @@ export function configureStore(initialState: DeepPartial<RootState>) {
 
   return store;
 }
+
+export const mfeStore = configureStore({});

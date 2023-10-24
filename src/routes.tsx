@@ -34,6 +34,9 @@ const OptimizationsBreakdown = lazy(
 const OptimizationsDetailsDemo = lazy(
   () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsDetailsDemo')
 );
+const OptimizationsLinkDemo = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsLinkDemo')
+);
 const OptimizationsSummaryDemo = lazy(
   () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsSummaryDemo')
 );
@@ -119,6 +122,10 @@ const routes = {
   optimizationsDetails: {
     element: userAccess(OptimizationsDetailsDemo),
     path: '/optimizations/details',
+  },
+  optimizationsLink: {
+    element: userAccess(OptimizationsLinkDemo),
+    path: '/optimizations/link',
   },
   optimizationsSummary: {
     element: userAccess(OptimizationsSummaryDemo),

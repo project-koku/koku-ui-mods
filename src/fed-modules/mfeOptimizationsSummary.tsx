@@ -2,11 +2,12 @@
 import IntlProvider from '@redhat-cloud-services/frontend-components-translations/Provider';
 import { getLocale } from 'components/i18n';
 import React from 'react';
+import { Provider } from 'react-redux';
 import { OptimizationsSummary } from 'routes/optimizations/optimizationsSummary';
+import { mfeStore } from 'store';
 
 // eslint-disable-next-line no-restricted-imports
 import messages from '../../locales/data.json';
-
 export interface OptimizationsSummaryOwnProps {
   toPath?: string;
 }
@@ -18,7 +19,9 @@ const MfeOptimizationsSummary: React.FC<OptimizationsSummaryProps> = ({ toPath }
 
   return (
     <IntlProvider defaultLocale="en" locale={locale} messages={messages[locale]} onError={console.log}>
-      <OptimizationsSummary toPath={toPath} />
+      <Provider store={mfeStore as any}>
+        <OptimizationsSummary toPath={toPath} />
+      </Provider>
     </IntlProvider>
   );
 };
