@@ -1,13 +1,14 @@
 import { PageSection } from '@patternfly/react-core';
+import type { Query } from 'api/queries/query';
+import { parseQuery } from 'api/queries/query';
 import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
+import { useLocation } from 'react-router-dom';
 import { routes } from 'routes';
 import { OptimizationsTable } from 'routes/optimizations/optimizationsTable';
-import { formatPath } from 'utils/paths';
-import { useLocation } from 'react-router-dom';
-import { parseQuery, Query } from 'api/queries/query';
 import { getGroupById, getGroupByValue } from 'routes/utils/groupBy';
+import { formatPath } from 'utils/paths';
 
 interface OptimizationsDetailsDemoOwnProps {
   // TBD...
@@ -34,7 +35,7 @@ const OptimizationsDetailsDemo: React.FC<OptimizationsDetailsDemoProps> = () => 
         breadcrumbPath={formatPath(`${routes.optimizationsTable.path}${location.search}`)}
         groupBy={groupBy}
         groupByValue={groupByValue}
-        toPath={formatPath(routes.optimizationsBreakdown.path)}
+        linkPath={formatPath(routes.optimizationsBreakdown.path)}
       />
     </PageSection>
   );

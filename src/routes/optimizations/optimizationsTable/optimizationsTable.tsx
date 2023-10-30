@@ -31,7 +31,8 @@ interface OptimizationsTableOwnProps {
   breadcrumbPath?: string;
   groupBy?: string;
   groupByValue?: string;
-  toPath?: string;
+  linkPath?: string;
+  linkState?: any;
 }
 
 export interface OptimizationsTableStateProps {
@@ -65,7 +66,8 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
   breadcrumbPath,
   groupBy,
   groupByValue,
-  toPath,
+  linkPath,
+  linkState,
 }) => {
   const intl = useIntl();
   const location = useLocation();
@@ -123,7 +125,8 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
         query={query}
         report={report}
         reportQueryString={reportQueryString}
-        toPath={toPath}
+        linkPath={linkPath}
+        linkState={linkState}
       />
     );
   };

@@ -13,7 +13,7 @@ type OptimizationsSummaryDemoProps = OptimizationsSummaryDemoOwnProps;
 const OptimizationsSummaryDemo: React.FC<OptimizationsSummaryDemoProps> = () => {
   return (
     <PageSection isFilled>
-      <OptimizationsSummary toPath={formatPath(routes.optimizationsDetails.path)} />
+      <OptimizationsSummary linkPath={formatPath(routes.optimizationsDetails.path)} />
     </PageSection>
   );
 };

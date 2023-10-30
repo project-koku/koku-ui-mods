@@ -8,17 +8,28 @@ import { OptimizationsDetailsHeader } from './optimizationsDetailsHeader';
 interface OptimizationsDetailsOwnProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
-  toPath?: string;
+  linkPath?: string;
+  linkState?: any;
 }
 
 type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
 
-const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({ breadcrumbLabel, breadcrumbPath, toPath }) => {
+const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
+  breadcrumbLabel,
+  breadcrumbPath,
+  linkPath,
+  linkState,
+}) => {
   return (
     <div style={styles.container}>
       <OptimizationsDetailsHeader />
       <PageSection isFilled>
-        <OptimizationsTable breadcrumbLabel={breadcrumbLabel} breadcrumbPath={breadcrumbPath} toPath={toPath} />
+        <OptimizationsTable
+          breadcrumbLabel={breadcrumbLabel}
+          breadcrumbPath={breadcrumbPath}
+          linkPath={linkPath}
+          linkState={linkState}
+        />
       </PageSection>
     </div>
   );

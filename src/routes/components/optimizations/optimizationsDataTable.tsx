@@ -7,7 +7,7 @@ import type { RecommendationReport } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DataTable } from 'routes/components/dataTable';
 import { styles } from 'routes/components/dataTable/dataTable.styles';
 import { NoOptimizationsState } from 'routes/components/page/noOptimizations/noOptimizationsState';
@@ -26,7 +26,8 @@ interface OptimizationsDataTableOwnProps {
   query?: Query;
   report: RecommendationReport;
   reportQueryString: string;
-  toPath?: string;
+  linkPath?: string;
+  linkState?: any;
 }
 
 type OptimizationsDataTableProps = OptimizationsDataTableOwnProps;
@@ -41,11 +42,10 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
   orderBy,
   query,
   report,
-  toPath,
+  linkPath,
+  linkState,
 }) => {
   const intl = useIntl();
-  const location = useLocation();
-
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
 
@@ -108,13 +108,13 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
               value: (
                 <Link
                   to={getOptimizationsBreakdownPath({
-                    basePath: toPath,
+                    basePath: linkPath,
                     breadcrumbLabel,
                     id: item.id,
                     title: container,
                   })}
                   state={{
-                    ...(location.state && location.state),
+                    ...(linkState && linkState),
                     optimizations: {
                       ...query,
                       breadcrumbPath,

@@ -29,7 +29,8 @@ import { rosActions, rosSelectors } from 'store/ros';
 import { styles } from './optimizations.styles';
 
 export interface OptimizationsSummaryOwnProps {
-  toPath?: string;
+  linkPath?: string;
+  linkState?: any;
 }
 
 export interface OptimizationsSummaryStateProps {
@@ -44,7 +45,10 @@ type OptimizationsSummaryProps = OptimizationsSummaryOwnProps & OptimizationsSum
 const reportPathsType = RosPathsType.recommendations;
 const reportType = RosType.ros;
 
-const OptimizationsSummary: React.FC<OptimizationsSummaryProps> = ({ toPath }: OptimizationsSummaryOwnProps) => {
+const OptimizationsSummary: React.FC<OptimizationsSummaryProps> = ({
+  linkPath,
+  linkState,
+}: OptimizationsSummaryOwnProps) => {
   const intl = useIntl();
   const { report, reportFetchStatus } = useMapToProps();
 
@@ -78,8 +82,10 @@ const OptimizationsSummary: React.FC<OptimizationsSummaryProps> = ({ toPath }: O
             <Skeleton width="16%" />
             <Skeleton className="skeleton" width={skeletonWidth.md} />
           </>
-        ) : toPath && count > 0 ? (
-          <Link to={toPath}>{description}</Link>
+        ) : linkPath && count > 0 ? (
+          <Link to={linkPath} state={linkState}>
+            {description}
+          </Link>
         ) : (
           description
         )}

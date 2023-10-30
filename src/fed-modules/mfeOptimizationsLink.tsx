@@ -12,8 +12,8 @@ import messages from '../../locales/data.json';
 export interface OptimizationsBadgeOwnProps {
   groupBy?: string;
   groupByValue?: string;
-  state?: any;
-  toPath?: string;
+  linkPath?: string;
+  linkState?: any;
 }
 
 type OptimizationsBadgeProps = OptimizationsBadgeOwnProps;
@@ -21,15 +21,15 @@ type OptimizationsBadgeProps = OptimizationsBadgeOwnProps;
 const MfeOptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({
   groupBy,
   groupByValue,
-  state,
-  toPath,
+  linkPath,
+  linkState,
 }: OptimizationsBadgeOwnProps) => {
   const locale = getLocale();
 
   return (
     <IntlProvider defaultLocale="en" locale={locale} messages={messages[locale]} onError={console.log}>
       <Provider store={mfeStore as any}>
-        <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} state={state} toPath={toPath} />
+        <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} linkState={linkState} linkPath={linkPath} />
       </Provider>
     </IntlProvider>
   );

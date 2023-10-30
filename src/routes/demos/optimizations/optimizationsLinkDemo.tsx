@@ -25,7 +25,7 @@ const OptimizationsLinkDemo: React.FC<OptimizationsLinkDemoProps> = () => {
     },
   };
 
-  const toPath = getBreakdownPath({
+  const linkPath = getBreakdownPath({
     basePath: formatPath(routes.optimizationsTable.path),
     groupBy,
     id: groupByValue,
@@ -33,7 +33,7 @@ const OptimizationsLinkDemo: React.FC<OptimizationsLinkDemoProps> = () => {
 
   return (
     <PageSection isFilled>
-      <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} state={state} toPath={toPath} />
+      <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} linkPath={linkPath} linkState={state} />
     </PageSection>
   );
 };

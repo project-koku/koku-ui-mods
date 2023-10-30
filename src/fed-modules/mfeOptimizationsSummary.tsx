@@ -9,18 +9,22 @@ import { mfeStore } from 'store';
 // eslint-disable-next-line no-restricted-imports
 import messages from '../../locales/data.json';
 export interface OptimizationsSummaryOwnProps {
-  toPath?: string;
+  linkPath?: string;
+  linkState?: any;
 }
 
 type OptimizationsSummaryProps = OptimizationsSummaryOwnProps;
 
-const MfeOptimizationsSummary: React.FC<OptimizationsSummaryProps> = ({ toPath }: OptimizationsSummaryOwnProps) => {
+const MfeOptimizationsSummary: React.FC<OptimizationsSummaryProps> = ({
+  linkPath,
+  linkState,
+}: OptimizationsSummaryOwnProps) => {
   const locale = getLocale();
 
   return (
     <IntlProvider defaultLocale="en" locale={locale} messages={messages[locale]} onError={console.log}>
       <Provider store={mfeStore as any}>
-        <OptimizationsSummary toPath={toPath} />
+        <OptimizationsSummary linkPath={linkPath} linkState={linkState} />
       </Provider>
     </IntlProvider>
   );

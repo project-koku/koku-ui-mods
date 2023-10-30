@@ -12,7 +12,10 @@ import messages from '../../locales/data.json';
 export interface OptimizationsDetailsOwnProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
-  toPath?: string;
+  groupBy?: string;
+  groupByValue?: string;
+  linkPath?: string;
+  linkState?: any;
 }
 
 type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
@@ -20,14 +23,24 @@ type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
 const MfeOptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
   breadcrumbLabel,
   breadcrumbPath,
-  toPath,
+  groupBy,
+  groupByValue,
+  linkPath,
+  linkState,
 }: OptimizationsDetailsOwnProps) => {
   const locale = getLocale();
 
   return (
     <IntlProvider defaultLocale="en" locale={locale} messages={messages[locale]} onError={console.log}>
       <Provider store={mfeStore as any}>
-        <OptimizationsTable breadcrumbLabel={breadcrumbLabel} breadcrumbPath={breadcrumbPath} toPath={toPath} />
+        <OptimizationsTable
+          breadcrumbLabel={breadcrumbLabel}
+          breadcrumbPath={breadcrumbPath}
+          groupBy={groupBy}
+          groupByValue={groupByValue}
+          linkPath={linkPath}
+          linkState={linkState}
+        />
       </Provider>
     </IntlProvider>
   );

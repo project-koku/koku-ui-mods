@@ -14,8 +14,8 @@ import { rosActions, rosSelectors } from 'store/ros';
 export interface OptimizationsLinkOwnProps {
   groupBy?: string;
   groupByValue?: string;
-  state?: any;
-  toPath?: string;
+  linkPath?: string;
+  linkState?: any;
 }
 
 export interface OptimizationsLinkStateProps {
@@ -33,8 +33,8 @@ const reportType = RosType.ros;
 const OptimizationsLink: React.FC<OptimizationsLinkProps> = ({
   groupBy,
   groupByValue,
-  state,
-  toPath,
+  linkPath,
+  linkState,
 }: OptimizationsLinkOwnProps) => {
   const { report } = useMapToProps({ groupBy, groupByValue });
 
@@ -45,9 +45,9 @@ const OptimizationsLink: React.FC<OptimizationsLinkProps> = ({
   }
   return (
     <Link
-      to={toPath}
+      to={linkPath}
       state={{
-        ...(state && state),
+        ...(linkState && linkState),
       }}
     >
       {count} TEST
