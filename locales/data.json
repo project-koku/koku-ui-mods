@@ -9651,6 +9651,12 @@
         "value": "Infrastructure"
       }
     ],
+    "kokuMfeUrl": [
+      {
+        "type": 0,
+        "value": "https://github.com/project-koku/koku-ui-mfe"
+      }
+    ],
     "lastProcessed": [
       {
         "type": 0,
@@ -12389,6 +12395,28 @@
       {
         "type": 0,
         "value": "Volume"
+      }
+    ],
+    "welcomeDesc": [
+      {
+        "type": 0,
+        "value": "Cost Management Microfrontend (MFE) with Module Federation"
+      }
+    ],
+    "welcomeInfo": [
+      {
+        "type": 0,
+        "value": "For more information visit "
+      },
+      {
+        "type": 1,
+        "value": "url"
+      }
+    ],
+    "welcomeTitle": [
+      {
+        "type": 0,
+        "value": "Cost Management Microfrontend (MFE) with Module Federation"
       }
     ],
     "workerUnallocated": [

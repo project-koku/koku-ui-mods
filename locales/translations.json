@@ -335,6 +335,7 @@
   "inactiveSourcesTitle": "A problem was detected with {value}",
   "inactiveSourcesTitleMultiplier": "A problem was detected with the following sources",
   "infrastructure": "Infrastructure",
+  "kokuMfeUrl": "https://github.com/project-koku/koku-ui-mfe",
   "lastProcessed": "Last processed",
   "learnMore": "Learn more",
   "loadingStateDesc": "Searching for your sources. Do not refresh the browser",
@@ -567,6 +568,9 @@
   "valueUnits": "{value} {units}",
   "various": "Various",
   "volumeTitle": "Volume",
+  "welcomeDesc": "Cost Management Microfrontend (MFE) with Module Federation",
+  "welcomeInfo": "For more information visit {url}",
+  "welcomeTitle": "Cost Management Microfrontend (MFE) with Module Federation",
   "workerUnallocated": "Worker unallocated",
   "workerUnallocatedDesc": "Distribute unused and non-reserved resource costs to projects",
   "yes": "Yes"

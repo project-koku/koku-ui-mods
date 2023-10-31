@@ -2179,6 +2179,11 @@ export default defineMessages({
     description: 'Infrastructure',
     id: 'infrastructure',
   },
+  kokuMfeUrl: {
+    defaultMessage: 'https://github.com/project-koku/koku-ui-mfe',
+    description: 'https://github.com/project-koku/koku-ui-mfe',
+    id: 'kokuMfeUrl',
+  },
   lastProcessed: {
     defaultMessage: 'Last processed',
     description: 'Last processed',
@@ -3475,6 +3480,21 @@ export default defineMessages({
     defaultMessage: 'Volume',
     description: 'Volume',
     id: 'volumeTitle',
+  },
+  welcomeDesc: {
+    defaultMessage: 'Cost Management Microfrontend (MFE) with Module Federation',
+    description: 'Cost Management Microfrontend (MFE) with Module Federation',
+    id: 'welcomeDesc',
+  },
+  welcomeInfo: {
+    defaultMessage: 'For more information visit {url}',
+    description: 'more information url',
+    id: 'welcomeInfo',
+  },
+  welcomeTitle: {
+    defaultMessage: 'Cost Management Microfrontend (MFE) with Module Federation',
+    description: 'Cost Management Microfrontend (MFE) with Module Federation',
+    id: 'welcomeTitle',
   },
   workerUnallocated: {
     defaultMessage: 'Worker unallocated',

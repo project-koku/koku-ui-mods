@@ -44,6 +44,7 @@ const OptimizationsTableDemo = lazy(
 const RhelDetails = lazy(() => import(/* webpackChunkName: "rhelDetails" */ 'routes/details/rhelDetails'));
 const RhelBreakdown = lazy(() => import(/* webpackChunkName: "rhelBreakdown" */ 'routes/details/rhelBreakdown'));
 const Settings = lazy(() => import(/* webpackChunkName: "overview" */ 'routes/settings'));
+const Welcome = lazy(() => import(/* webpackChunkName: "ocpDetails" */ 'routes/components/page/welcome/welcome'));
 
 const routes = {
   awsBreakdown: {
@@ -109,35 +110,35 @@ const routes = {
     path: '/ocp',
   },
   ocmOverview: {
-    element: userAccess(OptimizationsSummaryDemo),
+    element: userAccess(Welcome),
     path: '/ocm/overview',
   },
   optimizationsBadge: {
     element: userAccess(OptimizationsBadgeDemo),
-    path: '/optimizations/badge',
+    path: '/ros/optimizations/badge',
   },
   optimizationsBreakdown: {
     element: userAccess(OptimizationsBreakdownDemo),
-    path: '/optimizations/breakdown',
+    path: '/ros/optimizations/breakdown',
   },
   optimizationsDetails: {
     element: userAccess(OptimizationsDetailsDemo),
-    path: '/optimizations/details',
+    path: '/ros/optimizations/details',
   },
   optimizationsLink: {
     element: userAccess(OptimizationsLinkDemo),
-    path: '/optimizations/link',
+    path: '/ros/optimizations/link',
   },
   optimizationsSummary: {
     element: userAccess(OptimizationsSummaryDemo),
-    path: '/optimizations/summary',
+    path: '/ros/optimizations/summary',
   },
   optimizationsTable: {
     element: userAccess(OptimizationsTableDemo),
-    path: '/optimizations/table',
+    path: '/ros/optimizations/table',
   },
   overview: {
-    element: userAccess(OptimizationsBadgeDemo),
+    element: userAccess(Welcome),
     path: '/',
   },
   rhelBreakdown: {
