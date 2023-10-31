@@ -113,7 +113,7 @@ const OcpBreakdownOptimizations: React.FC<OcpOptimizationsBreakdownProps> = () =
         query={query}
         report={report}
         reportQueryString={reportQueryString}
-        toPath={formatPath(routes.ocpBreakdownOptimizations.path)}
+        linkPath={formatPath(routes.ocpBreakdownOptimizations.path)}
       />
     );
   };

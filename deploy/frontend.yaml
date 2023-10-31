@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Template
 metadata:
-  name: hccm-frontend-mods
+  name: hccm-frontend-mfe
 objects:
   - apiVersion: cloud.redhat.com/v1alpha1
     kind: Frontend
@@ -9,8 +9,8 @@ objects:
       name: cost-management-mfe
     spec:
       envName: ${ENV_NAME}
-      title: 'Federated Modules for Cost Management'
-      deploymentRepo: https://github.com/project-koku/koku-ros-ui
+      title: 'Cost Management Microfrontend (MFE) with Module Federation'
+      deploymentRepo: https://github.com/project-koku/koku-ui-mfe
       API:
         versions:
           - v1
@@ -19,26 +19,44 @@ objects:
           - /apps/cost-management-mfe
       image: ${IMAGE}:${IMAGE_TAG}
       navItems:
-        - title: ROS for Cost Management
+        - title: ROS
           expandable: true
           routes:
             - appId: 'cost-management-mfe'
-              title: Overview
-              href: "/microfrontend/cost-management"
+              title: 'Optimizations summary'
+              href: "/staging/cost-management/optimizations/summary"
             - appId: 'cost-management-mfe'
-              title: 'OpenShift'
-              href: '/microfrontend/cost-management/ocp'
+              title: 'Optimizations details'
+              href: '/staging/cost-management/optimizations/details'
+            - appId: 'cost-management-mfe'
+              title: 'Optimizations table'
+              href: '/staging/cost-management/optimizations/table'
+            - appId: 'cost-management-mfe'
+              title: 'Optimizations breakdown'
+              href: '/staging/cost-management/optimizations/breakdown'
+            - appId: 'cost-management-mfe'
+              title: 'Optimizations badge'
+              href: '/staging/cost-management/optimizations/badge'
+            - appId: 'cost-management-mfe'
+              title: 'Optimizations link'
+              href: '/staging/cost-management/optimizations/link'
+        - title: OCM
+          expandable: true
+          routes:
+            - appId: 'cost-management-mfe'
+              title: 'Overview card'
+              href: "/staging/cost-management/optimizations/summary"
       module:
         manifestLocation: "/apps/cost-management-mfe/fed-mods.json"
         modules:
           - id: "cost-management-mfe"
             module: "./RootApp"
             routes:
-              - pathname: /microfrontend/cost-management
+              - pathname: /staging/cost-management
 parameters:
   - name: ENV_NAME
     required: true
   - name: IMAGE_TAG
     required: true
   - name: IMAGE
-    value: quay.io/cloudservices/hccm-frontend-mods
+    value: quay.io/cloudservices/hccm-frontend-mfe

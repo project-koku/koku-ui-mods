@@ -32,7 +32,7 @@ class WatchRunPlugin {
 }
 
 module.exports = {
-  appUrl: '/microfrontend/cost-management',
+  appUrl: '/staging/cost-management',
   debug: true,
   interceptChromeConfig: false, // Change to false after your app is registered in configuration files
   proxyVerbose: true,

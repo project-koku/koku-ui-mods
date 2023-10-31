@@ -6,7 +6,7 @@ import { routes } from 'routes';
 // Note the basename does not include a release prefix (/beta, /preview, etc.), unlike the getBaseName function from
 // @redhat-cloud-services/frontend-components-utilities/helpers
 export const formatPath = path => {
-  const basePath = '/microfrontend/cost-management';
+  const basePath = '/staging/cost-management';
   return path === routes.overview.path ? basePath : `${basePath}${path}`;
 };
 

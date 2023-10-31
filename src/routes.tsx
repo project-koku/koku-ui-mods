@@ -108,6 +108,10 @@ const routes = {
     element: userAccess(OcpDetails),
     path: '/ocp',
   },
+  ocmOverview: {
+    element: userAccess(OptimizationsSummaryDemo),
+    path: '/ocm/overview',
+  },
   optimizationsBadge: {
     element: userAccess(OptimizationsBadgeDemo),
     path: '/optimizations/badge',

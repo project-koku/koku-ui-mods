@@ -48,9 +48,9 @@ After releasing to each staging environment, open an incognito window and view o
 
 Please ensure expected changes have been updated before releasing to the next staging environment.
 
-1. For stage-stable, view https://console.stage.redhat.com/microfrontend/cost-management/
-2. For prod-beta, view https://console.redhat.com/beta/microfrontend/cost-management/
-3. For prod-stable, view https://console.redhat.com/microfrontend/cost-management/
+1. For stage-stable, view https://console.stage.redhat.com/staging/cost-management/
+2. For prod-beta, view https://console.redhat.com/beta/staging/cost-management/
+3. For prod-stable, view https://console.redhat.com/staging/cost-management/
 
 ## Release notes
 
