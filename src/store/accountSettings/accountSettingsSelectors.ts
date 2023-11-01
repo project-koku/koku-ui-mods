@@ -1,9 +1,9 @@
 import type { AccountSettingsType } from 'api/accountSettings';
 import type { RootState } from 'store/rootReducer';
 
-import { accountSettingsStateKey, getFetchId } from './accountSettingsCommon';
+import { getFetchId, stateKey } from './accountSettingsCommon';
 
-export const selectAccountSettingsState = (state: RootState) => state[accountSettingsStateKey];
+export const selectAccountSettingsState = (state: RootState) => state[stateKey];
 
 export const selectAccountSettings = (state: RootState, accountSettingsType: AccountSettingsType) =>
   selectAccountSettingsState(state).byId.get(getFetchId(accountSettingsType));

@@ -1,1 +1,1 @@
-export { default as ResourceTypeahead } from './resourceTypeahead';
+export * from './resourceTypeahead';

@@ -82,4 +82,4 @@ class ResourceTypeahead extends React.Component<ResourceTypeaheadProps, Resource
   }
 }
 
-export default ResourceTypeahead;
+export { ResourceTypeahead };
