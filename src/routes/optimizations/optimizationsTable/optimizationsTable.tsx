@@ -11,10 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import type { AnyAction } from 'redux';
 import type { ThunkDispatch } from 'redux-thunk';
-import {
-  OptimizationsDataTable as OptimizationsDataTable,
-  OptimizationsToolbar,
-} from 'routes/components/optimizations';
 import { Loading } from 'routes/components/page/loading';
 import { NoOptimizations } from 'routes/components/page/noOptimizations';
 import { NotAvailable } from 'routes/components/page/notAvailable';
@@ -25,6 +21,9 @@ import { clearQueryState, getQueryState } from 'routes/utils/queryState';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
+
+import { OptimizationsDataTable } from './optimizationsDataTable';
+import { OptimizationsToolbar } from './optimizationsToolbar';
 
 interface OptimizationsTableOwnProps {
   breadcrumbLabel?: string;

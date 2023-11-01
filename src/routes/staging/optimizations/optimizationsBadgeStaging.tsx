@@ -2,13 +2,13 @@ import { PageSection } from '@patternfly/react-core';
 import React from 'react';
 import { OptimizationsBadge } from 'routes/optimizations/optimizationsBadge';
 
-interface OptimizationsBadgeDemoOwnProps {
+interface OptimizationsBadgeStagingOwnProps {
   // TBD...
 }
 
-type OptimizationsBadgeDemoProps = OptimizationsBadgeDemoOwnProps;
+type OptimizationsBadgeStagingProps = OptimizationsBadgeStagingOwnProps;
 
-const OptimizationsBadgeDemo: React.FC<OptimizationsBadgeDemoProps> = () => {
+const OptimizationsBadgeStaging: React.FC<OptimizationsBadgeStagingProps> = () => {
   return (
     <PageSection isFilled>
       <OptimizationsBadge groupBy="project" groupByValue="openshift" />
@@ -16,4 +16,4 @@ const OptimizationsBadgeDemo: React.FC<OptimizationsBadgeDemoProps> = () => {
   );
 };
 
-export default OptimizationsBadgeDemo;
+export default OptimizationsBadgeStaging;

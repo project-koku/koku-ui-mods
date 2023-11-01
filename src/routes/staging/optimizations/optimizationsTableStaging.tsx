@@ -10,18 +10,18 @@ import { OptimizationsTable } from 'routes/optimizations/optimizationsTable';
 import { getGroupById, getGroupByValue } from 'routes/utils/groupBy';
 import { formatPath } from 'utils/paths';
 
-interface OptimizationsDetailsDemoOwnProps {
+interface OptimizationsDetailsStagingOwnProps {
   // TBD...
 }
 
-type OptimizationsDetailsDemoProps = OptimizationsDetailsDemoOwnProps;
+type OptimizationsDetailsStagingProps = OptimizationsDetailsStagingOwnProps;
 
 const useQueryFromRoute = () => {
   const location = useLocation();
   return parseQuery<Query>(location.search);
 };
 
-const OptimizationsDetailsDemo: React.FC<OptimizationsDetailsDemoProps> = () => {
+const OptimizationsDetailsStaging: React.FC<OptimizationsDetailsStagingProps> = () => {
   const intl = useIntl();
   const queryFromRoute = useQueryFromRoute();
 
@@ -41,4 +41,4 @@ const OptimizationsDetailsDemo: React.FC<OptimizationsDetailsDemoProps> = () => 
   );
 };
 
-export default OptimizationsDetailsDemo;
+export default OptimizationsDetailsStaging;

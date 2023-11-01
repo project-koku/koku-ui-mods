@@ -4,23 +4,23 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Routes as RouterRoutes } from 'react-router-dom';
 
 const NotFound = lazy(() => import(/* webpackChunkName: "notFound" */ 'routes/components/page/notFound'));
-const OptimizationsBadgeDemo = lazy(
-  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsBadgeDemo')
+const OptimizationsBadgeStaging = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/staging/optimizations/optimizationsBadgeStaging')
 );
-const OptimizationsBreakdownDemo = lazy(
-  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsBreakdownDemo')
+const OptimizationsBreakdownStaging = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/staging/optimizations/optimizationsBreakdownStaging')
 );
-const OptimizationsDetailsDemo = lazy(
-  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsDetailsDemo')
+const OptimizationsDetailsStaging = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/staging/optimizations/optimizationsDetailsStaging')
 );
-const OptimizationsLinkDemo = lazy(
-  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsLinkDemo')
+const OptimizationsLinkStaging = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/staging/optimizations/optimizationsLinkStaging')
 );
-const OptimizationsSummaryDemo = lazy(
-  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsSummaryDemo')
+const OptimizationsSummaryStaging = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/staging/optimizations/optimizationsSummaryStaging')
 );
-const OptimizationsTableDemo = lazy(
-  () => import(/* webpackChunkName: "recommendations" */ 'routes/demos/optimizations/optimizationsTableDemo')
+const OptimizationsTableStaging = lazy(
+  () => import(/* webpackChunkName: "recommendations" */ 'routes/staging/optimizations/optimizationsTableStaging')
 );
 const Welcome = lazy(() => import(/* webpackChunkName: "ocpDetails" */ 'routes/components/page/welcome/welcome'));
 
@@ -30,27 +30,27 @@ const routes = {
     path: '/ocm/overview',
   },
   optimizationsBadge: {
-    element: userAccess(OptimizationsBadgeDemo),
+    element: userAccess(OptimizationsBadgeStaging),
     path: '/ros/optimizations/badge',
   },
   optimizationsBreakdown: {
-    element: userAccess(OptimizationsBreakdownDemo),
+    element: userAccess(OptimizationsBreakdownStaging),
     path: '/ros/optimizations/breakdown',
   },
   optimizationsDetails: {
-    element: userAccess(OptimizationsDetailsDemo),
+    element: userAccess(OptimizationsDetailsStaging),
     path: '/ros/optimizations/details',
   },
   optimizationsLink: {
-    element: userAccess(OptimizationsLinkDemo),
+    element: userAccess(OptimizationsLinkStaging),
     path: '/ros/optimizations/link',
   },
   optimizationsSummary: {
-    element: userAccess(OptimizationsSummaryDemo),
+    element: userAccess(OptimizationsSummaryStaging),
     path: '/ros/optimizations/summary',
   },
   optimizationsTable: {
-    element: userAccess(OptimizationsTableDemo),
+    element: userAccess(OptimizationsTableStaging),
     path: '/ros/optimizations/table',
   },
   welcome: {

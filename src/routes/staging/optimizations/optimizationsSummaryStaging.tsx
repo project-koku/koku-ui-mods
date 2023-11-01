@@ -4,13 +4,13 @@ import { routes } from 'routes';
 import { OptimizationsSummary } from 'routes/optimizations/optimizationsSummary';
 import { formatPath } from 'utils/paths';
 
-interface OptimizationsSummaryDemoOwnProps {
+interface OptimizationsSummaryStagingOwnProps {
   // TBD...
 }
 
-type OptimizationsSummaryDemoProps = OptimizationsSummaryDemoOwnProps;
+type OptimizationsSummaryStagingProps = OptimizationsSummaryStagingOwnProps;
 
-const OptimizationsSummaryDemo: React.FC<OptimizationsSummaryDemoProps> = () => {
+const OptimizationsSummaryStaging: React.FC<OptimizationsSummaryStagingProps> = () => {
   return (
     <PageSection isFilled>
       <OptimizationsSummary linkPath={formatPath(routes.optimizationsDetails.path)} />
@@ -18,4 +18,4 @@ const OptimizationsSummaryDemo: React.FC<OptimizationsSummaryDemoProps> = () => 
   );
 };
 
-export default OptimizationsSummaryDemo;
+export default OptimizationsSummaryStaging;

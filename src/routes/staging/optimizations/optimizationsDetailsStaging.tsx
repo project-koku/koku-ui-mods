@@ -5,13 +5,13 @@ import { routes } from 'routes';
 import { OptimizationsDetails } from 'routes/optimizations/optimizationsDetails';
 import { formatPath } from 'utils/paths';
 
-interface OptimizationsDetailsDemoOwnProps {
+interface OptimizationsDetailsStagingOwnProps {
   // TBD...
 }
 
-type OptimizationsDetailsDemoProps = OptimizationsDetailsDemoOwnProps;
+type OptimizationsDetailsStagingProps = OptimizationsDetailsStagingOwnProps;
 
-const OptimizationsDetailsDemo: React.FC<OptimizationsDetailsDemoProps> = () => {
+const OptimizationsDetailsStaging: React.FC<OptimizationsDetailsStagingProps> = () => {
   const intl = useIntl();
 
   return (
@@ -23,4 +23,4 @@ const OptimizationsDetailsDemo: React.FC<OptimizationsDetailsDemoProps> = () => 
   );
 };
 
-export default OptimizationsDetailsDemo;
+export default OptimizationsDetailsStaging;

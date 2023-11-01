@@ -6,13 +6,13 @@ import { OptimizationsLink } from 'routes/optimizations/optimizationsLink';
 import { getBreakdownPath } from 'routes/utils/paths';
 import { formatPath } from 'utils/paths';
 
-interface OptimizationsLinkDemoOwnProps {
+interface OptimizationsLinkStagingOwnProps {
   // TBD...
 }
 
-type OptimizationsLinkDemoProps = OptimizationsLinkDemoOwnProps;
+type OptimizationsLinkStagingProps = OptimizationsLinkStagingOwnProps;
 
-const OptimizationsLinkDemo: React.FC<OptimizationsLinkDemoProps> = () => {
+const OptimizationsLinkStaging: React.FC<OptimizationsLinkStagingProps> = () => {
   const location = useLocation();
 
   const groupBy = 'project';
@@ -38,4 +38,4 @@ const OptimizationsLinkDemo: React.FC<OptimizationsLinkDemoProps> = () => {
   );
 };
 
-export default OptimizationsLinkDemo;
+export default OptimizationsLinkStaging;
