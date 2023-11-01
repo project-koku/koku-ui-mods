@@ -1,5 +1,5 @@
 import { getQueryRoute } from 'api/queries/query';
-import { breadcrumbLabelKey, breakdownDescKey, breakdownTitleKey, orgUnitIdKey } from 'utils/props';
+import { breadcrumbLabelKey, breakdownDescKey, breakdownTitleKey } from 'utils/props';
 
 export const getBreakdownPath = ({
   basePath,
@@ -52,45 +52,5 @@ export const getOptimizationsBreakdownPath = ({
     ...(title && { [breakdownTitleKey]: title }),
     ...(breadcrumbLabel && { [breadcrumbLabelKey]: breadcrumbLabel }),
   };
-  return `${basePath}?${getQueryRoute(newQuery)}`;
-};
-
-export const getOrgBreakdownPath = ({
-  basePath,
-  description,
-  groupBy,
-  groupByOrg,
-  id,
-  title,
-  type,
-}: {
-  basePath: string;
-  description: string | number; // Used to display a description in the breakdown header
-  groupBy: string | number;
-  groupByOrg: string | number; // Used for group_by[org_unit_id]=<groupByOrg> param in the breakdown page
-  id: string | number; // group_by[account]=<id> param in the breakdown page
-  title: string | number; // Used to display a title in the breakdown header
-  type: string; // account or organizational_unit
-}) => {
-  const newQuery: any = {
-    ...(description && description !== title && { [breakdownDescKey]: description }),
-    ...(title && { [breakdownTitleKey]: title }),
-    ...(groupByOrg && { [orgUnitIdKey]: groupByOrg }), // Used to set group by for return link
-    filter: {
-      ...(type === 'account' && { account: id }),
-    },
-    group_by: {
-      [groupBy]: id, // Group by may be overridden below
-    },
-  };
-  if (type === 'account') {
-    newQuery.group_by = {
-      [orgUnitIdKey]: groupByOrg,
-    };
-  } else if (type === 'organizational_unit') {
-    newQuery.group_by = {
-      [orgUnitIdKey]: id,
-    };
-  }
   return `${basePath}?${getQueryRoute(newQuery)}`;
 };

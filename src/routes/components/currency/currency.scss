@@ -1,8 +1,0 @@
-@import url("~@patternfly/patternfly/base/patternfly-variables.css");
-
-// Workaround for missing "position" property
-.currencyOverride {
-  .pf-v5-c-select__menu {
-    right: 0;
-  }
-}

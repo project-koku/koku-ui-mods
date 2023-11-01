@@ -14,18 +14,7 @@ import { userAccessQuery, userAccessSelectors } from 'store/userAccess';
 import type { ChromeComponentProps } from 'utils/chrome';
 import { withChrome } from 'utils/chrome';
 import { formatPath, usePathname } from 'utils/paths';
-import {
-  hasAwsAccess,
-  hasAzureAccess,
-  hasCostModelAccess,
-  hasGcpAccess,
-  hasIbmAccess,
-  hasOciAccess,
-  hasOcpAccess,
-  hasRhelAccess,
-  hasRosAccess,
-  hasSettingsAccess,
-} from 'utils/userAccess';
+import { hasRosAccess } from 'utils/userAccess';
 
 interface PermissionsOwnProps extends ChromeComponentProps {
   children?: React.ReactNode;
@@ -46,8 +35,6 @@ type PermissionsProps = PermissionsOwnProps & PermissionsStateProps;
 const PermissionsBase: React.FC<PermissionsProps> = ({
   children = null,
   // chrome,
-  isFinsightsFeatureEnabled,
-  isIbmFeatureEnabled,
   isRosFeatureEnabled,
   userAccess,
   userAccessError,
@@ -58,43 +45,11 @@ const PermissionsBase: React.FC<PermissionsProps> = ({
       return false;
     }
 
-    const aws = hasAwsAccess(userAccess);
-    const azure = hasAzureAccess(userAccess);
-    const costModel = hasCostModelAccess(userAccess);
-    const gcp = hasGcpAccess(userAccess);
-    const ibm = isIbmFeatureEnabled && hasIbmAccess(userAccess);
-    const oci = hasOciAccess(userAccess);
-    const ocp = hasOcpAccess(userAccess);
-    const rhel = isFinsightsFeatureEnabled && hasRhelAccess(userAccess);
     const ros = isRosFeatureEnabled && hasRosAccess(userAccess);
-    const settings = costModel || hasSettingsAccess(userAccess);
 
     switch (pathname) {
-      case formatPath(routes.explorer.path):
-      case formatPath(routes.overview.path):
-        return aws || azure || costModel || gcp || ibm || ocp || oci;
-      case formatPath(routes.awsBreakdown.path):
-      case formatPath(routes.awsDetails.path):
-        return aws;
-      case formatPath(routes.azureBreakdown.path):
-      case formatPath(routes.azureDetails.path):
-        return azure;
-      case formatPath(routes.costModel.basePath):
-        return costModel;
-      case formatPath(routes.gcpBreakdown.path):
-      case formatPath(routes.gcpDetails.path):
-        return gcp;
-      case formatPath(routes.ociBreakdown.path):
-      case formatPath(routes.ociDetails.path):
-        return oci;
-      case formatPath(routes.ibmBreakdown.path):
-      case formatPath(routes.ibmDetails.path):
-        return ibm;
-      case formatPath(routes.ocpBreakdown.path):
-      case formatPath(routes.ocpBreakdownOptimizations.path):
-      case formatPath(routes.ocpDetails.path):
-        return ocp;
       case formatPath(routes.ocmOverview.path):
+        return true;
       case formatPath(routes.optimizationsBadge.path):
       case formatPath(routes.optimizationsBreakdown.path):
       case formatPath(routes.optimizationsDetails.path):
@@ -102,11 +57,6 @@ const PermissionsBase: React.FC<PermissionsProps> = ({
       case formatPath(routes.optimizationsSummary.path):
       case formatPath(routes.optimizationsTable.path):
         return ros;
-      case formatPath(routes.rhelBreakdown.path):
-      case formatPath(routes.rhelDetails.path):
-        return rhel;
-      case formatPath(routes.settings.path):
-        return settings;
       default:
         return false;
     }

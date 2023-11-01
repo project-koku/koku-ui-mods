@@ -7,7 +7,7 @@ import { routes } from 'routes';
 // @redhat-cloud-services/frontend-components-utilities/helpers
 export const formatPath = path => {
   const basePath = '/staging/cost-management';
-  return path === routes.overview.path ? basePath : `${basePath}${path}`;
+  return path === routes.welcome.path ? basePath : `${basePath}${path}`;
 };
 
 // export const getBaseName = pathname => {
@@ -44,7 +44,5 @@ export const getReleasePath = () => {
 export const usePathname = () => {
   const location = useLocation();
 
-  // cost models may include UUID in path
-  const costModelPath = formatPath(routes.costModel.basePath);
-  return location.pathname.startsWith(costModelPath) ? costModelPath : location.pathname.replace(/\/$/, '');
+  return location.pathname.replace(/\/$/, '');
 };

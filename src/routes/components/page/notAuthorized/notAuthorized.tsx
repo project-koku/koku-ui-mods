@@ -26,4 +26,4 @@ const NotAuthorized = ({ pathname, title }: NotAuthorizedProps) => {
   );
 };
 
-export default NotAuthorized;
+export { NotAuthorized };

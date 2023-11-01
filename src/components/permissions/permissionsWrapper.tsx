@@ -8,7 +8,6 @@ import type { UserAccess } from 'api/userAccess';
 import { UserAccessType } from 'api/userAccess';
 import type { AxiosError } from 'axios';
 import { asyncComponent } from 'components/async';
-import { CommonDrawer } from 'components/drawers';
 import { PageTitle } from 'components/pageTitle';
 import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
@@ -20,9 +19,6 @@ import { providersActions, providersQuery, providersSelectors } from 'store/prov
 import { uiActions } from 'store/ui';
 import { userAccessActions, userAccessQuery, userAccessSelectors } from 'store/userAccess';
 
-const InactiveSources = asyncComponent(
-  () => import(/* webpackChunkName: "InactiveSources" */ 'components/inactiveSources')
-);
 const Permissions = asyncComponent(() => import(/* webpackChunkName: "permissions" */ './permissions') as any);
 
 interface PermissionsWrapperOwnProps {
@@ -82,12 +78,9 @@ class PermissionsWrapperBase extends React.Component<PermissionsWrapperProps, an
       <PageTitle>
         {userAccessFetchStatus === FetchStatus.complete && (
           <Permissions>
-            {providersFetchStatus === FetchStatus.complete && (
-              <CommonDrawer>
-                <InactiveSources />
-                {accountSettingsFetchStatus === FetchStatus.complete && children}
-              </CommonDrawer>
-            )}
+            {providersFetchStatus === FetchStatus.complete &&
+              accountSettingsFetchStatus === FetchStatus.complete &&
+              children}
           </Permissions>
         )}
       </PageTitle>

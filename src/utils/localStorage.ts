@@ -1,5 +1,4 @@
 import { ComputedReportItemValueType } from 'routes/components/charts/common';
-import { CostTypes } from 'routes/components/costType/costType';
 
 const accountCostTypeID = 'account_cost_type';
 const accountCurrencyID = 'account_currency';
@@ -7,7 +6,6 @@ const costDistributionID = 'cost_distribution';
 const costManagementID = 'cost_management';
 const costTypeID = 'costType';
 const currencyID = 'currency';
-const inactiveSourcesID = 'inactive_sources';
 const sessionTokenID = 'session';
 
 // Returns a subset of the token cookie
@@ -144,7 +142,7 @@ export const getAccountCostType = () => {
 // Returns cost type
 export const getCostType = () => {
   const costType = getItem(costTypeID);
-  return costType && costType !== null ? costType : CostTypes.unblended;
+  return costType && costType !== null ? costType : 'unblended';
 };
 
 // Returns true if cost type is available
@@ -210,30 +208,5 @@ export const setAccountCurrency = (value: string) => {
 // Set currency
 export const setCurrency = (value: string) => {
   setItem(currencyID, value);
-  saveSessionToken();
-};
-
-/**
- * Inactive sources
- */
-
-// Deletes inactive sources
-export const deleteInactiveSources = () => {
-  removeItem(inactiveSourcesID);
-};
-
-// Returns inactive sources
-export const getInactiveSources = () => {
-  return getItem(inactiveSourcesID);
-};
-
-// Returns true if inactive sources is valid for the current session
-export const isInactiveSourcesValid = () => {
-  return getInactiveSources() && isSessionValid();
-};
-
-// Set inactive sources
-export const setInactiveSources = (value: string) => {
-  setItem(inactiveSourcesID, value);
   saveSessionToken();
 };

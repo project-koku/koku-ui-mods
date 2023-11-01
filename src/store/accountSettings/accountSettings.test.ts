@@ -7,7 +7,7 @@ import { FetchStatus } from 'store/common';
 import { createMockStoreCreator } from 'store/mockStore';
 
 import * as actions from './accountSettingsActions';
-import { accountSettingsStateKey } from './accountSettingsCommon';
+import { stateKey as accountSettingsStateKey } from './accountSettingsCommon';
 import { accountSettingsReducer } from './accountSettingsReducer';
 import * as selectors from './accountSettingsSelectors';
 
