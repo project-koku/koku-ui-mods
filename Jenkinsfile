@@ -19,7 +19,7 @@ pipeline {
     }
 
     environment {
-        FEO_CONTAINER_NAME="hccm-frontend-mods-pr-check-pipeline-$ghprbPullId"
+        FEO_CONTAINER_NAME="hccm-frontend-mfe-pr-check-pipeline-$ghprbPullId"
     }
 
     stages {
