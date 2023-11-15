@@ -653,8 +653,8 @@ export default defineMessages({
     id: 'welcomeInfo',
   },
   welcomeTitle: {
-    defaultMessage: 'Cost Management Microfrontend (MFE) with Module Federation',
-    description: 'Cost Management Microfrontend (MFE) with Module Federation',
+    defaultMessage: 'Cost Management microfrontend (MFE) with Module Federation',
+    description: 'Cost Management microfrontend (MFE) with Module Federation',
     id: 'welcomeTitle',
   },
 });
