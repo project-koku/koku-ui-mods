@@ -96,5 +96,5 @@
   "toolBarBulkSelectPage": "Select page ({value} items)",
   "unitTooltips": "{units, select, byte_ms {{value} Byte-ms} core_hours {{value} core-hours} gb {{value} GB} gb_hours {{value} GB-hours} gb_mo {{value} GB-month} gb_ms {{value} GB-ms} gibibyte_month {{value} GiB-month} hour {{value} hours} hrs {{value} hours} ms {{value} milliseconds} vm_hours {{value} VM-hours} other {{value}}}",
   "welcomeInfo": "For more information visit {url}",
-  "welcomeTitle": "Cost Management Microfrontend (MFE) with Module Federation"
+  "welcomeTitle": "Cost Management microfrontend (MFE) with Module Federation"
 }
