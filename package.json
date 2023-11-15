@@ -1,7 +1,7 @@
 {
   "name": "koku-ui-mfe",
   "version": "0.0.1",
-  "description": "Koku-ui Microfrontend (MFE) with Module Federation",
+  "description": "Koku-ui microfrontend (MFE) with Module Federation",
   "main": "index.js",
   "repository": "https://github.com/project-koku/koku-ros-ui.git",
   "author": "Red Hat",

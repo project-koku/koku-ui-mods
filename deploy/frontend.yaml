@@ -9,7 +9,7 @@ objects:
       name: cost-management-mfe
     spec:
       envName: ${ENV_NAME}
-      title: 'Cost Management Microfrontend (MFE) with Module Federation'
+      title: 'Cost Management microfrontend (MFE) with Module Federation'
       deploymentRepo: https://github.com/project-koku/koku-ui-mfe
       API:
         versions:
