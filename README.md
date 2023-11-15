@@ -1,4 +1,4 @@
-# Koku-ui Microfrontend (MFE) with Module Federation
+# Koku-ui microfrontend (MFE) with Module Federation
 
 [![AGPLv3][license-badge]][license]
 [![Build Status][build-badge]][build]
