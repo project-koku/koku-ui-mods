@@ -23,29 +23,29 @@ objects:
           expandable: true
           routes:
             - appId: 'cost-management-mfe'
-              title: 'Optimizations summary'
-              href: "/staging/cost-management/optimizations/summary"
-            - appId: 'cost-management-mfe'
-              title: 'Optimizations details'
-              href: '/staging/cost-management/optimizations/details'
-            - appId: 'cost-management-mfe'
-              title: 'Optimizations table'
-              href: '/staging/cost-management/optimizations/table'
-            - appId: 'cost-management-mfe'
-              title: 'Optimizations breakdown'
-              href: '/staging/cost-management/optimizations/breakdown'
-            - appId: 'cost-management-mfe'
               title: 'Optimizations badge'
               href: '/staging/cost-management/optimizations/badge'
             - appId: 'cost-management-mfe'
               title: 'Optimizations link'
               href: '/staging/cost-management/optimizations/link'
+            - appId: 'cost-management-mfe'
+              title: 'Optimizations summary'
+              href: "/staging/cost-management/optimizations/summary"
+            - appId: 'cost-management-mfe'
+              title: 'Optimizations table'
+              href: '/staging/cost-management/optimizations/table'
+            - appId: 'cost-management-mfe'
+              title: 'Optimizations details'
+              href: '/staging/cost-management/optimizations/details'
+            - appId: 'cost-management-mfe'
+              title: 'Optimizations breakdown'
+              href: '/staging/cost-management/optimizations/breakdown'
         - title: OCM
           expandable: true
           routes:
             - appId: 'cost-management-mfe'
               title: 'Overview card'
-              href: "/staging/cost-management/optimizations/summary"
+              href: "/staging/cost-management/ocm/overview"
       module:
         manifestLocation: "/apps/cost-management-mfe/fed-mods.json"
         modules:
