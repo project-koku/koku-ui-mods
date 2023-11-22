@@ -59,7 +59,7 @@ const OptimizationsSummary: React.FC<OptimizationsSummaryProps> = ({
     <Card className="summary">
       <CardTitle>
         <Title headingLevel="h2" size={TitleSizes.lg}>
-          {intl.formatMessage(messages.optimizations)} Test
+          {intl.formatMessage(messages.optimizations)}
           <span style={styles.infoIcon}>
             <Popover
               aria-label={intl.formatMessage(messages.optimizationsInfoArialLabel)}
