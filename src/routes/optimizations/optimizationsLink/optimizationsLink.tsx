@@ -50,7 +50,7 @@ const OptimizationsLink: React.FC<OptimizationsLinkProps> = ({
         ...(linkState && linkState),
       }}
     >
-      {count} TEST
+      {count}
     </Link>
   );
 };
