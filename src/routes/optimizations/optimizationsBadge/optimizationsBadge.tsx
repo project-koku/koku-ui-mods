@@ -39,7 +39,7 @@ const OptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({
 
   const count = report?.meta ? report.meta.count : 0;
 
-  return <Badge screenReaderText={intl.formatMessage(messages.optimizationsDetails, { count })}>{count} Test</Badge>;
+  return <Badge screenReaderText={intl.formatMessage(messages.optimizationsDetails, { count })}>{count}</Badge>;
 };
 
 const useMapToProps = ({ groupBy, groupByValue }: OptimizationsBadgeOwnProps): OptimizationsBadgeStateProps => {
