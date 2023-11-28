@@ -35,7 +35,7 @@ class OptimizationsToolbarBase extends React.Component<OptimizationsToolbarProps
   }
 
   private getCategoryOptions = (): ToolbarChipGroup[] => {
-    const { intl, isProject } = this.props;
+    const { intl, isProject = true } = this.props;
 
     const options = [
       { name: intl.formatMessage(messages.filterByValues, { value: 'container' }), key: 'container' },

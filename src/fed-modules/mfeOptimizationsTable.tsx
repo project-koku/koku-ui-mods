@@ -14,6 +14,7 @@ export interface OptimizationsDetailsOwnProps {
   breadcrumbPath?: string;
   groupBy?: string;
   groupByValue?: string;
+  isProject?: boolean;
   linkPath?: string;
   linkState?: any;
 }
@@ -25,6 +26,7 @@ const MfeOptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
   breadcrumbPath,
   groupBy,
   groupByValue,
+  isProject,
   linkPath,
   linkState,
 }: OptimizationsDetailsOwnProps) => {
@@ -38,6 +40,7 @@ const MfeOptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
           breadcrumbPath={breadcrumbPath}
           groupBy={groupBy}
           groupByValue={groupByValue}
+          isProject={isProject}
           linkPath={linkPath}
           linkState={linkState}
         />
