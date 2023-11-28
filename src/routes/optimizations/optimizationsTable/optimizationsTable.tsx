@@ -30,6 +30,7 @@ interface OptimizationsTableOwnProps {
   breadcrumbPath?: string;
   groupBy?: string;
   groupByValue?: string;
+  isProject?: boolean;
   linkPath?: string;
   linkState?: any;
 }
@@ -65,6 +66,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
   breadcrumbPath,
   groupBy,
   groupByValue,
+  isProject,
   linkPath,
   linkState,
 }) => {
@@ -139,6 +141,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
       <OptimizationsToolbar
         isDisabled={isDisabled}
         itemsPerPage={itemsPerPage}
+        isProject={isProject}
         itemsTotal={itemsTotal}
         onFilterAdded={filter => handleOnFilterAdded(filter)}
         onFilterRemoved={filter => handleOnFilterRemoved(filter)}
