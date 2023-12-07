@@ -4,11 +4,13 @@ This doc describes how to release the UI to each staging environment. Note that 
 
 ## Release script
 
-Using our script ensures that code is always pulled from the correct branches. For example, we always pull from: 
+The release script creates a PR with a unique SHA, used for a namespace \`ref\` in the app-interface repo. The script also ensures that code is always pulled from the correct branches. For example, we always:
 
 1. Pull from master when pushing to stage-stable
 2. Pull from stage-stable when pushing to prod-beta
 3. Pull from prod-beta when pushing to prod-stable
+
+Please allow the PR to build successfully and merge before running the script again for the next branch.
 
 ### Release to stage-stable
 
@@ -28,19 +30,31 @@ sh scripts/release-branch.sh -b
 sh scripts/release-branch.sh -p
 ```
 
-## Travis build
+## Deployment
 
-Whenever a branch is merged, our Travis script automatically builds and pushes a bundle to our RedHatInsights build repo.
+After all PRs have been merged, update the \`hccm-frontend-mfe\` resource in https://gitlab.cee.redhat.com/service/app-interface/-/blob/master/data/services/insights/hccm/deploy-clowder.yml
 
-To view our Travis build, see https://app.travis-ci.com/github/project-koku/koku-ros-ui/builds
+Use the latest commit of each branch to update namespaces \`ref\` in the app-interface repo. Don't use a merge commit, SHAs must be unique when images are created for each branch.
 
-## RedHatInsights build repo
-
-After each successfully Travis build, you should see a new commit here https://github.com/RedHatInsights/cost-management-mfe-build.
-
-At this point, the Insights pipeline takes over and the bundle should be available shortly in the expected staging environment. 
-
-Depending on how many builds are queued, this could take a few minutes or hours. Typically, the prod-stable environment is updated within 15-30 min.
+```
+- name: hccm-frontend-mfe
+  ...
+    # Stage Stable Deployment
+  - namespace:
+      $ref: /services/insights/frontend-operator/namespaces/stage-frontends.yml
+    ref: 68ce48592f5222029f27f6fb708698013d2f0a58 // Replace with latest SHA for stage-beta branch
+    ...
+    # Prod Beta Deployment
+  - namespace:
+      $ref: /services/insights/frontend-operator/namespaces/prod-beta-frontends.yml
+    ref: e2d9e9116068d4d1aa5feda5c7d1716ee02b5bca // Replace with latest SHA for prod-beta branch
+    ...
+    # Prod Stable Deployment
+  - namespace:
+      $ref: /services/insights/frontend-operator/namespaces/prod-frontends.yml
+    ref: 77deb707f31b40414e8b13afe23d39e7091fd067 // Replace with latest SHA for prod-stable branch
+    ...
+```
 
 ## Testing
 
@@ -50,7 +64,6 @@ Please ensure expected changes have been updated before releasing to the next st
 
 1. For stage-stable, view https://console.stage.redhat.com/staging/cost-management/
 2. For prod-beta, view https://console.redhat.com/beta/staging/cost-management/
-3. For prod-stable, view https://console.redhat.com/staging/cost-management/
 
 ## Release notes
 
@@ -64,6 +77,6 @@ For release examples, please see existing releases here https://github.com/proje
 
 ## Troubleshooting
 
-If a staging environment has not updated as expected, it's best to ask questions in the forum-consoledot-ui channel of http://coreos.slack.com.
+If a staging environment has not updated as expected, it's best to ask questions in the forum-consoledot-ui or proj-fecontainer-migration channels of http://coreos.slack.com.
 
 Alternatively, open a Jira issue under the "ConsoleDot Platform (console.redhat.com) (RHCLOUD)" project category. For an example, see https://issues.redhat.com/browse/RHCLOUD-18259
