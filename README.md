@@ -1,4 +1,4 @@
-# Koku-ui microfrontend (MFE) with Module Federation
+# Koku microfrontend (MFE) with Module Federation
 
 [![AGPLv3][license-badge]][license]
 [![Build Status][build-badge]][build]
@@ -40,7 +40,7 @@ npm build
 npm test
 ```
 
-## Running the Koku-ui MFE against a hosted Koku API, using webpack proxy
+## Running the Koku MFE against a hosted Koku API, using webpack proxy
 Note that this approach currently supports the Insights stage-beta, stage-stable, prod-beta, and prod-stable environments.
 
 1. Start development server
@@ -59,7 +59,7 @@ Follow the prompts that follow.
 https://stage.foo.redhat.com:1337/beta/staging/cost-management
 ```
 
-### Running Koku UI with a local Cloud Services Backend
+### Running the Koku MFE with a local Cloud Services Backend
 
 See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
 
@@ -68,14 +68,16 @@ See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/clou
 make dev-static-node
 ```
 
-2. Start development server in Koku UI microfrontend (MFE) repo
+2. Start development server in Koku MFE repo
 ```
 npm start:csb
 ```
 
-### Running Koku UI with a local Koku UI microfrontend (MFE)
+### Running the Koku MFE with a local Koku UI
 
-1. Start development server in Koku UI microfrontend (MFE) repo
+See https://github.com/project-koku/koku-ui
+
+1. Start development server in Koku MFE repo
 ```
 npm start:static
 ```
@@ -85,16 +87,17 @@ npm start:static
 npm start:mfe
 ```
 
-### Running Koku UI with a local Koku UI microfrontend (MFE) and Cloud Services Backend
+### Running the Koku MFE with a local Koku UI and Cloud Services Backend
 
 See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
+and https://github.com/project-koku/koku-ui
 
 1. Serve files locally from Cloud Services Backend repo
 ```
 make dev-static-node
 ```
 
-2. Start development server in Koku UI microfrontend (MFE) repo
+2. Start development server in Koku MFE repo
 ```
 npm start:static
 ```
@@ -104,9 +107,9 @@ npm start:static
 npm start:csb:mfe
 ```
 
-## Releasing the Koku-ui MFE
+## Releasing the Koku MFE
 
-This [RELEASE][release-doc] doc describes how to release the UI to each staging environment.
+This [RELEASE][release-doc] doc describes how to release the Koku MFE to each staging environment.
 
 ## Useful Links
 
@@ -162,11 +165,11 @@ This [RELEASE][release-doc] doc describes how to release the UI to each staging 
   * [Docker](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) - Manage Docker images from VSCode
 
 [koku-readme]: https://github.com/project-koku/koku#readme
-[license-badge]: https://img.shields.io/github/license/project-koku/koku-ros-ui.svg?longCache=true&style=for-the-badge
-[license]: https://github.com/project-koku/koku-ros-ui/blob/main/LICENSE
+[license-badge]: https://img.shields.io/github/license/project-koku/koku-ui-mfe.svg?longCache=true&style=for-the-badge
+[license]: https://github.com/project-koku/koku-ui-mfe/blob/main/LICENSE
 [nodejs]: https://nodejs.org/en/
 [patch-etc-hosts]: https://github.com/RedHatInsights/insights-proxy/blob/master/scripts/patch-etc-hosts.sh
 [pf-logo]: https://www.patternfly.org/v4/images/logo.4189e7eb1a0741ea2b3b51b80d33c4cb.svg
 [patternfly]: https://www.patternfly.org/
-[release-doc]: https://github.com/project-koku/koku-ros-ui/blob/main/RELEASE.md
+[release-doc]: https://github.com/project-koku/koku-ui-mfe/blob/main/RELEASE.md
 [npm]: https://https://www.npmjs.com/

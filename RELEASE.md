@@ -1,6 +1,6 @@
-# Releasing Koku UI federated modules
+# Releasing Koku microfrontend (MFE) with Module Federation
 
-This doc describes how to release the UI to each staging environment. Note that this should be done in order for testing purposes; stage-stable, prod-beta, and finally prod-stable
+This doc describes how to release the Koku MFE to each staging environment. Note that this should be done in order for testing purposes; stage-stable, prod-beta, and finally prod-stable
 
 ## Release script
 
@@ -67,13 +67,13 @@ Please ensure expected changes have been updated before releasing to the next st
 
 ## Release notes
 
-After releasing to prod-stable, a new tag will be created here https://github.com/project-koku/koku-ros-ui/tags. Create a new GitHub release based on this tag -- use the tag label as the "release title".
+After releasing to prod-stable, a new tag will be created here https://github.com/project-koku/koku-ui-mfe/tags. Create a new GitHub release based on this tag -- use the tag label as the "release title".
 
 Note that you may  "Draft a new release", before the latest tag is available, and mark it as a "pre-release" -- don't click "publish release" yet, use "save draft".
 
 Please document any new features and bug fixes available in production and other staging environments. For example, note any features that are only available in stage-beta.
 
-For release examples, please see existing releases here https://github.com/project-koku/koku-ros-ui/releases
+For release examples, please see existing releases here https://github.com/project-koku/koku-ui-mfe/releases
 
 ## Troubleshooting
 
