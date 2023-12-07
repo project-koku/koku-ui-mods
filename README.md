@@ -40,7 +40,7 @@ npm build
 npm test
 ```
 
-## Running the Koku MFE against a hosted Koku API, using webpack proxy
+## Running Koku MFE against a hosted Koku API, using webpack proxy
 Note that this approach currently supports the Insights stage-beta, stage-stable, prod-beta, and prod-stable environments.
 
 1. Start development server
@@ -59,7 +59,7 @@ Follow the prompts that follow.
 https://stage.foo.redhat.com:1337/beta/staging/cost-management
 ```
 
-### Running the Koku MFE with a local Cloud Services Backend
+### Running Koku MFE with local Cloud Services Backend
 
 See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
 
@@ -73,7 +73,7 @@ make dev-static-node
 npm start:csb
 ```
 
-### Running the Koku MFE with a local Koku UI
+### Running Koku MFE with local Koku UI
 
 See https://github.com/project-koku/koku-ui
 
@@ -87,7 +87,7 @@ npm start:static
 npm start:mfe
 ```
 
-### Running the Koku MFE with a local Koku UI and Cloud Services Backend
+### Running Koku MFE with local Koku UI and Cloud Services Backend
 
 See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
 and https://github.com/project-koku/koku-ui
@@ -107,9 +107,9 @@ npm start:static
 npm start:csb:mfe
 ```
 
-## Releasing the Koku MFE
+## Releasing Koku MFE
 
-This [RELEASE][release-doc] doc describes how to release the Koku MFE to each staging environment.
+This [RELEASE][release-doc] doc describes how to release Koku MFE to each staging environment.
 
 ## Useful Links
 
