@@ -3,7 +3,7 @@ import './optimizationsBreakdown.scss';
 import { Alert, List, ListItem, PageSection } from '@patternfly/react-core';
 import type { Query } from 'api/queries/query';
 import { parseQuery } from 'api/queries/query';
-import type { RecommendationItem, RecommendationReportData } from 'api/ros/recommendations';
+import type { RecommendationReportData } from 'api/ros/recommendations';
 import { RosPathsType, RosType } from 'api/ros/ros';
 import type { AxiosError } from 'axios';
 import messages from 'locales/messages';
@@ -18,8 +18,9 @@ import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
 import { breadcrumbLabelKey } from 'utils/props';
-import { getNotifications, hasRecommendation } from 'utils/recomendations';
+import { getNotifications, hasRecommendation, Interval, OptimizationType } from 'utils/recomendations';
 
+import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
@@ -39,46 +40,41 @@ interface OptimizationsBreakdownStateProps {
 
 type OptimizationsBreakdownProps = OptimizationsBreakdownOwnProps & OptimizationsBreakdownStateProps;
 
-// eslint-disable-next-line no-shadow
-export const enum Interval {
-  short_term = 'short_term', // last 24 hrs
-  medium_term = 'medium_term', // last 7 days
-  long_term = 'long_term', // last 15 days
-}
-
 const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendation as any;
 
 const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
   const { breadcrumbLabel, breadcrumbPath, report, reportFetchStatus } = useMapToProps();
+  const [optimizationType] = useState(OptimizationType.cost);
   const intl = useIntl();
 
-  const getDefaultTerm = () => {
+  const getDefaultInterval = () => {
     let result = Interval.short_term;
-    if (!report?.recommendations?.duration_based) {
+    const terms = report?.recommendations?.recommendation_terms;
+
+    if (!terms) {
       return result;
     }
 
-    const recommendation = report.recommendations.duration_based;
-    if (hasRecommendation(recommendation.short_term)) {
+    if (hasRecommendation(terms?.short_term?.recommendation_engines?.[optimizationType]?.config)) {
       result = Interval.short_term;
-    } else if (hasRecommendation(recommendation.medium_term)) {
+    } else if (hasRecommendation(terms?.medium_term?.recommendation_engines?.[optimizationType]?.config)) {
       result = Interval.medium_term;
-    } else if (hasRecommendation(recommendation.long_term)) {
+    } else if (hasRecommendation(terms?.long_term?.recommendation_engines?.[optimizationType]?.config)) {
       result = Interval.long_term;
     }
     return result as Interval;
   };
 
-  const [currentInterval, setCurrentInterval] = useState(getDefaultTerm());
+  const [currentInterval, setCurrentInterval] = useState(getDefaultInterval());
 
   const getAlert = () => {
     let notifications;
-    if (report?.recommendations?.duration_based?.[currentInterval]) {
-      notifications = getNotifications(report.recommendations.duration_based[currentInterval]);
+    if (report?.recommendations?.recommendation_terms?.[currentInterval]) {
+      notifications = getNotifications(report.recommendations.recommendation_terms[currentInterval]);
     }
 
-    if (!notifications) {
+    if (notifications.length === 0) {
       return null;
     }
 
@@ -95,27 +91,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
     );
   };
 
-  const getRecommendationTerm = (): RecommendationItem => {
-    if (!report) {
-      return undefined;
-    }
-
-    let result;
-    switch (currentInterval) {
-      case Interval.short_term:
-        result = report?.recommendations?.duration_based?.short_term;
-        break;
-      case Interval.medium_term:
-        result = report?.recommendations?.duration_based?.medium_term;
-        break;
-      case Interval.long_term:
-        result = report?.recommendations?.duration_based?.long_term;
-        break;
-    }
-    return result;
-  };
-
-  const handleOnSelect = (value: Interval) => {
+  const handleOnSelected = (value: Interval) => {
     setCurrentInterval(value);
   };
 
@@ -128,7 +104,8 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
         breadcrumbPath={breadcrumbPath}
         currentInterval={currentInterval}
         isDisabled={isLoading}
-        onSelect={handleOnSelect}
+        onSelected={handleOnSelected}
+        optimizationType={optimizationType}
         report={report}
       />
       <PageSection isFilled>
@@ -140,7 +117,11 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
         ) : (
           <>
             {getAlert()}
-            <OptimizationsBreakdownConfiguration term={getRecommendationTerm()} />
+            <OptimizationsBreakdownConfiguration
+              currentInterval={currentInterval}
+              optimizationType={optimizationType}
+              recommendations={report?.recommendations}
+            />
           </>
         )}
       </PageSection>
@@ -160,9 +141,11 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   const location = useLocation();
 
   const reportQueryString = queryFromRoute ? queryFromRoute.id : ''; // Flatten ID
-  const report: any = useSelector((state: RootState) =>
+  let report: any = useSelector((state: RootState) =>
     rosSelectors.selectRos(state, reportPathsType, reportType, reportQueryString)
   );
+  // Todo: Update to use new API response
+  report = data.data[0];
   const reportFetchStatus = useSelector((state: RootState) =>
     rosSelectors.selectRosFetchStatus(state, reportPathsType, reportType, reportQueryString)
   );

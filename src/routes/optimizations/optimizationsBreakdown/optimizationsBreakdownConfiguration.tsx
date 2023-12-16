@@ -15,41 +15,50 @@ import {
   TitleSizes,
 } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import type { RecommendationItem } from 'api/ros/recommendations';
+import type { RecommendationTerm } from 'api/ros/recommendations';
+import type { RecommendationItems } from 'api/ros/recommendations';
+import type { RecommendationValues } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { formatOptimization, formatPercentage } from 'utils/format';
-import { hasRecommendationValues } from 'utils/recomendations';
+import type { OptimizationType } from 'utils/recomendations';
+import { ConfigType, hasRecommendationValues, Interval } from 'utils/recomendations';
 import YAML from 'yaml';
 
 import { styles } from './optimizationsBreakdown.styles';
 
 interface OptimizationsBreakdownConfigurationOwnProps {
-  term: RecommendationItem;
+  currentInterval?: Interval.short_term | Interval.medium_term | Interval.long_term;
+  optimizationType?: OptimizationType;
+  recommendations?: RecommendationItems;
 }
 
 type OptimizationsBreakdownConfigurationProps = OptimizationsBreakdownConfigurationOwnProps;
 
-const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfigurationProps> = ({ term }) => {
+const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfigurationProps> = ({
+  currentInterval,
+  optimizationType,
+  recommendations,
+}) => {
   const [copied, setCopied] = useState(false);
   const intl = useIntl();
 
-  const getConfig = (key: 'config' | 'current', isFormatted = true, isUnitsOnly = false) => {
-    const hasConfigLimitsCpu = hasRecommendationValues(term, key, 'limits', 'cpu');
-    const hasConfigLimitsMemory = hasRecommendationValues(term, key, 'limits', 'memory');
-    const hasConfigRequestsCpu = hasRecommendationValues(term, key, 'requests', 'cpu');
-    const hasConfigRequestsMemory = hasRecommendationValues(term, key, 'requests', 'memory');
+  const getConfiguration = (values: RecommendationValues, isFormatted = true, isUnitsOnly = false) => {
+    const hasConfigLimitsCpu = hasRecommendationValues(values, 'limits', 'cpu');
+    const hasConfigLimitsMemory = hasRecommendationValues(values, 'limits', 'memory');
+    const hasConfigRequestsCpu = hasRecommendationValues(values, 'requests', 'cpu');
+    const hasConfigRequestsMemory = hasRecommendationValues(values, 'requests', 'memory');
 
-    const cpuConfigLimitsAmount = hasConfigLimitsCpu ? term[key].limits.cpu.amount : undefined;
-    const cpuConfigLimitsUnits = hasConfigLimitsCpu ? term[key].limits.cpu.format : undefined;
-    const cpuConfigRequestsAmount = hasConfigRequestsCpu ? term[key].requests.cpu.amount : undefined;
-    const cpuConfigRequestsUnits = hasConfigRequestsCpu ? term[key].requests.cpu.format : undefined;
+    const cpuConfigLimitsAmount = hasConfigLimitsCpu ? values.limits.cpu.amount : undefined;
+    const cpuConfigLimitsUnits = hasConfigLimitsCpu ? values.limits.cpu.format : undefined;
+    const cpuConfigRequestsAmount = hasConfigRequestsCpu ? values.requests.cpu.amount : undefined;
+    const cpuConfigRequestsUnits = hasConfigRequestsCpu ? values.requests.cpu.format : undefined;
 
-    const memConfigLimitsAmount = hasConfigLimitsMemory ? term[key].limits.memory.amount : undefined;
-    const memConfigLimitsUnits = hasConfigLimitsMemory ? term[key].limits.memory.format : undefined;
-    const memConfigRequestsAmount = hasConfigRequestsMemory ? term[key].requests.memory.amount : undefined;
-    const memConfigRequestsUnits = hasConfigRequestsMemory ? term[key].requests.memory.format : undefined;
+    const memConfigLimitsAmount = hasConfigLimitsMemory ? values.limits.memory.amount : undefined;
+    const memConfigLimitsUnits = hasConfigLimitsMemory ? values.limits.memory.format : undefined;
+    const memConfigRequestsAmount = hasConfigRequestsMemory ? values.requests.memory.amount : undefined;
+    const memConfigRequestsUnits = hasConfigRequestsMemory ? values.requests.memory.format : undefined;
 
     const formatValue = (value, units) => {
       if (!value) {
@@ -65,37 +74,68 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
           : value;
     };
     return {
-      resources: {
-        limits: {
-          cpu: formatValue(cpuConfigLimitsAmount, cpuConfigLimitsUnits),
-          memory: formatValue(memConfigLimitsAmount, memConfigLimitsUnits),
-        },
-        requests: {
-          cpu: formatValue(cpuConfigRequestsAmount, cpuConfigRequestsUnits),
-          memory: formatValue(memConfigRequestsAmount, memConfigRequestsUnits),
-        },
+      limits: {
+        cpu: formatValue(cpuConfigLimitsAmount, cpuConfigLimitsUnits),
+        memory: formatValue(memConfigLimitsAmount, memConfigLimitsUnits),
+      },
+      requests: {
+        cpu: formatValue(cpuConfigRequestsAmount, cpuConfigRequestsUnits),
+        memory: formatValue(memConfigRequestsAmount, memConfigRequestsUnits),
       },
     };
   };
 
-  const getCurrentConfig = () => {
-    const code = getConfig('current');
+  const getCurrentConfig = (isFormatted = true, isUnitsOnly = false) => {
+    const values = recommendations?.current;
+
+    return getConfiguration(values, isFormatted, isUnitsOnly);
+  };
+
+  const getRecommendationTerm = (): RecommendationTerm => {
+    if (!recommendations) {
+      return undefined;
+    }
+
+    let result;
+    switch (currentInterval) {
+      case Interval.short_term:
+        result = recommendations?.recommendation_terms?.short_term;
+        break;
+      case Interval.medium_term:
+        result = recommendations?.recommendation_terms?.medium_term;
+        break;
+      case Interval.long_term:
+        result = recommendations?.recommendation_terms?.long_term;
+        break;
+    }
+    return result;
+  };
+
+  const getRecommendedConfig = (isFormatted = true, isUnitsOnly = false) => {
+    const term = getRecommendationTerm();
+    const values = term?.recommendation_engines?.[optimizationType]?.config;
+
+    return getConfiguration(values, isFormatted, isUnitsOnly);
+  };
+
+  const getCurrentYaml = () => {
+    const code = getCurrentConfig();
 
     // See https://eemeli.org/yaml/#tojs-options
     return YAML.stringify(code).replace(/"/g, ''); // prettify
   };
 
   const getCurrentConfigCodeBlock = () => {
-    const code = getCurrentConfig();
+    const code = getCurrentYaml();
     if (code === null) {
       return null;
     }
     return (
       <CodeBlock actions={getEmptyActions()}>
         <CodeBlockCode>
-          {hasMissingValue('current') ? (
+          {hasMissingValue(ConfigType.current) ? (
             <span style={styles.codeBlock}>
-              <span>{getWarningConfig('current')}</span>
+              <span>{getWarningConfig(ConfigType.current)}</span>
               <span>&nbsp;</span>
               <span>{code}</span>
             </span>
@@ -121,7 +161,7 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
   };
 
   const getRecommendedActions = () => {
-    const code = getRecommendedConfig();
+    const code = getRecommendedYaml();
 
     return (
       <CodeBlockAction>
@@ -141,8 +181,8 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     );
   };
 
-  const getRecommendedConfig = () => {
-    let code = getConfig('config');
+  const getRecommendedYaml = () => {
+    let code = getRecommendedConfig();
     if (code === null) {
       return null;
     }
@@ -154,16 +194,16 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
   };
 
   const getRecommendedConfigCodeBlock = () => {
-    const code = getRecommendedConfig();
+    const code = getRecommendedYaml();
     if (code === null) {
       return null;
     }
     return (
       <CodeBlock actions={getRecommendedActions()}>
         <CodeBlockCode>
-          {hasMissingValue('config') ? (
+          {hasMissingValue(ConfigType.recommended) ? (
             <span style={styles.codeBlock}>
-              <span>{getWarningConfig('config')}</span>
+              <span>{getWarningConfig(ConfigType.recommended)}</span>
               <span>&nbsp;</span>
               <span>{code}</span>
             </span>
@@ -176,22 +216,19 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
   };
 
   const getVariationChange = (key1: 'limits' | 'requests', key2: 'cpu' | 'memory') => {
-    const currentValues = getConfig('current', false);
-    const currentUnits = getConfig('current', false, true);
-    const recommendedValues = getConfig('config', false);
-    const recommendedUnits = getConfig('config', false, true);
+    const currentValues = getCurrentConfig(false);
+    const currentUnits = getCurrentConfig(false, true);
+    const recommendedValues = getRecommendedConfig(false);
+    const recommendedUnits = getRecommendedConfig(false, true);
 
-    let currentVal = currentValues.resources[key1][key2];
-    let recommendedVal = recommendedValues.resources[key1][key2];
+    let currentVal = currentValues[key1][key2];
+    let recommendedVal = recommendedValues[key1][key2];
 
     // Convert millicores to cores
-    if (currentUnits.resources[key1][key2] === 'cores' && recommendedUnits.resources[key1][key2] === 'millicores') {
-      recommendedVal = recommendedValues.resources[key1][key2] / 1000;
-    } else if (
-      currentUnits.resources[key1][key2] === 'millicores' &&
-      recommendedUnits.resources[key1][key2] === 'cores'
-    ) {
-      currentVal = currentValues.resources[key1][key2] / 1000;
+    if (currentUnits[key1][key2] === 'cores' && recommendedUnits[key1][key2] === 'millicores') {
+      recommendedVal = recommendedValues[key1][key2] / 1000;
+    } else if (currentUnits[key1][key2] === 'millicores' && recommendedUnits[key1][key2] === 'cores') {
+      currentVal = currentValues[key1][key2] / 1000;
     }
 
     // Calculate percentage change
@@ -204,10 +241,10 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
 
   const getVariationConfig = config => {
     // Get longest formatted string containing units
-    const limitsCpuChars = `cpu: ${config.resources.limits.cpu}`.length;
-    const limitsMemoryChars = `memory: ${config.resources.limits.memory}`.length;
-    const requestsCpuChars = `cpu: ${config.resources.requests.cpu}`.length;
-    const requestsMemoryChars = `memory: ${config.resources.requests.memory}`.length;
+    const limitsCpuChars = `cpu: ${config.limits.cpu}`.length;
+    const limitsMemoryChars = `memory: ${config.limits.memory}`.length;
+    const requestsCpuChars = `cpu: ${config.requests.cpu}`.length;
+    const requestsMemoryChars = `memory: ${config.requests.memory}`.length;
 
     // Calculate max characters in order to left-align change values
     const maxChars = Math.max(limitsCpuChars, limitsMemoryChars, requestsCpuChars, requestsMemoryChars);
@@ -236,15 +273,13 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
       return `${value}${change}`;
     };
     return {
-      resources: {
-        limits: {
-          cpu: formatValue(config.resources.limits.cpu, cpuVariationLimitsChange),
-          memory: formatValue(config.resources.limits.memory, memoryVariationLimitsChange),
-        },
-        requests: {
-          cpu: formatValue(config.resources.requests.cpu, cpuVariationRequestsChange),
-          memory: formatValue(config.resources.requests.memory, memoryVariationRequestsChange),
-        },
+      limits: {
+        cpu: formatValue(config.limits.cpu, cpuVariationLimitsChange),
+        memory: formatValue(config.limits.memory, memoryVariationLimitsChange),
+      },
+      requests: {
+        cpu: formatValue(config.requests.cpu, cpuVariationRequestsChange),
+        memory: formatValue(config.requests.memory, memoryVariationRequestsChange),
       },
     };
   };
@@ -260,8 +295,8 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     return `${spacing}${value}`;
   };
 
-  const getWarningConfig = (key: 'current' | 'config') => {
-    const config = getConfig(key, false);
+  const getWarningConfig = (key: ConfigType.current | ConfigType.recommended) => {
+    const values = key === ConfigType.current ? getCurrentConfig(false) : getRecommendedConfig(false);
 
     const getWarning = value => {
       return !value ? (
@@ -274,15 +309,14 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     return (
       <>
         <br />
+        {getWarning(values.limits.cpu)}
         <br />
-        {getWarning(config.resources.limits.cpu)}
-        <br />
-        {getWarning(config.resources.limits.memory)}
+        {getWarning(values.limits.memory)}
         <br />
         <br />
-        {getWarning(config.resources.requests.cpu)}
+        {getWarning(values.requests.cpu)}
         <br />
-        {getWarning(config.resources.requests.memory)}
+        {getWarning(values.requests.memory)}
       </>
     );
   };
@@ -292,17 +326,17 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     setCopied(true);
   };
 
-  const hasMissingValue = (key: 'config' | 'current') => {
-    const config = getConfig(key, false);
+  const hasMissingValue = (key: ConfigType.current | ConfigType.recommended) => {
+    const values = key === ConfigType.current ? getCurrentConfig(false) : getRecommendedConfig(false);
 
     const isMissingValue = value => {
       return !value || `${value}`.trim().length === 0;
     };
 
-    const cpuLimitsWarning = isMissingValue(config.resources.limits.cpu);
-    const cpuRequestsWarning = isMissingValue(config.resources.requests.cpu);
-    const memoryLimitsWarning = isMissingValue(config.resources.limits.memory);
-    const memoryRequestsWarning = isMissingValue(config.resources.requests.memory);
+    const cpuLimitsWarning = isMissingValue(values.limits.cpu);
+    const cpuRequestsWarning = isMissingValue(values.requests.cpu);
+    const memoryLimitsWarning = isMissingValue(values.limits.memory);
+    const memoryRequestsWarning = isMissingValue(values.requests.memory);
 
     return cpuLimitsWarning || cpuRequestsWarning || memoryLimitsWarning || memoryRequestsWarning;
   };
