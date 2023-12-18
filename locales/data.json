@@ -1298,6 +1298,12 @@
         "value": "Optimizations"
       }
     ],
+    "optimizationsCost": [
+      {
+        "type": 0,
+        "value": "Cost optimizations"
+      }
+    ],
     "optimizationsDetails": [
       {
         "offset": 0,
@@ -1439,6 +1445,12 @@
         },
         "type": 5,
         "value": "value"
+      }
+    ],
+    "optimizationsPerformance": [
+      {
+        "type": 0,
+        "value": "Performance optimizations"
       }
     ],
     "optimizationsPerspective": [

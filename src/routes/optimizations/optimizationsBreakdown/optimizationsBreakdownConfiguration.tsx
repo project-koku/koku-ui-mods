@@ -44,7 +44,21 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
   const [copied, setCopied] = useState(false);
   const intl = useIntl();
 
-  const getConfiguration = (values: RecommendationValues, isFormatted = true, isUnitsOnly = false) => {
+  const formatValue = (value, units, isFormatted = true, isUnitsOnly = false) => {
+    if (!value) {
+      return '';
+    }
+    return isFormatted
+      ? intl.formatMessage(messages.optimizationsValue, {
+          value: formatOptimization(value),
+          units,
+        })
+      : isUnitsOnly
+        ? units
+        : value;
+  };
+
+  const getConfiguration = (values: RecommendationValues, isFormatted, isUnitsOnly) => {
     const hasConfigLimitsCpu = hasRecommendationValues(values, 'limits', 'cpu');
     const hasConfigLimitsMemory = hasRecommendationValues(values, 'limits', 'memory');
     const hasConfigRequestsCpu = hasRecommendationValues(values, 'requests', 'cpu');
@@ -60,27 +74,14 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     const memConfigRequestsAmount = hasConfigRequestsMemory ? values.requests.memory.amount : undefined;
     const memConfigRequestsUnits = hasConfigRequestsMemory ? values.requests.memory.format : undefined;
 
-    const formatValue = (value, units) => {
-      if (!value) {
-        return '';
-      }
-      return isFormatted
-        ? intl.formatMessage(messages.optimizationsValue, {
-            value: formatOptimization(value),
-            units,
-          })
-        : isUnitsOnly
-          ? units
-          : value;
-    };
     return {
       limits: {
-        cpu: formatValue(cpuConfigLimitsAmount, cpuConfigLimitsUnits),
-        memory: formatValue(memConfigLimitsAmount, memConfigLimitsUnits),
+        cpu: formatValue(cpuConfigLimitsAmount, cpuConfigLimitsUnits, false), // Todo: omit CPU units
+        memory: formatValue(memConfigLimitsAmount, memConfigLimitsUnits, isFormatted, isUnitsOnly),
       },
       requests: {
-        cpu: formatValue(cpuConfigRequestsAmount, cpuConfigRequestsUnits),
-        memory: formatValue(memConfigRequestsAmount, memConfigRequestsUnits),
+        cpu: formatValue(cpuConfigRequestsAmount, cpuConfigRequestsUnits, false), // Todo: omit CPU units
+        memory: formatValue(memConfigRequestsAmount, memConfigRequestsUnits, isFormatted, isUnitsOnly),
       },
     };
   };
@@ -119,7 +120,7 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
   };
 
   const getCurrentYaml = () => {
-    const code = getCurrentConfig();
+    const code = getCurrentConfig(true, false);
 
     // See https://eemeli.org/yaml/#tojs-options
     return YAML.stringify(code).replace(/"/g, ''); // prettify
@@ -266,20 +267,21 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
       getVariationChange('requests', 'memory')
     );
 
-    const formatValue = (value, change) => {
+    const concatValue = (value, change) => {
       if (!value) {
         return '';
       }
       return `${value}${change}`;
     };
+
     return {
       limits: {
-        cpu: formatValue(config.limits.cpu, cpuVariationLimitsChange),
-        memory: formatValue(config.limits.memory, memoryVariationLimitsChange),
+        cpu: concatValue(config.limits.cpu, cpuVariationLimitsChange),
+        memory: concatValue(config.limits.memory, memoryVariationLimitsChange),
       },
       requests: {
-        cpu: formatValue(config.requests.cpu, cpuVariationRequestsChange),
-        memory: formatValue(config.requests.memory, memoryVariationRequestsChange),
+        cpu: concatValue(config.requests.cpu, cpuVariationRequestsChange),
+        memory: concatValue(config.requests.memory, memoryVariationRequestsChange),
       },
     };
   };

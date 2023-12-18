@@ -1,12 +1,13 @@
 import './optimizationsBreakdown.scss';
 
-import { Alert, List, ListItem, PageSection } from '@patternfly/react-core';
+import { Alert, List, ListItem, PageSection, Tab, TabContent, Tabs, TabTitleText } from '@patternfly/react-core';
 import type { Query } from 'api/queries/query';
 import { parseQuery } from 'api/queries/query';
 import type { RecommendationReportData } from 'api/ros/recommendations';
 import { RosPathsType, RosType } from 'api/ros/ros';
 import type { AxiosError } from 'axios';
 import messages from 'locales/messages';
+import type { RefObject } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +25,20 @@ import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
+
+export const getIdKeyForTab = (tab: OptimizationType) => {
+  switch (tab) {
+    case OptimizationType.cost:
+      return 'cost';
+    case OptimizationType.performance:
+      return 'performance';
+  }
+};
+
+interface AvailableTab {
+  contentRef: RefObject<any>;
+  tab: OptimizationType;
+}
 
 interface OptimizationsBreakdownOwnProps {
   // TBD...
@@ -45,6 +60,7 @@ const reportPathsType = RosPathsType.recommendation as any;
 
 const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
   const { breadcrumbLabel, breadcrumbPath, report, reportFetchStatus } = useMapToProps();
+  const [activeTabKey, setActiveTabKey] = useState(0);
   const [optimizationType] = useState(OptimizationType.cost);
   const intl = useIntl();
 
@@ -91,11 +107,96 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
     );
   };
 
+  const getAvailableTabs = () => {
+    const availableTabs: AvailableTab[] = [
+      {
+        contentRef: React.createRef(),
+        tab: OptimizationType.cost,
+      },
+      {
+        contentRef: React.createRef(),
+        tab: OptimizationType.performance,
+      },
+    ];
+    return availableTabs;
+  };
+
+  const getTabContent = (availableTabs: AvailableTab[]) => {
+    return availableTabs.map((val, index) => {
+      return (
+        <TabContent
+          eventKey={index}
+          key={`${getIdKeyForTab(val.tab)}-tabContent`}
+          id={`tab-${index}`}
+          ref={val.contentRef as any}
+        >
+          {getTabItem(val.tab, index)}
+        </TabContent>
+      );
+    });
+  };
+
+  const getTabItem = (tab: OptimizationType, index: number) => {
+    const emptyTab = <></>; // Lazily load tabs
+
+    if (activeTabKey !== index) {
+      return emptyTab;
+    }
+
+    const currentTab = getIdKeyForTab(tab);
+    if (currentTab === OptimizationType.cost || currentTab === OptimizationType.performance) {
+      return (
+        <OptimizationsBreakdownConfiguration
+          currentInterval={currentInterval}
+          optimizationType={tab}
+          recommendations={report?.recommendations}
+        />
+      );
+    } else {
+      return emptyTab;
+    }
+  };
+
+  const getTab = (tab: OptimizationType, contentRef, index: number) => {
+    return (
+      <Tab
+        eventKey={index}
+        key={`${getIdKeyForTab(tab)}-tab`}
+        tabContentId={`tab-${index}`}
+        tabContentRef={contentRef}
+        title={<TabTitleText>{getTabTitle(tab)}</TabTitleText>}
+      />
+    );
+  };
+
+  const getTabs = (availableTabs: AvailableTab[]) => {
+    return (
+      <Tabs activeKey={activeTabKey} onSelect={handleTabClick}>
+        {availableTabs.map((val, index) => getTab(val.tab, val.contentRef, index))}
+      </Tabs>
+    );
+  };
+
+  const getTabTitle = (tab: OptimizationType) => {
+    if (tab === OptimizationType.cost) {
+      return intl.formatMessage(messages.optimizationsCost);
+    } else if (tab === OptimizationType.performance) {
+      return intl.formatMessage(messages.optimizationsPerformance);
+    }
+  };
+
   const handleOnSelected = (value: Interval) => {
     setCurrentInterval(value);
   };
 
+  const handleTabClick = (event, tabIndex) => {
+    if (activeTabKey !== tabIndex) {
+      setActiveTabKey(tabIndex);
+    }
+  };
+
   const isLoading = reportFetchStatus === FetchStatus.inProgress;
+  const [availableTabs] = useState(getAvailableTabs());
 
   return (
     <div style={styles.container}>
@@ -108,6 +209,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
         optimizationType={optimizationType}
         report={report}
       />
+      <div style={styles.tabs}>{getTabs(availableTabs)}</div>
       <PageSection isFilled>
         {isLoading ? (
           <Loading
@@ -115,14 +217,10 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
             heading={intl.formatMessage(messages.optimizationsLoadingStateTitle)}
           />
         ) : (
-          <>
+          <div>
             {getAlert()}
-            <OptimizationsBreakdownConfiguration
-              currentInterval={currentInterval}
-              optimizationType={optimizationType}
-              recommendations={report?.recommendations}
-            />
-          </>
+            {getTabContent(availableTabs)}
+          </div>
         )}
       </PageSection>
     </div>

@@ -132,21 +132,21 @@ export const data = {
                 config: {
                   limits: {
                     cpu: {
-                      amount: 60,
+                      amount: 7,
                       format: 'm',
                     },
                     memory: {
-                      amount: 493.99,
+                      amount: 394.99,
                       format: 'Mi',
                     },
                   },
                   requests: {
                     cpu: {
-                      amount: 60,
+                      amount: 7,
                       format: 'm',
                     },
                     memory: {
-                      amount: 493.99,
+                      amount: 394.99,
                       format: 'Mi',
                     },
                   },
