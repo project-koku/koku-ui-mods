@@ -33,7 +33,6 @@ export const getExcludeSelect = ({
 
   return (
     <ToolbarItem>
-      TEST
       <SelectWrapper
         id="exclude-select"
         isDisabled={isDisabled && !hasFilters(filters)}
