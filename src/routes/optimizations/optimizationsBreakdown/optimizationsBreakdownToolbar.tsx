@@ -9,7 +9,7 @@ import { hasNotification, hasRecommendation, Interval } from 'utils/recomendatio
 interface OptimizationsBreakdownToolbarOwnProps {
   currentInterval?: string;
   isDisabled?: boolean;
-  onSelected?: (value: string) => void;
+  onSelect?: (value: string) => void;
   query?: Query;
   terms?: RecommendationTerms;
   optimizationType?: OptimizationType;
@@ -20,7 +20,7 @@ type OptimizationsBreakdownToolbarProps = OptimizationsBreakdownToolbarOwnProps;
 const OptimizationsBreakdownToolbar: React.FC<OptimizationsBreakdownToolbarProps> = ({
   currentInterval,
   isDisabled,
-  onSelected,
+  onSelect,
   terms,
   optimizationType,
 }) => {
@@ -56,7 +56,7 @@ const OptimizationsBreakdownToolbar: React.FC<OptimizationsBreakdownToolbarProps
     <PerspectiveSelect
       currentItem={currentInterval || options[0].value}
       isDisabled={isDisabled}
-      onSelected={onSelected}
+      onSelect={onSelect}
       options={options}
       title={messages.optimizationsPerspective}
     />

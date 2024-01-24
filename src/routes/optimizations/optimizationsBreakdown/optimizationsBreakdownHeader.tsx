@@ -26,7 +26,7 @@ interface OptimizationsBreakdownHeaderOwnProps {
   breadcrumbPath?: string;
   currentInterval?: string;
   isDisabled?: boolean;
-  onSelected?: (value: string) => void;
+  onSelect?: (value: string) => void;
   optimizationType?: OptimizationType;
   report?: RecommendationReportData;
 }
@@ -38,7 +38,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
   breadcrumbPath,
   currentInterval,
   isDisabled,
-  onSelected,
+  onSelect,
   optimizationType,
   report,
 }) => {
@@ -114,7 +114,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
         <OptimizationsBreakdownToolbar
           currentInterval={currentInterval}
           isDisabled={isDisabled}
-          onSelected={onSelected}
+          onSelect={onSelect}
           optimizationType={optimizationType}
           terms={terms}
         />
