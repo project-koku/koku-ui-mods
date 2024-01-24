@@ -68,8 +68,8 @@ class PerspectiveSelectBase extends React.Component<PerspectiveSelectProps, Pers
         id="perspective-select"
         isDisabled={isDisabled}
         onSelect={this.handleOnSelect}
+        options={selectOptions}
         selection={selection}
-        selectOptions={selectOptions}
         toggleIcon={<FilterIcon />}
       />
     );
