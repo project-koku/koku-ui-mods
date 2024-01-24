@@ -15,7 +15,6 @@ import type { Filter } from 'routes/utils/filter';
 import { createMapStateToProps } from 'store/common';
 
 import { styles } from './dataToolbar.styles';
-import { getBulkSelect } from './utils/bulkSelect';
 import {
   getCategoryInput,
   getCategorySelect,
@@ -46,8 +45,6 @@ interface BasicToolbarOwnProps {
   resourcePathsType?: ResourcePathsType;
   resourceReport?: Resource;
   selectedItems?: any[];
-  showBulkSelect?: boolean; // Show bulk select
-  showBulkSelectAll?: boolean; // Show bulk select all option
   showFilter?: boolean; // Show export icon
   style?: React.CSSProperties;
   useActiveFilters?: boolean;
@@ -121,57 +118,6 @@ export class BasicToolbarBase extends React.Component<BasicToolbarProps, BasicTo
       if (onFilterRemoved) {
         onFilterRemoved(filter);
       }
-    });
-  };
-
-  // Bulk select
-
-  public getBulkSelectComponent = () => {
-    const {
-      isAllSelected,
-      isBulkSelectDisabled,
-      isDisabled,
-      isReadOnly,
-      itemsPerPage,
-      itemsTotal,
-      selectedItems,
-      showBulkSelectAll,
-    } = this.props;
-    const { isBulkSelectOpen } = this.state;
-
-    return getBulkSelect({
-      isAllSelected,
-      isBulkSelectDisabled,
-      isBulkSelectOpen,
-      isDisabled,
-      isReadOnly,
-      itemsPerPage,
-      itemsTotal,
-      onBulkSelect: this.handleOnBulkSelect,
-      onBulkSelectClicked: this.handleOnBulkSelectClicked,
-      onBulkSelectToggle: this.handleOnBulkSelectToggle,
-      selectedItems,
-      showSelectAll: showBulkSelectAll,
-    });
-  };
-
-  private handleOnBulkSelectClicked = (action: string) => {
-    const { onBulkSelect } = this.props;
-
-    if (onBulkSelect) {
-      onBulkSelect(action);
-    }
-  };
-
-  private handleOnBulkSelect = () => {
-    this.setState({
-      isBulkSelectOpen: !this.state.isBulkSelectOpen,
-    });
-  };
-
-  private handleOnBulkSelectToggle = isOpen => {
-    this.setState({
-      isBulkSelectOpen: isOpen,
     });
   };
 
@@ -327,7 +273,7 @@ export class BasicToolbarBase extends React.Component<BasicToolbarProps, BasicTo
   };
 
   public render() {
-    const { actions, categoryOptions, pagination, showBulkSelect, showFilter, style } = this.props;
+    const { actions, categoryOptions, pagination, showFilter, style } = this.props;
     const options = categoryOptions ? categoryOptions : getDefaultCategoryOptions();
 
     // Todo: clearAllFilters workaround https://github.com/patternfly/patternfly-react/issues/4222
@@ -339,7 +285,6 @@ export class BasicToolbarBase extends React.Component<BasicToolbarProps, BasicTo
           collapseListedFiltersBreakpoint="xl"
         >
           <ToolbarContent>
-            {showBulkSelect && <ToolbarItem variant="bulk-select">{this.getBulkSelectComponent()}</ToolbarItem>}
             {showFilter && (
               <ToolbarToggleGroup breakpoint="xl" toggleIcon={<FilterIcon />}>
                 <ToolbarGroup variant="filter-group">
