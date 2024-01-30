@@ -610,6 +610,11 @@ export default defineMessages({
     description: 'Select page ({value} items)',
     id: 'toolBarBulkSelectPage',
   },
+  typeaheadAriaClear: {
+    defaultMessage: 'Clear button and input',
+    description: 'Clear button and input',
+    id: 'typeaheadAriaClear',
+  },
   unitTooltips: {
     defaultMessage:
       '{units, select, ' +
