@@ -1857,6 +1857,12 @@
         "value": " items)"
       }
     ],
+    "typeaheadAriaClear": [
+      {
+        "type": 0,
+        "value": "Clear button and input"
+      }
+    ],
     "unitTooltips": [
       {
         "options": {

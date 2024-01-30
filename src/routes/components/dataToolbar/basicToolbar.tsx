@@ -9,13 +9,12 @@ import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import type { SelectWrapperOption } from 'routes/components/selectWrapper';
 import { isEqual } from 'routes/utils/equal';
 import type { Filter } from 'routes/utils/filter';
 import { createMapStateToProps } from 'store/common';
 
 import { styles } from './dataToolbar.styles';
-import { getBulkSelect } from './utils/bulkSelect';
-import type { CategoryOption } from './utils/category';
 import {
   getCategoryInput,
   getCategorySelect,
@@ -38,7 +37,7 @@ interface BasicToolbarOwnProps {
   isReadOnly?: boolean;
   itemsPerPage?: number;
   itemsTotal?: number;
-  onBulkSelected?: (action: string) => void;
+  onBulkSelect?: (action: string) => void;
   onFilterAdded?: (filter: Filter) => void;
   onFilterRemoved?: (filterType: Filter) => void;
   pagination?: React.ReactNode; // Optional pagination controls to display in toolbar
@@ -46,8 +45,6 @@ interface BasicToolbarOwnProps {
   resourcePathsType?: ResourcePathsType;
   resourceReport?: Resource;
   selectedItems?: any[];
-  showBulkSelect?: boolean; // Show bulk select
-  showBulkSelectAll?: boolean; // Show bulk select all option
   showFilter?: boolean; // Show export icon
   style?: React.CSSProperties;
   useActiveFilters?: boolean;
@@ -58,7 +55,6 @@ interface BasicToolbarState {
   currentCategory?: string;
   filters?: Filters;
   isBulkSelectOpen?: boolean;
-  isCategorySelectOpen?: boolean;
 }
 
 interface BasicToolbarStateProps {
@@ -72,7 +68,6 @@ export class BasicToolbarBase extends React.Component<BasicToolbarProps, BasicTo
     categoryInput: '',
     filters: cloneDeep(defaultFilters),
     isBulkSelectOpen: false,
-    isCategorySelectOpen: false,
   };
   public state: BasicToolbarState = { ...this.defaultState };
 
@@ -126,85 +121,25 @@ export class BasicToolbarBase extends React.Component<BasicToolbarProps, BasicTo
     });
   };
 
-  // Bulk select
-
-  public getBulkSelectComponent = () => {
-    const {
-      isAllSelected,
-      isBulkSelectDisabled,
-      isDisabled,
-      isReadOnly,
-      itemsPerPage,
-      itemsTotal,
-      selectedItems,
-      showBulkSelectAll,
-    } = this.props;
-    const { isBulkSelectOpen } = this.state;
-
-    return getBulkSelect({
-      isAllSelected,
-      isBulkSelectDisabled,
-      isBulkSelectOpen,
-      isDisabled,
-      isReadOnly,
-      itemsPerPage,
-      itemsTotal,
-      onBulkSelect: this.handleOnBulkSelect,
-      onBulkSelectClicked: this.handleOnBulkSelectClicked,
-      onBulkSelectToggle: this.handleOnBulkSelectToggle,
-      selectedItems,
-      showSelectAll: showBulkSelectAll,
-    });
-  };
-
-  private handleOnBulkSelectClicked = (action: string) => {
-    const { onBulkSelected } = this.props;
-
-    if (onBulkSelected) {
-      onBulkSelected(action);
-    }
-  };
-
-  private handleOnBulkSelect = () => {
-    this.setState({
-      isBulkSelectOpen: !this.state.isBulkSelectOpen,
-    });
-  };
-
-  private handleOnBulkSelectToggle = isOpen => {
-    this.setState({
-      isBulkSelectOpen: isOpen,
-    });
-  };
-
   // Category select
 
   public getCategorySelectComponent() {
     const { categoryOptions, isDisabled } = this.props;
-    const { currentCategory, filters, isCategorySelectOpen } = this.state;
+    const { currentCategory, filters } = this.state;
 
     return getCategorySelect({
       categoryOptions,
       currentCategory,
       filters,
       isDisabled,
-      isCategorySelectOpen,
       onCategorySelect: this.handleOnCategorySelect,
-      onCategoryToggle: this.handleOnCategoryToggle,
     });
   }
 
-  private handleOnCategorySelect = (selection: CategoryOption) => {
+  private handleOnCategorySelect = (_evt, selection: SelectWrapperOption) => {
     this.setState({
       categoryInput: '',
       currentCategory: selection.value,
-      isCategorySelectOpen: !this.state.isCategorySelectOpen,
-    });
-  };
-
-  private handleOnCategoryToggle = isOpen => {
-    this.setState({
-      isCategorySelectOpen: isOpen,
     });
   };
 
@@ -338,7 +273,7 @@ export class BasicToolbarBase extends React.Component<BasicToolbarProps, BasicTo
   };
 
   public render() {
-    const { actions, categoryOptions, pagination, showBulkSelect, showFilter, style } = this.props;
+    const { actions, categoryOptions, pagination, showFilter, style } = this.props;
     const options = categoryOptions ? categoryOptions : getDefaultCategoryOptions();
 
     // Todo: clearAllFilters workaround https://github.com/patternfly/patternfly-react/issues/4222
@@ -350,7 +285,6 @@ export class BasicToolbarBase extends React.Component<BasicToolbarProps, BasicTo
           collapseListedFiltersBreakpoint="xl"
         >
           <ToolbarContent>
-            {showBulkSelect && <ToolbarItem variant="bulk-select">{this.getBulkSelectComponent()}</ToolbarItem>}
             {showFilter && (
               <ToolbarToggleGroup breakpoint="xl" toggleIcon={<FilterIcon />}>
                 <ToolbarGroup variant="filter-group">
