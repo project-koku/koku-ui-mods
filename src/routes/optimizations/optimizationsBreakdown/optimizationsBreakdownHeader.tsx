@@ -15,6 +15,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 import { getTimeFromNow } from 'utils/dates';
+import type { OptimizationType } from 'utils/recomendations';
 import { hasWarning } from 'utils/recomendations';
 
 import { styles } from './optimizationsBreakdownHeader.styles';
@@ -26,6 +27,7 @@ interface OptimizationsBreakdownHeaderOwnProps {
   currentInterval?: string;
   isDisabled?: boolean;
   onSelect?: (value: string) => void;
+  optimizationType?: OptimizationType;
   report?: RecommendationReportData;
 }
 
@@ -37,13 +39,14 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
   currentInterval,
   isDisabled,
   onSelect,
+  optimizationType,
   report,
 }) => {
   const intl = useIntl();
   const location = useLocation();
 
-  const recommendations = report?.recommendations ? report.recommendations.duration_based : undefined;
-  const showWarningIcon = hasWarning(recommendations);
+  const terms = report?.recommendations ? report.recommendations.recommendation_terms : undefined;
+  const showWarningIcon = hasWarning(terms);
 
   const getBackToLink = () => {
     return (
@@ -111,8 +114,9 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
         <OptimizationsBreakdownToolbar
           currentInterval={currentInterval}
           isDisabled={isDisabled}
-          recommendations={recommendations}
           onSelect={onSelect}
+          optimizationType={optimizationType}
+          terms={terms}
         />
       </div>
     </header>
