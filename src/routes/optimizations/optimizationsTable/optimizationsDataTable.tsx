@@ -100,7 +100,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
         const project = item.project ? item.project : '';
         const workload = item.workload ? item.workload : '';
         const workloadType = item.workload_type ? item.workload_type : '';
-        const showWarningIcon = hasWarning(item?.recommendations?.duration_based);
+        const showWarningIcon = hasWarning(item?.recommendations?.recommendation_terms);
 
         newRows.push({
           cells: [
