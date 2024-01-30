@@ -21,7 +21,6 @@ import { rosActions, rosSelectors } from 'store/ros';
 import { breadcrumbLabelKey } from 'utils/props';
 import { getNotifications, hasRecommendation, Interval, OptimizationType } from 'utils/recomendations';
 
-import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
@@ -90,7 +89,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
       notifications = getNotifications(report.recommendations.recommendation_terms[currentInterval]);
     }
 
-    if (notifications.length === 0) {
+    if (notifications?.length === 0) {
       return null;
     }
 
@@ -98,9 +97,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
       <div style={styles.alertContainer}>
         <Alert isInline variant="warning" title={intl.formatMessage(messages.notificationsAlertTitle)}>
           <List>
-            {notifications.map((notification, index) => (
-              <ListItem key={index}>{notification.message}</ListItem>
-            ))}
+            {notifications?.map((notification, index) => <ListItem key={index}>{notification.message}</ListItem>)}
           </List>
         </Alert>
       </div>
@@ -239,11 +236,9 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   const location = useLocation();
 
   const reportQueryString = queryFromRoute ? queryFromRoute.id : ''; // Flatten ID
-  let report: any = useSelector((state: RootState) =>
+  const report: any = useSelector((state: RootState) =>
     rosSelectors.selectRos(state, reportPathsType, reportType, reportQueryString)
   );
-  // Todo: Update to use new API response
-  report = data.data[0];
   const reportFetchStatus = useSelector((state: RootState) =>
     rosSelectors.selectRosFetchStatus(state, reportPathsType, reportType, reportQueryString)
   );

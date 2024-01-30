@@ -31,7 +31,7 @@ export const filterNotifications = (notifications: Notification[]) => {
 };
 
 export const getNotifications = (term: RecommendationTerm): Notification[] => {
-  if (!term.notifications) {
+  if (!term?.notifications) {
     return undefined;
   }
   const notifications = Object.keys(term.notifications).map(key => term.notifications[key]);
@@ -40,7 +40,7 @@ export const getNotifications = (term: RecommendationTerm): Notification[] => {
 
 export const hasNotification = (term: RecommendationTerm) => {
   const notifications = getNotifications(term);
-  return notifications.length > 0;
+  return notifications?.length > 0;
 };
 
 export const hasRecommendation = (values: RecommendationValues) => {
