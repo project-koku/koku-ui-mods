@@ -115,7 +115,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
     return result;
   };
 
-  const handleOnSelected = (value: Interval) => {
+  const handleOnSelect = (value: Interval) => {
     setCurrentInterval(value);
   };
 
@@ -128,7 +128,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
         breadcrumbPath={breadcrumbPath}
         currentInterval={currentInterval}
         isDisabled={isLoading}
-        onSelected={handleOnSelected}
+        onSelect={handleOnSelect}
         report={report}
       />
       <PageSection isFilled>
