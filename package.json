@@ -48,7 +48,7 @@
     "verify": "npm-run-all build lint test"
   },
   "dependencies": {
-    "@patternfly/patternfly": "^5.1.0",
+    "@patternfly/patternfly": "^5.2.0",
     "@patternfly/react-charts": "^7.2.0-prerelease.2",
     "@patternfly/react-component-groups": "^5.0.0",
     "@patternfly/react-core": "^5.1.2",
