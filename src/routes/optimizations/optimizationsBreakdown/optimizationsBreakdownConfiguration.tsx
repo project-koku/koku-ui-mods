@@ -76,11 +76,11 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
 
     return {
       limits: {
-        cpu: formatValue(cpuConfigLimitsAmount, cpuConfigLimitsUnits, false), // Todo: omit CPU units
+        cpu: formatValue(cpuConfigLimitsAmount, cpuConfigLimitsUnits, isFormatted),
         memory: formatValue(memConfigLimitsAmount, memConfigLimitsUnits, isFormatted, isUnitsOnly),
       },
       requests: {
-        cpu: formatValue(cpuConfigRequestsAmount, cpuConfigRequestsUnits, false), // Todo: omit CPU units
+        cpu: formatValue(cpuConfigRequestsAmount, cpuConfigRequestsUnits, isFormatted),
         memory: formatValue(memConfigRequestsAmount, memConfigRequestsUnits, isFormatted, isUnitsOnly),
       },
     };
