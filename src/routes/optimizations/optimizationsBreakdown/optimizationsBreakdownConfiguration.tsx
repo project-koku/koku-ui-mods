@@ -76,11 +76,11 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
 
     return {
       limits: {
-        cpu: formatValue(cpuConfigLimitsAmount, cpuConfigLimitsUnits, isFormatted),
+        cpu: formatValue(cpuConfigLimitsAmount, cpuConfigLimitsUnits, isFormatted, isUnitsOnly),
         memory: formatValue(memConfigLimitsAmount, memConfigLimitsUnits, isFormatted, isUnitsOnly),
       },
       requests: {
-        cpu: formatValue(cpuConfigRequestsAmount, cpuConfigRequestsUnits, isFormatted),
+        cpu: formatValue(cpuConfigRequestsAmount, cpuConfigRequestsUnits, isFormatted, isUnitsOnly),
         memory: formatValue(memConfigRequestsAmount, memConfigRequestsUnits, isFormatted, isUnitsOnly),
       },
     };
@@ -225,11 +225,36 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     let currentVal = currentValues[key1][key2];
     let recommendedVal = recommendedValues[key1][key2];
 
-    // Convert millicores to cores
-    if (currentUnits[key1][key2] === 'cores' && recommendedUnits[key1][key2] === 'millicores') {
-      recommendedVal = recommendedValues[key1][key2] / 1000;
-    } else if (currentUnits[key1][key2] === 'millicores' && recommendedUnits[key1][key2] === 'cores') {
-      currentVal = currentValues[key1][key2] / 1000;
+    // Convert units if not the same
+    if (currentUnits[key1][key2] !== recommendedUnits[key1][key2]) {
+      // Convert cores to millicores
+      if (key2 === 'cpu' && currentUnits[key1][key2] !== recommendedUnits[key1][key2]) {
+        if (currentUnits[key1][key2] === 'cores' || currentUnits[key1][key2] === null) {
+          currentVal = currentValues[key1][key2] * 1000;
+        }
+        if (recommendedUnits[key1][key2] === 'cores' || recommendedUnits[key1][key2] === null) {
+          recommendedVal = recommendedValues[key1][key2] * 1000;
+        }
+        // Workaround for no change
+        if (recommendedValues[key1][key2] === undefined) {
+          recommendedVal = currentVal;
+        }
+      }
+      // Convert Mi and Gi to bytes
+      if (key2 === 'cpu') {
+        if (currentUnits[key1][key2] === 'Mi') {
+          currentVal = Math.pow(currentValues[key1][key2], 2);
+        }
+        if (currentUnits[key1][key2] === 'Gi') {
+          currentVal = Math.pow(currentValues[key1][key2], 3);
+        }
+        if (recommendedValues[key1][key2] === 'Mi') {
+          recommendedVal = Math.pow(recommendedValues[key1][key2], 2);
+        }
+        if (recommendedValues[key1][key2] === 'Gi') {
+          recommendedVal = Math.pow(recommendedValues[key1][key2], 3);
+        }
+      }
     }
 
     // Calculate percentage change
