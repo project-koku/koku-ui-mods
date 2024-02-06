@@ -5,11 +5,10 @@ export interface RosData {
   cluster_alias?: string;
   container?: string;
   id?: number;
-  project?: string;
   last_reported?: string;
-  recommendations?: {
-    duration_based?: any;
-  };
+  project?: string;
+  recommendations?: any;
+  source_id?: string;
   workload?: string;
   workload_type?: string;
 }

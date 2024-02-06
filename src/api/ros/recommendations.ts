@@ -3,66 +3,63 @@ import axios from 'axios';
 import type { RosData, RosMeta, RosReport } from './ros';
 import { RosType } from './ros';
 
-export interface RecommendationValue {
-  amount?: number;
-  format?: string;
-}
-
 export interface Notification {
   code?: number;
   message?: string;
   type?: string;
 }
 
-export interface RecommendationItem {
-  config: {
-    limits: {
-      memory?: RecommendationValue;
-      cpu?: RecommendationValue;
-    };
-    requests: {
-      memory?: RecommendationValue;
-      cpu?: RecommendationValue;
-    };
+export interface RecommendationValue {
+  amount?: number;
+  format?: string;
+}
+
+export interface RecommendationValues {
+  limits: {
+    cpu?: RecommendationValue;
+    memory?: RecommendationValue;
   };
-  current: {
-    limits: {
-      memory?: RecommendationValue;
-      cpu?: RecommendationValue;
-    };
-    requests: {
-      memory?: RecommendationValue;
-      cpu?: RecommendationValue;
-    };
+  requests: {
+    cpu?: RecommendationValue;
+    memory?: RecommendationValue;
   };
-  variation: {
-    limits: {
-      memory?: RecommendationValue;
-      cpu?: RecommendationValue;
-    };
-    requests: {
-      memory?: RecommendationValue;
-      cpu?: RecommendationValue;
-    };
-  };
-  duration_in_hours?: string;
+}
+
+export interface RecommendationEngine {
+  config: RecommendationValues;
+  pods_count?: number;
+  variation: RecommendationValues;
+}
+
+export interface RecommendationTerm {
+  duration_in_hours?: number;
   monitoring_start_time?: string;
+  notifications?: {
+    [key: string]: Notification;
+  };
+  recommendation_engines?: {
+    cost: RecommendationEngine;
+    performance: RecommendationEngine;
+  };
+}
+
+export interface RecommendationTerms {
+  long_term?: RecommendationTerm;
+  medium_term?: RecommendationTerm;
+  short_term?: RecommendationTerm;
+}
+
+export interface RecommendationItems {
+  current?: RecommendationValues;
   monitoring_end_time?: string;
   notifications?: {
     [key: string]: Notification;
   };
-}
-
-export interface RecommendationItems {
-  short_term?: RecommendationItem;
-  medium_term?: RecommendationItem;
-  long_term?: RecommendationItem;
+  recommendation_terms?: RecommendationTerms;
 }
 
 export interface RecommendationReportData extends RosData {
-  recommendations?: {
-    duration_based?: RecommendationItems;
-  };
+  recommendations?: RecommendationItems;
 }
 
 export interface RecommendationReportMeta extends RosMeta {
