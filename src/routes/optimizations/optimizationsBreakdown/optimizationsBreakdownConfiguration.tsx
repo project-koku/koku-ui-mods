@@ -240,19 +240,24 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
           recommendedVal = currentVal;
         }
       }
-      // Convert Mi and Gi to bytes
-      if (key2 === 'cpu') {
-        if (currentUnits[key1][key2] === 'Mi') {
-          currentVal = Math.pow(currentValues[key1][key2], 2);
-        }
+      // Convert Gi and Mi to bytes
+      //
+      // See https://medium.com/swlh/understanding-kubernetes-resource-cpu-and-memory-units-30284b3cc866
+      //
+      // Gi = GiB = Gibibyte. 1Gi = 2³⁰ = 1,073,741,824 bytes
+      // Mi = MiB = Mebibyte. 1Mi = 2²⁰ = 1,048,576 bytes
+      if (key2 === 'memory') {
         if (currentUnits[key1][key2] === 'Gi') {
-          currentVal = Math.pow(currentValues[key1][key2], 3);
+          currentVal = currentValues[key1][key2] * Math.pow(2, 30);
         }
-        if (recommendedValues[key1][key2] === 'Mi') {
-          recommendedVal = Math.pow(recommendedValues[key1][key2], 2);
+        if (currentUnits[key1][key2] === 'Mi') {
+          currentVal = currentValues[key1][key2] * Math.pow(2, 20);
         }
-        if (recommendedValues[key1][key2] === 'Gi') {
-          recommendedVal = Math.pow(recommendedValues[key1][key2], 3);
+        if (recommendedUnits[key1][key2] === 'Gi') {
+          recommendedVal = recommendedValues[key1][key2] * Math.pow(2, 30);
+        }
+        if (recommendedUnits[key1][key2] === 'Mi') {
+          recommendedVal = recommendedValues[key1][key2] * Math.pow(2, 20);
         }
       }
     }
