@@ -227,38 +227,46 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
 
     // Convert units if not the same
     if (currentUnits[key1][key2] !== recommendedUnits[key1][key2]) {
-      // Convert cores to millicores
-      if (key2 === 'cpu' && currentUnits[key1][key2] !== recommendedUnits[key1][key2]) {
-        if (currentUnits[key1][key2] === 'cores' || currentUnits[key1][key2] === null) {
-          currentVal = currentValues[key1][key2] * 1000;
-        }
-        if (recommendedUnits[key1][key2] === 'cores' || recommendedUnits[key1][key2] === null) {
-          recommendedVal = recommendedValues[key1][key2] * 1000;
-        }
-        // Workaround for no change
-        if (recommendedValues[key1][key2] === undefined) {
-          recommendedVal = currentVal;
-        }
-      }
-      // Convert Gi and Mi to bytes
-      //
-      // See https://medium.com/swlh/understanding-kubernetes-resource-cpu-and-memory-units-30284b3cc866
-      //
-      // Gi = GiB = Gibibyte. 1Gi = 2³⁰ = 1,073,741,824 bytes
-      // Mi = MiB = Mebibyte. 1Mi = 2²⁰ = 1,048,576 bytes
-      if (key2 === 'memory') {
-        if (currentUnits[key1][key2] === 'Gi') {
-          currentVal = currentValues[key1][key2] * Math.pow(2, 30);
-        }
-        if (currentUnits[key1][key2] === 'Mi') {
-          currentVal = currentValues[key1][key2] * Math.pow(2, 20);
-        }
-        if (recommendedUnits[key1][key2] === 'Gi') {
-          recommendedVal = recommendedValues[key1][key2] * Math.pow(2, 30);
-        }
-        if (recommendedUnits[key1][key2] === 'Mi') {
-          recommendedVal = recommendedValues[key1][key2] * Math.pow(2, 20);
-        }
+      if (key2 === 'cpu') {
+        // Convert cores to millicores
+        //
+        // Note: units may be null to omit "cores" label for Kubernetes
+        const getMultiplier = (units: string) => {
+          return units === null || units === 'cores' ? 1000 : 1;
+        };
+        currentVal = currentValues[key1][key2] * getMultiplier(currentUnits[key1][key2]);
+        recommendedVal = recommendedValues[key1][key2] * getMultiplier(recommendedUnits[key1][key2]);
+      } else if (key2 === 'memory') {
+        // Convert Gi, Mi, etc. to bytes
+        //
+        // See https://medium.com/swlh/understanding-kubernetes-resource-cpu-and-memory-units-30284b3cc866
+        //
+        // Ei = EiB = Exbibyte. 1Ei = 2⁶⁰ = 1,152,921,504,606,846,976 bytes
+        // Pi = PiB = Pebibyte. 1Pi = 2⁵⁰ = 1,125,899,906,842,624 bytes
+        // Ti = TiB = Tebibyte. 1Ti = 2⁴⁰ = 1,099,511,627,776 bytes
+        // Gi = GiB = Gibibyte. 1Gi = 2³⁰ = 1,073,741,824 bytes
+        // Mi = MiB = Mebibyte. 1Mi = 2²⁰ = 1,048,576 bytes
+        // Ki = KiB = Kibibyte. 1Ki = 2¹⁰ = 1,024 bytes
+        const getMultiplier = (units: string) => {
+          switch (units.toLowerCase()) {
+            case 'ei':
+              return Math.pow(2, 60);
+            case 'pi':
+              return Math.pow(2, 50);
+            case 'ti':
+              return Math.pow(2, 40);
+            case 'gi':
+              return Math.pow(2, 30);
+            case 'mi':
+              return Math.pow(2, 20);
+            case 'ki':
+              return Math.pow(2, 10);
+            default:
+              return 1;
+          }
+        };
+        currentVal = currentValues[key1][key2] * getMultiplier(currentUnits[key1][key2]);
+        recommendedVal = recommendedValues[key1][key2] * getMultiplier(recommendedUnits[key1][key2]);
       }
     }
 
