@@ -21,4 +21,8 @@ export const styles = {
     paddingBottom: global_spacer_md.value,
     paddingTop: global_spacer_md.value,
   },
+  tabs: {
+    backgroundColor: global_BackgroundColor_light_100.value,
+    paddingLeft: global_spacer_lg.value,
+  },
 } as { [className: string]: React.CSSProperties };
