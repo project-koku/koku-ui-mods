@@ -391,6 +391,11 @@ export default defineMessages({
     description: 'Optimizations',
     id: 'optimizations',
   },
+  optimizationsCost: {
+    defaultMessage: 'Cost optimizations',
+    description: 'Cost optimizations',
+    id: 'optimizationsCost',
+  },
   optimizationsDetails: {
     defaultMessage: '{count, plural, =0 {No optimizations} =1 {{count} optimization} other {{count} optimizations}}',
     description: 'Optimization details',
@@ -443,6 +448,11 @@ export default defineMessages({
       'other {}}',
     description: 'Selected items for export',
     id: 'optimizationsNames',
+  },
+  optimizationsPerformance: {
+    defaultMessage: 'Performance optimizations',
+    description: 'Performance optimizations',
+    id: 'optimizationsPerformance',
   },
   optimizationsPerspective: {
     defaultMessage: 'View optimizations based on',
