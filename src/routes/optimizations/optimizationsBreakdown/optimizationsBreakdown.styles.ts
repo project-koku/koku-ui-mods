@@ -7,6 +7,10 @@ export const styles = {
   alertContainer: {
     marginBottom: global_spacer_lg.value,
   },
+  boxplotContainer: {
+    backgroundColor: global_BackgroundColor_light_100.value,
+    marginTop: global_spacer_lg.value,
+  },
   codeBlock: {
     display: 'flex',
   },

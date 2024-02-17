@@ -21,7 +21,9 @@ import { rosActions, rosSelectors } from 'store/ros';
 import { breadcrumbLabelKey } from 'utils/props';
 import { getNotifications, hasRecommendation, Interval, OptimizationType } from 'utils/recomendations';
 
+import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
+import { OptimizationsBreakdownBoxplot } from './optimizationsBreakdownBoxplot';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
 
@@ -143,11 +145,20 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
     const currentTab = getIdKeyForTab(tab);
     if (currentTab === OptimizationType.cost || currentTab === OptimizationType.performance) {
       return (
-        <OptimizationsBreakdownConfiguration
-          currentInterval={currentInterval}
-          optimizationType={tab}
-          recommendations={report?.recommendations}
-        />
+        <>
+          <OptimizationsBreakdownConfiguration
+            currentInterval={currentInterval}
+            optimizationType={tab}
+            recommendations={report?.recommendations}
+          />
+          <div style={styles.boxplotContainer}>
+            <OptimizationsBreakdownBoxplot
+              currentInterval={currentInterval}
+              optimizationType={tab}
+              recommendations={report?.recommendations}
+            />
+          </div>
+        </>
       );
     } else {
       return emptyTab;
@@ -236,9 +247,11 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   const location = useLocation();
 
   const reportQueryString = queryFromRoute ? queryFromRoute.id : ''; // Flatten ID
-  const report: any = useSelector((state: RootState) =>
+  let report: any = useSelector((state: RootState) =>
     rosSelectors.selectRos(state, reportPathsType, reportType, reportQueryString)
   );
+  // Todo: Update to use new API response
+  report = data.data[0];
   const reportFetchStatus = useSelector((state: RootState) =>
     rosSelectors.selectRosFetchStatus(state, reportPathsType, reportType, reportQueryString)
   );

@@ -403,6 +403,18 @@
         "value": "Current configuration"
       }
     ],
+    "currentCpuUtilization": [
+      {
+        "type": 0,
+        "value": "Current CPU utilization"
+      }
+    ],
+    "currentMemoryUtilization": [
+      {
+        "type": 0,
+        "value": "Current memory utilization"
+      }
+    ],
     "dataTableAriaLabel": [
       {
         "type": 0,

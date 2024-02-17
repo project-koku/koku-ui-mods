@@ -30,6 +30,8 @@
   "costManagement": "Cost Management MFE",
   "currencyAbbreviations": "{symbol, select, billion {{value} B} million {{value} M} quadrillion {{value} q} thousand {{value} K} trillion {{value} t} other {}}",
   "currentConfiguration": "Current configuration",
+  "currentCpuUtilization": "Current CPU utilization",
+  "currentMemoryUtilization": "Current memory utilization",
   "dataTableAriaLabel": "Details table",
   "detailsEmptyState": "Processing data to generate a list of all services that sums to a total cost...",
   "emptyFilterStateSubtitle": "Sorry, no data with the given filter was found.",

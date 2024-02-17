@@ -164,6 +164,16 @@ export default defineMessages({
     description: 'Current configuration',
     id: 'currentConfiguration',
   },
+  currentCpuUtilization: {
+    defaultMessage: 'Current CPU utilization',
+    description: 'Current CPU utilization',
+    id: 'currentCpuUtilization',
+  },
+  currentMemoryUtilization: {
+    defaultMessage: 'Current memory utilization',
+    description: 'Current memory utilization',
+    id: 'currentMemoryUtilization',
+  },
   dataTableAriaLabel: {
     defaultMessage: 'Details table',
     description: 'Details table',
