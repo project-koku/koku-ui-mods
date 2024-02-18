@@ -326,6 +326,12 @@
         "value": "Cost Management MFE"
       }
     ],
+    "cpu": [
+      {
+        "type": 0,
+        "value": "CPU"
+      }
+    ],
     "currencyAbbreviations": [
       {
         "options": {
@@ -1238,6 +1244,12 @@
         "value": "Looking for sources..."
       }
     ],
+    "memory": [
+      {
+        "type": 0,
+        "value": "Memory"
+      }
+    ],
     "names": [
       {
         "offset": 0,
@@ -1769,6 +1781,18 @@
       {
         "type": 0,
         "value": "Recommended configuration"
+      }
+    ],
+    "recommendedLimit": [
+      {
+        "type": 0,
+        "value": "Recommended limit"
+      }
+    ],
+    "recommendedRequest": [
+      {
+        "type": 0,
+        "value": "Recommended request"
       }
     ],
     "selectableTableAriaLabel": [

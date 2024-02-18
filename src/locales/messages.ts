@@ -112,6 +112,11 @@ export default defineMessages({
     description: 'Requests (Jan)',
     id: 'chartRequestsLegendTooltip',
   },
+  chartTooltipTitle: {
+    defaultMessage: '{value}',
+    description: 'Chart tooltip title showing datum month or hours',
+    id: 'chartTooltipTitle',
+  },
   chartUsageLegendLabel: {
     defaultMessage: 'Usage ({dateRange})',
     description: 'Usage (Jan 1-31)',
@@ -146,6 +151,11 @@ export default defineMessages({
     defaultMessage: 'Cost Management MFE',
     description: 'Cost Management MFE',
     id: 'costManagement',
+  },
+  cpu: {
+    defaultMessage: 'CPU',
+    description: 'CPU',
+    id: 'cpu',
   },
   currencyAbbreviations: {
     defaultMessage:
@@ -359,6 +369,11 @@ export default defineMessages({
     description: 'Looking for sources',
     id: 'loadingStateTitle',
   },
+  memory: {
+    defaultMessage: 'Memory',
+    description: 'Memory',
+    id: 'memory',
+  },
   names: {
     defaultMessage: '{count, plural, one {Name} other {Names}}',
     description: 'Name plural or singular',
@@ -554,6 +569,16 @@ export default defineMessages({
     defaultMessage: 'Recommended configuration',
     description: 'Recommended configuration',
     id: 'recommendedConfiguration',
+  },
+  recommendedLimit: {
+    defaultMessage: 'Recommended limit',
+    description: 'Recommended limit',
+    id: 'recommendedLimit',
+  },
+  recommendedRequest: {
+    defaultMessage: 'Recommended request',
+    description: 'Recommended request',
+    id: 'recommendedRequest',
   },
   selectableTableAriaLabel: {
     defaultMessage: 'Selectable table',

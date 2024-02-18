@@ -21,9 +21,6 @@ export interface ChartLegendItem {
 export interface ChartSeries {
   childName?: string;
   data?: [ChartData];
-  isBar?: boolean; // Used with daily charts
-  isForecast?: boolean; // Used with daily charts
-  isLine?: boolean; // Used with daily charts
   legendItem?: ChartLegendItem;
   style?: VictoryStyleInterface;
 }
@@ -42,11 +39,16 @@ export const getChartNames = (series: ChartSeries[]) => {
 };
 
 export const getDomain = (series: ChartSeries[], hiddenSeries: Set<number>) => {
-  const domain: { x: DomainTuple; y?: DomainTuple } = { x: [1, 31] };
+  const domain: { x?: DomainTuple; y?: DomainTuple } = {};
   let maxValue = -1;
   let minValue = -1;
 
   if (series) {
+    // Don't use zero domain
+    if (series.length === hiddenSeries.size) {
+      domain.x = [0, 1];
+      hiddenSeries = new Set();
+    }
     series.forEach((s: any, index) => {
       if (!isSeriesHidden(hiddenSeries, index) && s.data && s.data.length !== 0) {
         const { max, min } = getMaxMinValues(s.data);

@@ -1,6 +1,10 @@
 import global_spacer_md from '@patternfly/react-tokens/dist/js/global_spacer_md';
 import global_spacer_sm from '@patternfly/react-tokens/dist/js/global_spacer_sm';
 
+export const chartStyles = {
+  chartHeight: 350,
+};
+
 export const styles = {
   cardContainer: {
     flexGrow: 1,

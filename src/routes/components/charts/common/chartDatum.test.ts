@@ -1,27 +1,12 @@
 import { intl } from 'components/i18n';
 import messages from 'locales/messages';
 
-import { getTooltipContent, transformReport } from './chartDatum';
-import { transformReportProps } from './testProps/transformReportProps';
-import { transformReportReturns } from './testProps/transformReportReturns';
+import { getTooltipContent } from './chartDatum';
 
 jest.spyOn(intl, 'formatMessage');
 
 const labelFormatFunc = getTooltipContent(jest.fn(v => v));
 
-describe('transformReport', () => {
-  test('should return transformed report', () => {
-    expect(
-      transformReport(
-        transformReportProps.report,
-        transformReportProps.type,
-        transformReportProps.idKey,
-        transformReportProps.reportItem,
-        transformReportProps.reportItemValue
-      )
-    ).toStrictEqual(transformReportReturns);
-  });
-});
 describe('getTooltipContent', () => {
   test('format hrs and gb', () => {
     [

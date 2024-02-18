@@ -76,21 +76,21 @@ export const data = {
                 config: {
                   requests: {
                     memory: {
-                      amount: 238.2999999999999,
+                      amount: 50,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.929,
+                      amount: 5,
                       format: 'cores',
                     },
                   },
                   limits: {
                     memory: {
-                      amount: 238.2999999999999,
+                      amount: 60,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.929,
+                      amount: 7,
                       format: 'cores',
                     },
                   },
@@ -125,21 +125,21 @@ export const data = {
                 config: {
                   requests: {
                     memory: {
-                      amount: 238.2,
+                      amount: 60,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.9299999999999999,
+                      amount: 4,
                       format: 'cores',
                     },
                   },
                   limits: {
                     memory: {
-                      amount: 238.2,
+                      amount: 70,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.9299999999999999,
+                      amount: 5,
                       format: 'cores',
                     },
                   },
@@ -269,21 +269,21 @@ export const data = {
                 config: {
                   requests: {
                     memory: {
-                      amount: 238.29999999,
+                      amount: 60,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.929,
+                      amount: 6,
                       format: 'cores',
                     },
                   },
                   limits: {
                     memory: {
-                      amount: 238.2,
+                      amount: 70,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.929999999,
+                      amount: 7,
                       format: 'cores',
                     },
                   },
@@ -318,21 +318,21 @@ export const data = {
                 config: {
                   requests: {
                     memory: {
-                      amount: 238.2,
+                      amount: 70,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.929999999,
+                      amount: 5,
                       format: 'cores',
                     },
                   },
                   limits: {
                     memory: {
-                      amount: 238.29999999,
+                      amount: 80,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.929,
+                      amount: 6,
                       format: 'cores',
                     },
                   },
@@ -516,21 +516,21 @@ export const data = {
                 config: {
                   requests: {
                     memory: {
-                      amount: 238.2999999999999,
+                      amount: 70,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.929,
+                      amount: 8,
                       format: 'cores',
                     },
                   },
                   limits: {
                     memory: {
-                      amount: 238.2999999999999,
+                      amount: 80,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.929,
+                      amount: 9,
                       format: 'cores',
                     },
                   },
@@ -565,21 +565,21 @@ export const data = {
                 config: {
                   requests: {
                     memory: {
-                      amount: 238.2,
+                      amount: 80,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.9299999999999999,
+                      amount: 7,
                       format: 'cores',
                     },
                   },
                   limits: {
                     memory: {
-                      amount: 238.2,
+                      amount: 90,
                       format: 'MiB',
                     },
                     cpu: {
-                      amount: 0.9299999999999999,
+                      amount: 8,
                       format: 'cores',
                     },
                   },

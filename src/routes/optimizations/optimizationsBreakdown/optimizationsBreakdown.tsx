@@ -23,7 +23,7 @@ import { getNotifications, hasRecommendation, Interval, OptimizationType } from 
 
 import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
-import { OptimizationsBreakdownBoxplot } from './optimizationsBreakdownBoxplot';
+import { OptimizationsBreakdownUtilization } from './optimizationsBreakdownUtilization';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
 
@@ -152,7 +152,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
             recommendations={report?.recommendations}
           />
           <div style={styles.boxplotContainer}>
-            <OptimizationsBreakdownBoxplot
+            <OptimizationsBreakdownUtilization
               currentInterval={currentInterval}
               optimizationType={tab}
               recommendations={report?.recommendations}
