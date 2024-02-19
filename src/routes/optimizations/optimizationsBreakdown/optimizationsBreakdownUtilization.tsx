@@ -44,7 +44,17 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
         units: values.format,
       });
     });
-    return datum;
+    return [
+      {
+        ...datum[0],
+        x: 0, // Extends threshold lines to chart edge
+      },
+      ...datum,
+      {
+        ...datum[0],
+        x: 100,
+      },
+    ];
   };
 
   const createUsageDatum = (usageType: UsageType) => {
@@ -58,6 +68,7 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
       const xVal = currentInterval === Interval.short_term ? format(date, 'kk:mm') : format(date, 'MMM d');
       if (data) {
         datum.push({
+          key,
           name: usageType,
           units: data.format,
           x: xVal,
