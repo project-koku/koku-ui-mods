@@ -37,7 +37,6 @@ export const styles = {
     textAlign: 'right',
     textWrap: 'wrap',
     verticalAlign: 'top',
-    width: '170px',
   },
   values: {
     align: 'right',

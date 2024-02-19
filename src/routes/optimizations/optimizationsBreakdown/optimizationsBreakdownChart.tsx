@@ -60,13 +60,19 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
 
   // Clone original container. See https://issues.redhat.com/browse/COST-762
   const cloneContainer = () => {
-    const dx = recommendationType === RecommendationType.cpu ? 50 : 45;
-
     // Custom HTML component to create a legend layout
     const HtmlLegendContent: any = ({ datum, legendData, text, title, x, y }) => {
+      let dx = recommendationType === RecommendationType.cpu ? 50 : 45;
+      let dy = 55;
+      let valueColWidth = 170;
+      if (datum.y[0] === null) {
+        dx += recommendationType === RecommendationType.cpu ? 45 : 52;
+        dy -= 10;
+        valueColWidth -= 100;
+      }
       return (
         <g>
-          <foreignObject height="100%" width="100%" x={x - dx} y={y - 55}>
+          <foreignObject height="100%" width="100%" x={x - dx} y={y - dy}>
             <table>
               <thead>
                 <tr>
@@ -101,7 +107,9 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
                       </svg>
                     </td>
                     <td style={styles.nameColumn}>{legendData[index].name}</td>
-                    <td style={styles.valueColumn}>{val}</td>
+                    <td style={styles.valueColumn} width={`${valueColWidth}px`}>
+                      {val}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -116,8 +124,8 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
           disable: !isDataAvailable(series, hiddenSeries),
           labelComponent: (
             <ChartCursorTooltip
-              flyoutHeight={135}
-              flyoutWidth={375}
+              flyoutHeight={({ datum }) => (datum.y[0] === null ? 115 : 135)}
+              flyoutWidth={({ datum }) => (datum.y[0] === null ? 275 : 375)}
               labelComponent={
                 <HtmlLegendContent legendData={getLegendData(series, hiddenSeries, true)} title={datum => datum.x} />
               }
@@ -131,7 +139,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
     if (serie.childName === 'usage') {
       return (
         <ChartBoxPlot
-          data={!hiddenSeries.has(index) ? serie.data : [{ y: null }]}
+          data={!hiddenSeries.has(index) ? serie.data : [{ y: [null] }]}
           key={serie.childName}
           name={serie.childName}
           style={serie.style}
@@ -157,7 +165,6 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
     const labelFormatter = datum => {
       const formatValue = val => (val !== undefined ? val : '');
 
-      // With box plot data, datum.y will also be an array
       if (datum && (datum._min || datum._max || datum._median || datum._q1 || datum._q3)) {
         return intl.formatMessage(messages.chartBoxplotTooltip, {
           min: formatValue(datum._min),
@@ -167,7 +174,10 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
           q3: formatValue(datum._q3),
         });
       }
-      return `${datum.y && datum.y !== null ? datum.y : intl.formatMessage(messages.chartNoData)}`;
+      // With box plot, datum.y will be an array
+      const yVal = Array.isArray(datum.y) ? datum.y[0] : datum.y;
+      const test = yVal !== null ? datum.y : intl.formatMessage(messages.chartNoData);
+      return test;
     };
 
     // labels={({ datum }) => labelFormatter(datum)}

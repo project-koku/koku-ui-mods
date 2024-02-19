@@ -173,22 +173,22 @@ export const data = {
               datapoints: 4,
               plots_data: {
                 '2024-01-20T12:00:00.000Z': {
-                  cpuUsage: {
-                    min: 0.0,
-                    q1: 2.5,
-                    median: 5.0,
-                    q3: 7.5,
-                    max: 10.0,
-                    format: 'cores',
-                  },
-                  memoryUsage: {
-                    min: 0.0,
-                    q1: 25.0,
-                    median: 50.0,
-                    q3: 75.0,
-                    max: 100.0,
-                    format: 'MiB',
-                  },
+                  // cpuUsage: {
+                  //   min: 0.0,
+                  //   q1: 2.5,
+                  //   median: 5.0,
+                  //   q3: 7.5,
+                  //   max: 10.0,
+                  //   format: 'cores',
+                  // },
+                  // memoryUsage: {
+                  //   min: 0.0,
+                  //   q1: 25.0,
+                  //   median: 50.0,
+                  //   q3: 75.0,
+                  //   max: 100.0,
+                  //   format: 'MiB',
+                  // },
                 },
                 '2024-01-20T06:00:00.000Z': {
                   cpuUsage: {

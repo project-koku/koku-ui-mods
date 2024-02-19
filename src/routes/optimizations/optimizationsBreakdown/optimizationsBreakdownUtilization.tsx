@@ -9,8 +9,8 @@ import { useIntl } from 'react-intl';
 import type { OptimizationType } from 'utils/recomendations';
 import { Interval, RecommendationType, ResourceType, UsageType } from 'utils/recomendations';
 
-import { chartStyles, styles } from './optimizationsBreakdownUtilization.styles';
 import { OptimizationsBreakdownChart } from './optimizationsBreakdownChart';
+import { chartStyles, styles } from './optimizationsBreakdownUtilization.styles';
 
 interface OptimizationsBreakdownUtilizationOwnProps {
   currentInterval?: Interval.short_term | Interval.medium_term | Interval.long_term;
@@ -44,36 +44,62 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
         units: values.format,
       });
     });
-    return [
-      {
-        ...datum[0],
-        x: 0, // Extends threshold lines to chart edge
-      },
-      ...datum,
-      {
-        ...datum[0],
-        x: 100,
-      },
-    ];
+    return datum.length
+      ? [
+          {
+            ...datum[0],
+            x: 0, // Extends threshold lines to chart edge
+          },
+          ...datum,
+          {
+            ...datum[0],
+            x: 100,
+          },
+        ]
+      : [];
   };
 
   const createUsageDatum = (usageType: UsageType) => {
     const term = getRecommendationTerm();
-    const plotsData = term?.plots?.plots_data;
+    const plotsData = term?.plots?.plots_data || [];
 
     const datum = [];
     for (const key of Object.keys(plotsData)) {
       const data = plotsData?.[key]?.[usageType];
       const date = new Date(key);
       const xVal = currentInterval === Interval.short_term ? format(date, 'kk:mm') : format(date, 'MMM d');
-      if (data) {
-        datum.push({
-          key,
-          name: usageType,
-          units: data.format,
-          x: xVal,
-          y: [data.min, data.median, data.max, data.q1, data.q3],
-        });
+      datum.push({
+        key,
+        name: usageType,
+        units: data?.format,
+        x: xVal,
+        y: data ? [data.min, data.median, data.max, data.q1, data.q3] : [null],
+      });
+    }
+    // Pad dates if plots_data is missing
+    if (datum.length === 0) {
+      if (currentInterval === Interval.short_term) {
+        const today = new Date(recommendations?.monitoring_end_time);
+        for (let hour = 24; hour > 0; hour -= 6) {
+          today.setHours(today.getHours() - hour);
+          datum.push({
+            key: today.toDateString(),
+            name: usageType,
+            x: format(today, 'kk:mm'),
+            y: [null],
+          });
+        }
+      } else {
+        for (let day = currentInterval === Interval.long_term ? 15 : 7; day > 0; day--) {
+          const today = new Date(recommendations?.monitoring_end_time);
+          today.setDate(today.getDate() - day);
+          datum.push({
+            key: today.toDateString(),
+            name: usageType,
+            x: format(today, 'MMM d'),
+            y: [null],
+          });
+        }
       }
     }
     return datum;

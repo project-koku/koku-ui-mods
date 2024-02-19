@@ -23,9 +23,9 @@ import { getNotifications, hasRecommendation, Interval, OptimizationType } from 
 
 import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
-import { OptimizationsBreakdownUtilization } from './optimizationsBreakdownUtilization';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
+import { OptimizationsBreakdownUtilization } from './optimizationsBreakdownUtilization';
 
 export const getIdKeyForTab = (tab: OptimizationType) => {
   switch (tab) {

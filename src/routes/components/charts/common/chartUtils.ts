@@ -39,7 +39,7 @@ export const getChartNames = (series: ChartSeries[]) => {
 };
 
 export const getDomain = (series: ChartSeries[], hiddenSeries: Set<number>) => {
-  const domain: { x?: DomainTuple; y?: DomainTuple } = {};
+  const domain: { x?: DomainTuple; y?: DomainTuple } = { y: [0, 1] };
   let maxValue = -1;
   let minValue = -1;
 
