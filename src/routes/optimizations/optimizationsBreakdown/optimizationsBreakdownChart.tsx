@@ -5,8 +5,9 @@ import {
   ChartArea,
   ChartAxis,
   ChartBoxPlot,
+  ChartCursorTooltip,
   ChartLegend,
-  ChartLegendTooltip,
+  ChartPoint,
   createContainer,
   getInteractiveLegendEvents,
 } from '@patternfly/react-charts';
@@ -26,7 +27,7 @@ import {
 import ChartTheme from 'routes/components/charts/theme';
 import { RecommendationType } from 'utils/recomendations';
 
-import { styles } from './optimizationsBreakdownChart.styles';
+import { chartStyles, styles } from './optimizationsBreakdownChart.styles';
 
 interface OptimizationsBreakdownChartOwnProps {
   baseHeight?: number;
@@ -59,11 +60,68 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
 
   // Clone original container. See https://issues.redhat.com/browse/COST-762
   const cloneContainer = () => {
+    const dx = recommendationType === RecommendationType.cpu ? 50 : 45;
+
+    // Custom HTML component to create a legend layout
+    const HtmlLegendContent: any = ({ datum, legendData, text, title, x, y }) => {
+      return (
+        <g>
+          <foreignObject height="100%" width="100%" x={x - dx} y={y - 55}>
+            <table>
+              <thead>
+                <tr>
+                  <th colSpan={2} style={{ ...styles.base, fontWeight: 700 }}>
+                    {title(datum)}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {text.map((val, index) => (
+                  <tr key={`tbody-tr-${index}`} style={styles.base}>
+                    <td style={styles.symbolColumn}>
+                      <svg height="9.74" width="9.74">
+                        <g>
+                          <rect
+                            role="presentation"
+                            shapeRendering="auto"
+                            width="9.74"
+                            height="9.74"
+                            style={{ ...legendData[index].symbol }}
+                          >
+                            {
+                              <ChartPoint
+                                x={0}
+                                y={0}
+                                symbol={legendData[index].symbol ? legendData[index].symbol.type : 'square'}
+                                size={5.6}
+                              />
+                            }
+                          </rect>
+                        </g>
+                      </svg>
+                    </td>
+                    <td style={styles.nameColumn}>{legendData[index].name}</td>
+                    <td style={styles.valueColumn}>{val}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </foreignObject>
+        </g>
+      );
+    };
+
     return cursorVoronoiContainer
       ? React.cloneElement(cursorVoronoiContainer, {
           disable: !isDataAvailable(series, hiddenSeries),
           labelComponent: (
-            <ChartLegendTooltip legendData={getLegendData(series, hiddenSeries, true)} title={datum => datum.x} />
+            <ChartCursorTooltip
+              flyoutHeight={135}
+              flyoutWidth={375}
+              labelComponent={
+                <HtmlLegendContent legendData={getLegendData(series, hiddenSeries, true)} title={datum => datum.x} />
+              }
+            />
           ),
         } as any)
       : undefined;
@@ -97,9 +155,17 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
     const CursorVoronoiContainer: any = createContainer('voronoi', 'cursor');
 
     const labelFormatter = datum => {
+      const formatValue = val => (val !== undefined ? val : '');
+
       // With box plot data, datum.y will also be an array
       if (datum && (datum._min || datum._max || datum._median || datum._q1 || datum._q3)) {
-        return `Min: ${datum._min}, Max: ${datum._max} Median: ${datum._median} Q1: ${datum._q1}, Q3: ${datum._q3}`;
+        return intl.formatMessage(messages.chartBoxplotTooltip, {
+          min: formatValue(datum._min),
+          max: formatValue(datum._max),
+          median: formatValue(datum._median),
+          q1: formatValue(datum._q1),
+          q3: formatValue(datum._q3),
+        });
       }
       return `${datum.y && datum.y !== null ? datum.y : intl.formatMessage(messages.chartNoData)}`;
     };
@@ -185,20 +251,20 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
         legendItem: {
           name: intl.formatMessage(recommendationType === RecommendationType.cpu ? messages.cpu : messages.memory),
           symbol: {
-            fill: styles.usageColorScale[1],
+            fill: chartStyles.usageColorScale[1],
             type: 'square',
           },
           tooltip: intl.formatMessage(recommendationType === RecommendationType.cpu ? messages.cpu : messages.memory),
         },
         style: {
           median: {
-            stroke: styles.usageColorScale[0],
+            stroke: chartStyles.usageColorScale[0],
           },
           q1: {
-            fill: styles.usageColorScale[1],
+            fill: chartStyles.usageColorScale[1],
           },
           q3: {
-            fill: styles.usageColorScale[1],
+            fill: chartStyles.usageColorScale[1],
           },
         } as any,
       });
@@ -210,15 +276,15 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
         legendItem: {
           name: intl.formatMessage(messages.recommendedLimit),
           symbol: {
-            fill: styles.limitColorScale[0],
+            fill: chartStyles.limitColorScale[0],
             type: 'square',
           },
           tooltip: intl.formatMessage(messages.recommendedLimit),
         },
         style: {
           data: {
-            ...styles.limit,
-            stroke: styles.limitColorScale[0],
+            ...chartStyles.limit,
+            stroke: chartStyles.limitColorScale[0],
           },
         },
       });
@@ -230,15 +296,15 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
         legendItem: {
           name: intl.formatMessage(messages.recommendedRequest),
           symbol: {
-            fill: styles.requestColorScale[0],
+            fill: chartStyles.requestColorScale[0],
             type: 'square',
           },
           tooltip: intl.formatMessage(messages.recommendedRequest),
         },
         style: {
           data: {
-            ...styles.request,
-            stroke: styles.requestColorScale[0],
+            ...chartStyles.request,
+            stroke: chartStyles.requestColorScale[0],
           },
         },
       });

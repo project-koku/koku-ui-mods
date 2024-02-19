@@ -34,6 +34,48 @@
         "value": ")"
       }
     ],
+    "chartBoxplotTooltip": [
+      {
+        "type": 0,
+        "value": "Min:"
+      },
+      {
+        "type": 1,
+        "value": "min"
+      },
+      {
+        "type": 0,
+        "value": ", Max:"
+      },
+      {
+        "type": 1,
+        "value": "max"
+      },
+      {
+        "type": 0,
+        "value": ", Median:"
+      },
+      {
+        "type": 1,
+        "value": "median"
+      },
+      {
+        "type": 0,
+        "value": ", Q1:"
+      },
+      {
+        "type": 1,
+        "value": "q1"
+      },
+      {
+        "type": 0,
+        "value": ", Q3:"
+      },
+      {
+        "type": 1,
+        "value": "q3"
+      }
+    ],
     "chartCostForecastConeLegendLabel": [
       {
         "type": 0,
@@ -266,6 +308,12 @@
       {
         "type": 0,
         "value": ")"
+      }
+    ],
+    "chartTooltipTitle": [
+      {
+        "type": 1,
+        "value": "value"
       }
     ],
     "chartUsageLegendLabel": [

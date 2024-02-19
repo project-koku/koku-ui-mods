@@ -17,6 +17,11 @@ export default defineMessages({
     description: '{value} total cost (January 1-31)',
     id: 'breakdownTotalCostDate',
   },
+  chartBoxplotTooltip: {
+    defaultMessage: 'Min:{min}, Max:{max}, Median:{median}, Q1:{q1}, Q3:{q3}',
+    description: 'Min:{min}, Max:{max}, Median:{median}, Q1:{q1}, Q3:{q3}',
+    id: 'chartBoxplotTooltip',
+  },
   chartCostForecastConeLegendLabel: {
     defaultMessage: 'Cost confidence ({dateRange})',
     description: 'Cost confidence (Jan 1-31)',
