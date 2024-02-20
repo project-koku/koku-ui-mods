@@ -10,12 +10,12 @@ const labelFormatFunc = getTooltipContent(jest.fn(v => v));
 describe('getTooltipContent', () => {
   test('format hrs and gb', () => {
     [
-      { unit: 'hrs', withTranslation: messages.unitTooltips },
-      { unit: 'gb', withTranslation: messages.unitTooltips },
-      { unit: 'gb-mo', withTranslation: messages.unitTooltips },
+      { unit: 'cores', withTranslation: messages.unitTooltips },
+      { unit: 'gi', withTranslation: messages.unitTooltips },
+      { unit: 'mi', withTranslation: messages.unitTooltips },
     ].forEach(tc => {
       labelFormatFunc(10, tc.unit);
-      expect(intl.formatMessage).toBeCalledWith(tc.withTranslation, { units: 'hrs', value: 10 });
+      expect(intl.formatMessage).toBeCalledWith(tc.withTranslation, { units: 'cores', value: 10 });
     });
   });
   test('format unknown units', () => {

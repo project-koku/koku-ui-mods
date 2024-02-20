@@ -17,80 +17,10 @@ export default defineMessages({
     description: '{value} total cost (January 1-31)',
     id: 'breakdownTotalCostDate',
   },
-  chartBoxplotTooltip: {
-    defaultMessage: 'Min:{min}, Max:{max}, Median:{median}, Q1:{q1}, Q3:{q3}',
-    description: 'Min:{min}, Max:{max}, Median:{median}, Q1:{q1}, Q3:{q3}',
-    id: 'chartBoxplotTooltip',
-  },
-  chartCostForecastConeLegendLabel: {
-    defaultMessage: 'Cost confidence ({dateRange})',
-    description: 'Cost confidence (Jan 1-31)',
-    id: 'chartCostForecastConeLegendLabel',
-  },
-  chartCostForecastConeLegendNoDataLabel: {
-    defaultMessage: 'Cost confidence (no data)',
-    description: 'Cost confidence (no data)',
-    id: 'chartCostForecastConeLegendNoDataLabel',
-  },
-  chartCostForecastConeLegendTooltip: {
-    defaultMessage: 'Cost confidence ({month})',
-    description: 'Cost confidence (Jan)',
-    id: 'chartCostForecastConeLegendTooltip',
-  },
   chartCostForecastConeTooltip: {
     defaultMessage: '{value0} - {value1}',
     description: 'Cost forecast confidence min/max tooltip',
     id: 'chartCostForecastConeTooltip',
-  },
-  chartCostForecastLegendLabel: {
-    defaultMessage: 'Cost forecast ({dateRange})',
-    description: 'Cost forecast (Jan 1-31)',
-    id: 'chartCostForecastLegendLabel',
-  },
-  chartCostForecastLegendNoDataLabel: {
-    defaultMessage: 'Cost forecast (no data)',
-    description: 'Cost forecast (no data)',
-    id: 'chartCostForecastLegendNoDataLabel',
-  },
-  chartCostForecastLegendTooltip: {
-    defaultMessage: 'Cost forecast ({month})',
-    description: 'Cost forecast (Jan 1-31)',
-    id: 'chartCostForecastLegendTooltip',
-  },
-  chartCostLegendLabel: {
-    defaultMessage: 'Cost ({dateRange})',
-    description: 'Cost (Jan 1-31)',
-    id: 'chartCostLegendLabel',
-  },
-  chartCostLegendNoDataLabel: {
-    defaultMessage: 'Cost (no data)',
-    description: 'Cost (no data)',
-    id: 'chartCostLegendNoDataLabel',
-  },
-  chartCostLegendTooltip: {
-    defaultMessage: 'Cost ({month})',
-    description: 'Cost (Jan)',
-    id: 'chartCostLegendTooltip',
-  },
-  chartCostSupplementaryLegendLabel: {
-    defaultMessage: 'Supplementary cost ({dateRange})',
-    description: 'Supplementary cost (Jan 1-31)',
-    id: 'chartCostSupplementaryLegendLabel',
-  },
-  chartCostSupplementaryLegendNoDataLabel: {
-    defaultMessage: 'Supplementary cost (no data)',
-    description: 'Supplementary cost (no data)',
-    id: 'chartCostSupplementaryLegendNoDataLabel',
-  },
-  chartCostSupplementaryLegendTooltip: {
-    defaultMessage: 'Supplementary cost ({month})',
-    description: 'Supplementary cost (Jan)',
-    id: 'chartCostSupplementaryLegendTooltip',
-  },
-  chartDayOfTheMonth: {
-    defaultMessage: 'Day {day}',
-    description: 'The day of the month',
-    id: 'chartDayOfTheMonth',
   },
   chartNoData: {
     defaultMessage: 'no data',
@@ -102,40 +32,12 @@ export default defineMessages({
     description: 'Others category for top costliest',
     id: 'chartOthers',
   },
-  chartRequestsLegendLabel: {
-    defaultMessage: 'Requests ({dateRange})',
-    description: 'Requests (Jan 1-31)',
-    id: 'chartRequestsLegendLabel',
-  },
-  chartRequestsLegendNoDataLabel: {
-    defaultMessage: 'Requests (no data)',
-    description: 'Requests (no data)',
-    id: 'chartRequestsLegendNoDataLabel',
-  },
-  chartRequestsLegendTooltip: {
-    defaultMessage: 'Requests ({month})',
-    description: 'Requests (Jan)',
-    id: 'chartRequestsLegendTooltip',
-  },
-  chartTooltipTitle: {
-    defaultMessage: '{value}',
-    description: 'Chart tooltip title showing datum month or hours',
-    id: 'chartTooltipTitle',
-  },
-  chartUsageLegendLabel: {
-    defaultMessage: 'Usage ({dateRange})',
-    description: 'Usage (Jan 1-31)',
-    id: 'chartUsageLegendLabel',
-  },
-  chartUsageLegendNoDataLabel: {
-    defaultMessage: 'Usage (no data)',
-    description: 'Usage (no data)',
-    id: 'chartUsageLegendNoDataLabel',
-  },
-  chartUsageLegendTooltip: {
-    defaultMessage: 'Usage ({month})',
-    description: 'Usage (Jan)',
-    id: 'chartUsageLegendTooltip',
+  chartUsageTooltip: {
+    defaultMessage:
+      'Min: {min} {units}, Max: {max} {units}{br}Median: {median} {units}{br}Q1: {q1} {units}, Q3: {q3} {units}',
+    description:
+      'Min: {min} {units}, Max: {max} {units}{br}Median: {median} {units}{br}Q1: {q1} {units}, Q3: {q3} {units}',
+    id: 'chartUsageTooltip',
   },
   chooseValuePlaceholder: {
     defaultMessage: 'Choose value',
@@ -364,6 +266,11 @@ export default defineMessages({
     description: 'https://github.com/project-koku/koku-ui-mfe',
     id: 'kokuMfeUrl',
   },
+  limit: {
+    defaultMessage: 'Limit',
+    description: 'Limit',
+    id: 'limit',
+  },
   loadingStateDesc: {
     defaultMessage: 'Searching for your sources. Do not refresh the browser',
     description: 'Searching for your sources. Do not refresh the browser',
@@ -560,16 +467,6 @@ export default defineMessages({
     description: 'Perspective values',
     id: 'perspectiveValues',
   },
-  readOnly: {
-    defaultMessage: 'Read only',
-    description: 'Read only',
-    id: 'readOnly',
-  },
-  readOnlyPermissions: {
-    defaultMessage: 'You have read only permissions',
-    description: 'You have read only permissions',
-    id: 'readOnlyPermissions',
-  },
   recommendedConfiguration: {
     defaultMessage: 'Recommended configuration',
     description: 'Recommended configuration',
@@ -585,6 +482,11 @@ export default defineMessages({
     description: 'Recommended request',
     id: 'recommendedRequest',
   },
+  request: {
+    defaultMessage: 'Request',
+    description: 'Request',
+    id: 'request',
+  },
   selectableTableAriaLabel: {
     defaultMessage: 'Selectable table',
     description: 'Selectable table',
@@ -599,11 +501,6 @@ export default defineMessages({
     defaultMessage: 'Selectable table row',
     description: 'Selectable table row',
     id: 'selectableTableRowAriaLabel',
-  },
-  selected: {
-    defaultMessage: '{value} selected',
-    description: '{value} selected',
-    id: 'selected',
   },
   settingsErrorDesc: {
     defaultMessage: 'Failed to update settings',
@@ -635,31 +532,6 @@ export default defineMessages({
     description: 'Suggestions',
     id: 'suggestions',
   },
-  toolBarBulkSelectAll: {
-    defaultMessage: 'Select all ({value} items)',
-    description: 'Select all ({value} items)',
-    id: 'toolBarBulkSelectAll',
-  },
-  toolBarBulkSelectAriaDeselect: {
-    defaultMessage: 'Deselect all items',
-    description: 'Deselect all items',
-    id: 'toolBarBulkSelectAriaDeselect',
-  },
-  toolBarBulkSelectAriaSelect: {
-    defaultMessage: 'Select all items',
-    description: 'Select all items',
-    id: 'toolBarBulkSelectAriaSelect',
-  },
-  toolBarBulkSelectNone: {
-    defaultMessage: 'Select none (0 items)',
-    description: 'Select none (0 items)',
-    id: 'toolBarBulkSelectNone',
-  },
-  toolBarBulkSelectPage: {
-    defaultMessage: 'Select page ({value} items)',
-    description: 'Select page ({value} items)',
-    id: 'toolBarBulkSelectPage',
-  },
   typeaheadAriaClear: {
     defaultMessage: 'Clear button and input',
     description: 'Clear button and input',
@@ -683,25 +555,24 @@ export default defineMessages({
     description: 'return value and unit based on key: "units"',
     id: 'unitTooltips',
   },
-  // units: {
-  //   defaultMessage:
-  //     '{units, select, ' +
-  //     'byte_ms {Byte-ms} ' +
-  //     'core {core} ' +
-  //     'core_hours {core-hours} ' +
-  //     'gb {GB} ' +
-  //     'gb_hours {GB-hours} ' +
-  //     'gb_mo {GB-month} ' +
-  //     'gb_ms {GB-ms} ' +
-  //     'gibibyte_month {GiB-month} ' +
-  //     'hour {hours} ' +
-  //     'hrs {hours} ' +
-  //     'ms {milliseconds} ' +
-  //     'vm_hours {VM-hours} ' +
-  //     'other {}}',
-  //   description: 'return the proper unit label based on key: "units"',
-  //   id: 'units',
-  // },
+  units: {
+    defaultMessage:
+      '{units, select, ' +
+      'cores {cores} ' +
+      'ei {Ei} ' +
+      'gi {Gi} ' +
+      'ki {Ki} ' +
+      'mi {Mi} ' +
+      'mib {MiB} ' +
+      'other {}}',
+    description: 'return the proper unit label based on key: "units"',
+    id: 'units',
+  },
+  valueUnits: {
+    defaultMessage: '{value} {units}',
+    description: '{value} {units}',
+    id: 'valueUnits',
+  },
   welcomeInfo: {
     defaultMessage: 'For more information visit {url}',
     description: 'more information url',

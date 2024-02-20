@@ -192,11 +192,11 @@ export const data = {
                 },
                 '2024-01-20T06:00:00.000Z': {
                   cpuUsage: {
-                    min: 0.0,
-                    q1: 2.5,
-                    median: 5.0,
-                    q3: 7.5,
-                    max: 10.0,
+                    min: 10.0,
+                    q1: 12.5,
+                    median: 13.0,
+                    q3: 14.5,
+                    max: 15.0,
                     format: 'cores',
                   },
                   memoryUsage: {

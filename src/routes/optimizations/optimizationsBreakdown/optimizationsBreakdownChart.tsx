@@ -5,9 +5,8 @@ import {
   ChartArea,
   ChartAxis,
   ChartBoxPlot,
-  ChartCursorTooltip,
   ChartLegend,
-  ChartPoint,
+  ChartLegendTooltip,
   createContainer,
   getInteractiveLegendEvents,
 } from '@patternfly/react-charts';
@@ -25,9 +24,10 @@ import {
   isSeriesHidden,
 } from 'routes/components/charts/common/chartUtils';
 import ChartTheme from 'routes/components/charts/theme';
+import { unitsLookupKey } from 'utils/format';
 import { RecommendationType } from 'utils/recomendations';
 
-import { chartStyles, styles } from './optimizationsBreakdownChart.styles';
+import { chartStyles } from './optimizationsBreakdownChart.styles';
 
 interface OptimizationsBreakdownChartOwnProps {
   baseHeight?: number;
@@ -60,77 +60,28 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
 
   // Clone original container. See https://issues.redhat.com/browse/COST-762
   const cloneContainer = () => {
-    // Custom HTML component to create a legend layout
-    const HtmlLegendContent: any = ({ datum, legendData, text, title, x, y }) => {
-      let dx = recommendationType === RecommendationType.cpu ? 50 : 45;
-      let dy = 55;
-      let valueColWidth = 170;
-      if (datum.y[0] === null) {
-        dx += recommendationType === RecommendationType.cpu ? 45 : 52;
-        dy -= 10;
-        valueColWidth -= 100;
+    const legendData = getLegendData(series, hiddenSeries, true);
+    // Force extra space for line wrapping
+    legendData?.push(
+      {
+        childName: 'usage',
+        name: '',
+        symbol: {
+          fill: 'none',
+        },
+      },
+      {
+        childName: 'usage',
+        name: '',
+        symbol: {
+          fill: 'none',
+        },
       }
-      return (
-        <g>
-          <foreignObject height="100%" width="100%" x={x - dx} y={y - dy}>
-            <table>
-              <thead>
-                <tr>
-                  <th colSpan={2} style={{ ...styles.base, fontWeight: 700 }}>
-                    {title(datum)}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {text.map((val, index) => (
-                  <tr key={`tbody-tr-${index}`} style={styles.base}>
-                    <td style={styles.symbolColumn}>
-                      <svg height="9.74" width="9.74">
-                        <g>
-                          <rect
-                            role="presentation"
-                            shapeRendering="auto"
-                            width="9.74"
-                            height="9.74"
-                            style={{ ...legendData[index].symbol }}
-                          >
-                            {
-                              <ChartPoint
-                                x={0}
-                                y={0}
-                                symbol={legendData[index].symbol ? legendData[index].symbol.type : 'square'}
-                                size={5.6}
-                              />
-                            }
-                          </rect>
-                        </g>
-                      </svg>
-                    </td>
-                    <td style={styles.nameColumn}>{legendData[index].name}</td>
-                    <td style={styles.valueColumn} width={`${valueColWidth}px`}>
-                      {val}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </foreignObject>
-        </g>
-      );
-    };
-
+    );
     return cursorVoronoiContainer
       ? React.cloneElement(cursorVoronoiContainer, {
           disable: !isDataAvailable(series, hiddenSeries),
-          labelComponent: (
-            <ChartCursorTooltip
-              flyoutHeight={({ datum }) => (datum.y[0] === null ? 115 : 135)}
-              flyoutWidth={({ datum }) => (datum.y[0] === null ? 275 : 375)}
-              labelComponent={
-                <HtmlLegendContent legendData={getLegendData(series, hiddenSeries, true)} title={datum => datum.x} />
-              }
-            />
-          ),
+          labelComponent: <ChartLegendTooltip legendData={legendData} title={datum => datum.x} />,
         } as any)
       : undefined;
   };
@@ -164,23 +115,28 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
 
     const labelFormatter = datum => {
       const formatValue = val => (val !== undefined ? val : '');
-
       if (datum && (datum._min || datum._max || datum._median || datum._q1 || datum._q3)) {
-        return intl.formatMessage(messages.chartBoxplotTooltip, {
+        return intl.formatMessage(messages.chartUsageTooltip, {
+          br: '\n',
           min: formatValue(datum._min),
           max: formatValue(datum._max),
           median: formatValue(datum._median),
           q1: formatValue(datum._q1),
           q3: formatValue(datum._q3),
+          units: intl.formatMessage(messages.units, { units: unitsLookupKey(datum.units) }),
         });
       }
+
       // With box plot, datum.y will be an array
       const yVal = Array.isArray(datum.y) ? datum.y[0] : datum.y;
-      const test = yVal !== null ? datum.y : intl.formatMessage(messages.chartNoData);
-      return test;
+      return yVal !== null
+        ? intl.formatMessage(messages.valueUnits, {
+            value: yVal,
+            units: intl.formatMessage(messages.units, { units: unitsLookupKey(datum.units) }),
+          })
+        : intl.formatMessage(messages.chartNoData);
     };
 
-    // labels={({ datum }) => labelFormatter(datum)}
     return (
       <CursorVoronoiContainer
         cursorDimension="x"
@@ -254,6 +210,46 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
     // Show all legends, regardless of data size
 
     const newSeries: ChartSeries[] = [];
+    if (requestData && requestData.length) {
+      newSeries.push({
+        childName: 'request',
+        data: requestData,
+        legendItem: {
+          name: intl.formatMessage(messages.recommendedRequest),
+          symbol: {
+            fill: chartStyles.requestColorScale[0],
+            type: 'square',
+          },
+          tooltip: intl.formatMessage(messages.request),
+        },
+        style: {
+          data: {
+            ...chartStyles.request,
+            stroke: chartStyles.requestColorScale[0],
+          },
+        },
+      });
+    }
+    if (limitData && limitData.length) {
+      newSeries.push({
+        childName: 'limit',
+        data: limitData,
+        legendItem: {
+          name: intl.formatMessage(messages.recommendedLimit),
+          symbol: {
+            fill: chartStyles.limitColorScale[0],
+            type: 'square',
+          },
+          tooltip: intl.formatMessage(messages.limit),
+        },
+        style: {
+          data: {
+            ...chartStyles.limit,
+            stroke: chartStyles.limitColorScale[0],
+          },
+        },
+      });
+    }
     if (usageData && usageData.length) {
       newSeries.push({
         childName: 'usage',
@@ -277,46 +273,6 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
             fill: chartStyles.usageColorScale[1],
           },
         } as any,
-      });
-    }
-    if (limitData && limitData.length) {
-      newSeries.push({
-        childName: 'limit',
-        data: limitData,
-        legendItem: {
-          name: intl.formatMessage(messages.recommendedLimit),
-          symbol: {
-            fill: chartStyles.limitColorScale[0],
-            type: 'square',
-          },
-          tooltip: intl.formatMessage(messages.recommendedLimit),
-        },
-        style: {
-          data: {
-            ...chartStyles.limit,
-            stroke: chartStyles.limitColorScale[0],
-          },
-        },
-      });
-    }
-    if (requestData && requestData.length) {
-      newSeries.push({
-        childName: 'request',
-        data: requestData,
-        legendItem: {
-          name: intl.formatMessage(messages.recommendedRequest),
-          symbol: {
-            fill: chartStyles.requestColorScale[0],
-            type: 'square',
-          },
-          tooltip: intl.formatMessage(messages.recommendedRequest),
-        },
-        style: {
-          data: {
-            ...chartStyles.request,
-            stroke: chartStyles.requestColorScale[0],
-          },
-        },
       });
     }
     setSeries(newSeries);
@@ -350,7 +306,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
           height={chartHeight}
           legendAllowWrap={handleLegendAllowWrap}
           legendComponent={getLegend()}
-          legendData={getLegendData(series, hiddenSeries)}
+          // legendData={getLegendData(series, hiddenSeries)}
           legendPosition="bottom"
           name={name}
           padding={getPadding()}
