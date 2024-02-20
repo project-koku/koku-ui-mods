@@ -25,4 +25,8 @@ export const styles = {
     backgroundColor: global_BackgroundColor_light_100.value,
     paddingLeft: global_spacer_lg.value,
   },
+  utilizationContainer: {
+    backgroundColor: global_BackgroundColor_light_100.value,
+    marginTop: global_spacer_lg.value,
+  },
 } as { [className: string]: React.CSSProperties };

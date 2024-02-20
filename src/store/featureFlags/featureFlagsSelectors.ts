@@ -6,11 +6,5 @@ export const selectFeatureFlagsState = (state: RootState) => state[stateKey];
 
 export const selectHasFeatureFlags = (state: RootState) => selectFeatureFlagsState(state).hasFeatureFlags;
 
-export const selectIsExportsFeatureEnabled = (state: RootState) =>
-  selectFeatureFlagsState(state).isExportsFeatureEnabled;
-export const selectIsFinsightsFeatureEnabled = (state: RootState) =>
-  selectFeatureFlagsState(state).isFinsightsFeatureEnabled;
-export const selectIsIbmFeatureEnabled = (state: RootState) => selectFeatureFlagsState(state).isIbmFeatureEnabled;
-export const selectIsRosFeatureEnabled = (state: RootState) => selectFeatureFlagsState(state).isRosFeatureEnabled;
-export const selectIsSettingsPlatformFeatureEnabled = (state: RootState) =>
-  selectFeatureFlagsState(state).isSettingsPlatformFeatureEnabled;
+export const selectIsUtilizationFeatureEnabled = (state: RootState) =>
+  selectFeatureFlagsState(state).isUtilizationFeatureEnabled;

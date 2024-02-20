@@ -1,11 +1,7 @@
 import { createAction } from 'typesafe-actions';
 
 export interface FeatureFlagsActionMeta {
-  isExportsFeatureEnabled?: boolean;
-  isFinsightsFeatureEnabled?: boolean;
-  isIbmFeatureEnabled?: boolean;
-  isRosFeatureEnabled?: boolean;
-  isSettingsPlatformFeatureEnabled?: boolean;
+  isUtilizationFeatureEnabled?: boolean;
 }
 
 export const setFeatureFlags = createAction('feature/init_feature_flags')<FeatureFlagsActionMeta>();

@@ -8,20 +8,12 @@ export type FeatureFlagsAction = ActionType<typeof setFeatureFlags | typeof rese
 
 export type FeatureFlagsState = Readonly<{
   hasFeatureFlags: boolean;
-  isExportsFeatureEnabled: boolean;
-  isFinsightsFeatureEnabled: boolean;
-  isIbmFeatureEnabled: boolean;
-  isRosFeatureEnabled: boolean;
-  isSettingsPlatformFeatureEnabled: boolean;
+  isUtilizationFeatureEnabled: boolean;
 }>;
 
 export const defaultState: FeatureFlagsState = {
   hasFeatureFlags: false,
-  isExportsFeatureEnabled: false,
-  isFinsightsFeatureEnabled: false,
-  isIbmFeatureEnabled: false,
-  isRosFeatureEnabled: false,
-  isSettingsPlatformFeatureEnabled: false,
+  isUtilizationFeatureEnabled: false,
 };
 
 export const stateKey = 'featureFlags';
@@ -32,11 +24,7 @@ export function featureFlagsReducer(state = defaultState, action: FeatureFlagsAc
       return {
         ...state,
         hasFeatureFlags: true,
-        isExportsFeatureEnabled: action.payload.isExportsFeatureEnabled,
-        isFinsightsFeatureEnabled: action.payload.isFinsightsFeatureEnabled,
-        isIbmFeatureEnabled: action.payload.isIbmFeatureEnabled,
-        isRosFeatureEnabled: action.payload.isRosFeatureEnabled,
-        isSettingsPlatformFeatureEnabled: action.payload.isSettingsPlatformFeatureEnabled,
+        isUtilizationFeatureEnabled: action.payload.isUtilizationFeatureEnabled,
       };
 
     default:

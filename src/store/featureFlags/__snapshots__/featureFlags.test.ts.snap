@@ -3,10 +3,6 @@
 exports[`default state 1`] = `
 {
   "hasFeatureFlags": false,
-  "isExportsFeatureEnabled": false,
-  "isFinsightsFeatureEnabled": false,
-  "isIbmFeatureEnabled": false,
-  "isRosFeatureEnabled": false,
-  "isSettingsPlatformFeatureEnabled": false,
+  "isUtilizationFeatureEnabled": false,
 }
 `;
