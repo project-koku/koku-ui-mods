@@ -17,6 +17,7 @@ import type { ThunkDispatch } from 'redux-thunk';
 import { Loading } from 'routes/components/page/loading';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
+import { featureFlagsSelectors } from 'store/featureFlags';
 import { rosActions, rosSelectors } from 'store/ros';
 import { breadcrumbLabelKey } from 'utils/props';
 import { getNotifications, hasRecommendation, Interval, OptimizationType } from 'utils/recomendations';
@@ -49,6 +50,7 @@ interface OptimizationsBreakdownStateProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
   report?: RecommendationReportData;
+  isUtilizationFeatureEnabled?: boolean;
   reportError?: AxiosError;
   reportFetchStatus?: FetchStatus;
   reportQueryString?: string;
@@ -60,7 +62,7 @@ const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendation as any;
 
 const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
-  const { breadcrumbLabel, breadcrumbPath, report, reportFetchStatus } = useMapToProps();
+  const { breadcrumbLabel, breadcrumbPath, isUtilizationFeatureEnabled, report, reportFetchStatus } = useMapToProps();
   const [activeTabKey, setActiveTabKey] = useState(0);
   const [optimizationType] = useState(OptimizationType.cost);
   const intl = useIntl();
@@ -151,13 +153,15 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
             optimizationType={tab}
             recommendations={report?.recommendations}
           />
-          <div style={styles.boxplotContainer}>
-            <OptimizationsBreakdownUtilization
-              currentInterval={currentInterval}
-              optimizationType={tab}
-              recommendations={report?.recommendations}
-            />
-          </div>
+          {isUtilizationFeatureEnabled && (
+            <div style={styles.utilizationContainer}>
+              <OptimizationsBreakdownUtilization
+                currentInterval={currentInterval}
+                optimizationType={tab}
+                recommendations={report?.recommendations}
+              />
+            </div>
+          )}
         </>
       );
     } else {
@@ -250,8 +254,6 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   let report: any = useSelector((state: RootState) =>
     rosSelectors.selectRos(state, reportPathsType, reportType, reportQueryString)
   );
-  // Todo: Update to use new API response
-  report = data.data[0];
   const reportFetchStatus = useSelector((state: RootState) =>
     rosSelectors.selectRosFetchStatus(state, reportPathsType, reportType, reportQueryString)
   );
@@ -265,9 +267,18 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
     }
   }, [reportQueryString]);
 
+  // Todo: Update to use new API response
+  const isUtilizationFeatureEnabled = useSelector((state: RootState) =>
+    featureFlagsSelectors.selectIsUtilizationFeatureEnabled(state)
+  );
+  if (isUtilizationFeatureEnabled) {
+    report = data.data[0];
+  }
+
   return {
     breadcrumbLabel: queryFromRoute[breadcrumbLabelKey],
     breadcrumbPath: location?.state?.optimizations ? location.state.optimizations.breadcrumbPath : undefined,
+    isUtilizationFeatureEnabled,
     report,
     reportError,
     reportFetchStatus,

@@ -90,6 +90,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
     if (serie.childName === 'usage') {
       return (
         <ChartBoxPlot
+          boxWidth={width < 475 ? 15 : undefined}
           data={!hiddenSeries.has(index) ? serie.data : [{ y: [null] }]}
           key={serie.childName}
           name={serie.childName}

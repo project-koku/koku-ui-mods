@@ -7,10 +7,6 @@ export const styles = {
   alertContainer: {
     marginBottom: global_spacer_lg.value,
   },
-  boxplotContainer: {
-    backgroundColor: global_BackgroundColor_light_100.value,
-    marginTop: global_spacer_lg.value,
-  },
   codeBlock: {
     display: 'flex',
   },
@@ -28,5 +24,9 @@ export const styles = {
   tabs: {
     backgroundColor: global_BackgroundColor_light_100.value,
     paddingLeft: global_spacer_lg.value,
+  },
+  utilizationContainer: {
+    backgroundColor: global_BackgroundColor_light_100.value,
+    marginTop: global_spacer_lg.value,
   },
 } as { [className: string]: React.CSSProperties };
