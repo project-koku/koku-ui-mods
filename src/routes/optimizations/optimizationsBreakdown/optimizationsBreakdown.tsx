@@ -1,11 +1,13 @@
 import './optimizationsBreakdown.scss';
 
 import { Alert, List, ListItem, PageSection, Tab, TabContent, Tabs, TabTitleText } from '@patternfly/react-core';
+import { useUnleashClient } from '@unleash/proxy-client-react';
 import type { Query } from 'api/queries/query';
 import { parseQuery } from 'api/queries/query';
 import type { RecommendationReportData } from 'api/ros/recommendations';
 import { RosPathsType, RosType } from 'api/ros/ros';
 import type { AxiosError } from 'axios';
+import { FeatureToggle } from 'components/featureFlags';
 import messages from 'locales/messages';
 import type { RefObject } from 'react';
 import React, { useEffect, useState } from 'react';
@@ -17,7 +19,6 @@ import type { ThunkDispatch } from 'redux-thunk';
 import { Loading } from 'routes/components/page/loading';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
-import { featureFlagsSelectors } from 'store/featureFlags';
 import { rosActions, rosSelectors } from 'store/ros';
 import { breadcrumbLabelKey } from 'utils/props';
 import { getNotifications, hasRecommendation, Interval, OptimizationType } from 'utils/recomendations';
@@ -249,6 +250,7 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
   const queryFromRoute = useQueryFromRoute();
   const location = useLocation();
+  const client = useUnleashClient();
 
   const reportQueryString = queryFromRoute ? queryFromRoute.id : ''; // Flatten ID
   let report: any = useSelector((state: RootState) =>
@@ -268,9 +270,8 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   }, [reportQueryString]);
 
   // Todo: Update to use new API response
-  const isUtilizationFeatureEnabled = useSelector((state: RootState) =>
-    featureFlagsSelectors.selectIsUtilizationFeatureEnabled(state)
-  );
+  const isUtilizationFeatureEnabled =
+    client.isEnabled(FeatureToggle.isUtilizationFeatureEnabled) && insights?.chrome?.isBeta();
   if (isUtilizationFeatureEnabled) {
     report = data.data[0];
   }
