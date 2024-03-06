@@ -81,7 +81,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
     return cursorVoronoiContainer
       ? React.cloneElement(cursorVoronoiContainer, {
           disable: !isDataAvailable(series, hiddenSeries),
-          labelComponent: <ChartLegendTooltip legendData={legendData} title={(datum => datum.x) as any} />,
+          labelComponent: <ChartLegendTooltip legendData={legendData} title={datum => datum.x} />,
         } as any)
       : undefined;
   };
