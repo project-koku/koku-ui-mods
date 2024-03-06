@@ -6,7 +6,7 @@ import { parseQuery } from 'api/queries/query';
 import type { RecommendationReportData } from 'api/ros/recommendations';
 import { RosPathsType, RosType } from 'api/ros/ros';
 import type { AxiosError } from 'axios';
-import { useIsUtilizationFeatureEnabled } from 'components/featureFlags';
+import { useIsUtilizationFlagEnabled } from 'components/featureToggle';
 import messages from 'locales/messages';
 import type { RefObject } from 'react';
 import React, { useEffect, useState } from 'react';
@@ -50,7 +50,7 @@ interface OptimizationsBreakdownStateProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
   report?: RecommendationReportData;
-  isUtilizationFeatureEnabled?: boolean;
+  isUtilizationFlagEnabled?: boolean;
   reportError?: AxiosError;
   reportFetchStatus?: FetchStatus;
   reportQueryString?: string;
@@ -62,7 +62,7 @@ const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendation as any;
 
 const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
-  const { breadcrumbLabel, breadcrumbPath, isUtilizationFeatureEnabled, report, reportFetchStatus } = useMapToProps();
+  const { breadcrumbLabel, breadcrumbPath, isUtilizationFlagEnabled, report, reportFetchStatus } = useMapToProps();
   const [activeTabKey, setActiveTabKey] = useState(0);
   const [optimizationType] = useState(OptimizationType.cost);
   const intl = useIntl();
@@ -153,7 +153,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
             optimizationType={tab}
             recommendations={report?.recommendations}
           />
-          {isUtilizationFeatureEnabled && (
+          {isUtilizationFlagEnabled && (
             <div style={styles.utilizationContainer}>
               <OptimizationsBreakdownUtilization
                 currentInterval={currentInterval}
@@ -268,15 +268,15 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   }, [reportQueryString]);
 
   // Todo: Update to use new API response
-  const isUtilizationFeatureEnabled = useIsUtilizationFeatureEnabled();
-  if (isUtilizationFeatureEnabled) {
+  const isUtilizationFlagEnabled = useIsUtilizationFlagEnabled();
+  if (isUtilizationFlagEnabled) {
     report = data.data[0];
   }
 
   return {
     breadcrumbLabel: queryFromRoute[breadcrumbLabelKey],
     breadcrumbPath: location?.state?.optimizations ? location.state.optimizations.breadcrumbPath : undefined,
-    isUtilizationFeatureEnabled,
+    isUtilizationFlagEnabled,
     report,
     reportError,
     reportFetchStatus,
