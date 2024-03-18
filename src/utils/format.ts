@@ -240,24 +240,13 @@ export const unitsLookupKey = (units): string => {
   const lookup = units ? units.replace(/[- ]/g, '_').toLowerCase() : '';
 
   switch (lookup) {
-    case 'byte_ms':
-    case 'core':
-    case 'core_hours':
-    case 'gb':
-    case 'gb_hours':
-    case 'gb_mo':
-    case 'gb_ms':
-    case 'cluser_month':
-    case 'pvc_month':
-    case 'gibibyte_month':
-    case 'hour':
-    case 'hrs':
-    case 'ms':
-    case 'tag_mo':
-    case 'vm_hours':
+    case 'cores':
+    case 'ei':
+    case 'gi':
+    case 'ki':
+    case 'mi':
+    case 'mib':
       return lookup;
-    case 'gb_month':
-      return 'gb_mo';
     default:
       return undefined;
   }
