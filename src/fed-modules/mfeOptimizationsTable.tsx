@@ -1,13 +1,8 @@
 /* eslint-disable no-console */
-import IntlProvider from '@redhat-cloud-services/frontend-components-translations/Provider';
-import { getLocale } from 'components/i18n';
 import React from 'react';
-import { Provider } from 'react-redux';
 import { OptimizationsTable } from 'routes/optimizations/optimizationsTable';
-import { mfeStore } from 'store';
 
-// eslint-disable-next-line no-restricted-imports
-import messages from '../../locales/data.json';
+import { MfeOptimizationsWrapper } from './mfeOptimizationsWrapper';
 
 export interface OptimizationsDetailsOwnProps {
   breadcrumbLabel?: string;
@@ -30,22 +25,18 @@ const MfeOptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
   linkPath,
   linkState,
 }: OptimizationsDetailsOwnProps) => {
-  const locale = getLocale();
-
   return (
-    <IntlProvider defaultLocale="en" locale={locale} messages={messages[locale]} onError={console.log}>
-      <Provider store={mfeStore as any}>
-        <OptimizationsTable
-          breadcrumbLabel={breadcrumbLabel}
-          breadcrumbPath={breadcrumbPath}
-          groupBy={groupBy}
-          groupByValue={groupByValue}
-          isProject={isProject}
-          linkPath={linkPath}
-          linkState={linkState}
-        />
-      </Provider>
-    </IntlProvider>
+    <MfeOptimizationsWrapper>
+      <OptimizationsTable
+        breadcrumbLabel={breadcrumbLabel}
+        breadcrumbPath={breadcrumbPath}
+        groupBy={groupBy}
+        groupByValue={groupByValue}
+        isProject={isProject}
+        linkPath={linkPath}
+        linkState={linkState}
+      />
+    </MfeOptimizationsWrapper>
   );
 };
 

@@ -7,7 +7,7 @@ import { resourceReducer, resourceStateKey } from 'store/resources';
 import { rosReducer, rosStateKey } from 'store/ros';
 import type { StateType } from 'typesafe-actions';
 
-import { featureFlagsReducer, featureFlagsStateKey } from './featureFlags';
+import { featureToggleReducer, featureToggleStateKey } from './featureToggle';
 import { providersReducer, providersStateKey } from './providers';
 import { uiReducer, uiStateKey } from './ui';
 import { userAccessReducer, userAccessStateKey } from './userAccess';
@@ -16,7 +16,7 @@ export type RootState = StateType<typeof rootReducer>;
 
 export const rootReducer = combineReducers({
   [accountSettingsStateKey]: accountSettingsReducer,
-  [featureFlagsStateKey]: featureFlagsReducer,
+  [featureToggleStateKey]: featureToggleReducer,
   [forecastStateKey]: forecastReducer,
   [providersStateKey]: providersReducer,
   [reportStateKey]: reportReducer,
