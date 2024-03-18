@@ -6,6 +6,7 @@ import { parseQuery } from 'api/queries/query';
 import type { RecommendationReportData } from 'api/ros/recommendations';
 import { RosPathsType, RosType } from 'api/ros/ros';
 import type { AxiosError } from 'axios';
+import { useIsUtilizationFlagEnabled } from 'components/featureToggle';
 import messages from 'locales/messages';
 import type { RefObject } from 'react';
 import React, { useEffect, useState } from 'react';
@@ -21,9 +22,11 @@ import { rosActions, rosSelectors } from 'store/ros';
 import { breadcrumbLabelKey } from 'utils/props';
 import { getNotifications, hasRecommendation, Interval, OptimizationType } from 'utils/recomendations';
 
+import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
+import { OptimizationsBreakdownUtilization } from './optimizationsBreakdownUtilization';
 
 export const getIdKeyForTab = (tab: OptimizationType) => {
   switch (tab) {
@@ -47,6 +50,7 @@ interface OptimizationsBreakdownStateProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
   report?: RecommendationReportData;
+  isUtilizationFlagEnabled?: boolean;
   reportError?: AxiosError;
   reportFetchStatus?: FetchStatus;
   reportQueryString?: string;
@@ -58,7 +62,7 @@ const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendation as any;
 
 const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
-  const { breadcrumbLabel, breadcrumbPath, report, reportFetchStatus } = useMapToProps();
+  const { breadcrumbLabel, breadcrumbPath, isUtilizationFlagEnabled, report, reportFetchStatus } = useMapToProps();
   const [activeTabKey, setActiveTabKey] = useState(0);
   const [optimizationType] = useState(OptimizationType.cost);
   const intl = useIntl();
@@ -143,11 +147,22 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
     const currentTab = getIdKeyForTab(tab);
     if (currentTab === OptimizationType.cost || currentTab === OptimizationType.performance) {
       return (
-        <OptimizationsBreakdownConfiguration
-          currentInterval={currentInterval}
-          optimizationType={tab}
-          recommendations={report?.recommendations}
-        />
+        <>
+          <OptimizationsBreakdownConfiguration
+            currentInterval={currentInterval}
+            optimizationType={tab}
+            recommendations={report?.recommendations}
+          />
+          {isUtilizationFlagEnabled && (
+            <div style={styles.utilizationContainer}>
+              <OptimizationsBreakdownUtilization
+                currentInterval={currentInterval}
+                optimizationType={tab}
+                recommendations={report?.recommendations}
+              />
+            </div>
+          )}
+        </>
       );
     } else {
       return emptyTab;
@@ -236,7 +251,7 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   const location = useLocation();
 
   const reportQueryString = queryFromRoute ? queryFromRoute.id : ''; // Flatten ID
-  const report: any = useSelector((state: RootState) =>
+  let report: any = useSelector((state: RootState) =>
     rosSelectors.selectRos(state, reportPathsType, reportType, reportQueryString)
   );
   const reportFetchStatus = useSelector((state: RootState) =>
@@ -252,9 +267,16 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
     }
   }, [reportQueryString]);
 
+  // Todo: Update to use new API response
+  const isUtilizationFlagEnabled = useIsUtilizationFlagEnabled();
+  if (isUtilizationFlagEnabled) {
+    report = data.data[0];
+  }
+
   return {
     breadcrumbLabel: queryFromRoute[breadcrumbLabelKey],
     breadcrumbPath: location?.state?.optimizations ? location.state.optimizations.breadcrumbPath : undefined,
+    isUtilizationFlagEnabled,
     report,
     reportError,
     reportFetchStatus,

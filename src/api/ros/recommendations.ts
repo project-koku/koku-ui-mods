@@ -31,6 +31,15 @@ export interface RecommendationEngine {
   variation: RecommendationValues;
 }
 
+export interface UsageValue {
+  min?: number;
+  q1?: number;
+  median?: number;
+  q3?: number;
+  max?: number;
+  format?: string;
+}
+
 export interface RecommendationTerm {
   duration_in_hours?: number;
   monitoring_start_time?: string;
@@ -40,6 +49,15 @@ export interface RecommendationTerm {
   recommendation_engines?: {
     cost: RecommendationEngine;
     performance: RecommendationEngine;
+  };
+  plots?: {
+    datapoints?: number;
+    plots_data?: {
+      [date: string]: {
+        cpuUsage?: UsageValue;
+        memoryUsage?: UsageValue;
+      };
+    };
   };
 }
 
