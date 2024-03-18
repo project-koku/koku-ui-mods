@@ -34,40 +34,6 @@
         "value": ")"
       }
     ],
-    "chartCostForecastConeLegendLabel": [
-      {
-        "type": 0,
-        "value": "Cost confidence ("
-      },
-      {
-        "type": 1,
-        "value": "dateRange"
-      },
-      {
-        "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartCostForecastConeLegendNoDataLabel": [
-      {
-        "type": 0,
-        "value": "Cost confidence (no data)"
-      }
-    ],
-    "chartCostForecastConeLegendTooltip": [
-      {
-        "type": 0,
-        "value": "Cost confidence ("
-      },
-      {
-        "type": 1,
-        "value": "month"
-      },
-      {
-        "type": 0,
-        "value": ")"
-      }
-    ],
     "chartCostForecastConeTooltip": [
       {
         "type": 1,
@@ -80,118 +46,6 @@
       {
         "type": 1,
         "value": "value1"
-      }
-    ],
-    "chartCostForecastLegendLabel": [
-      {
-        "type": 0,
-        "value": "Cost forecast ("
-      },
-      {
-        "type": 1,
-        "value": "dateRange"
-      },
-      {
-        "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartCostForecastLegendNoDataLabel": [
-      {
-        "type": 0,
-        "value": "Cost forecast (no data)"
-      }
-    ],
-    "chartCostForecastLegendTooltip": [
-      {
-        "type": 0,
-        "value": "Cost forecast ("
-      },
-      {
-        "type": 1,
-        "value": "month"
-      },
-      {
-        "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartCostLegendLabel": [
-      {
-        "type": 0,
-        "value": "Cost ("
-      },
-      {
-        "type": 1,
-        "value": "dateRange"
-      },
-      {
-        "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartCostLegendNoDataLabel": [
-      {
-        "type": 0,
-        "value": "Cost (no data)"
-      }
-    ],
-    "chartCostLegendTooltip": [
-      {
-        "type": 0,
-        "value": "Cost ("
-      },
-      {
-        "type": 1,
-        "value": "month"
-      },
-      {
-        "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartCostSupplementaryLegendLabel": [
-      {
-        "type": 0,
-        "value": "Supplementary cost ("
-      },
-      {
-        "type": 1,
-        "value": "dateRange"
-      },
-      {
-        "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartCostSupplementaryLegendNoDataLabel": [
-      {
-        "type": 0,
-        "value": "Supplementary cost (no data)"
-      }
-    ],
-    "chartCostSupplementaryLegendTooltip": [
-      {
-        "type": 0,
-        "value": "Supplementary cost ("
-      },
-      {
-        "type": 1,
-        "value": "month"
-      },
-      {
-        "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartDayOfTheMonth": [
-      {
-        "type": 0,
-        "value": "Day "
-      },
-      {
-        "type": 1,
-        "value": "day"
       }
     ],
     "chartNoData": [
@@ -234,72 +88,94 @@
         "value": "count"
       }
     ],
-    "chartRequestsLegendLabel": [
+    "chartUsageTooltip": [
       {
         "type": 0,
-        "value": "Requests ("
+        "value": "Min: "
       },
       {
         "type": 1,
-        "value": "dateRange"
+        "value": "min"
       },
       {
         "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartRequestsLegendNoDataLabel": [
-      {
-        "type": 0,
-        "value": "Requests (no data)"
-      }
-    ],
-    "chartRequestsLegendTooltip": [
-      {
-        "type": 0,
-        "value": "Requests ("
+        "value": " "
       },
       {
         "type": 1,
-        "value": "month"
+        "value": "units"
       },
       {
         "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartUsageLegendLabel": [
-      {
-        "type": 0,
-        "value": "Usage ("
+        "value": ", Max: "
       },
       {
         "type": 1,
-        "value": "dateRange"
+        "value": "max"
       },
       {
         "type": 0,
-        "value": ")"
-      }
-    ],
-    "chartUsageLegendNoDataLabel": [
-      {
-        "type": 0,
-        "value": "Usage (no data)"
-      }
-    ],
-    "chartUsageLegendTooltip": [
-      {
-        "type": 0,
-        "value": "Usage ("
+        "value": " "
       },
       {
         "type": 1,
-        "value": "month"
+        "value": "units"
+      },
+      {
+        "type": 1,
+        "value": "br"
       },
       {
         "type": 0,
-        "value": ")"
+        "value": "Median: "
+      },
+      {
+        "type": 1,
+        "value": "median"
+      },
+      {
+        "type": 0,
+        "value": " "
+      },
+      {
+        "type": 1,
+        "value": "units"
+      },
+      {
+        "type": 1,
+        "value": "br"
+      },
+      {
+        "type": 0,
+        "value": "Q1: "
+      },
+      {
+        "type": 1,
+        "value": "q1"
+      },
+      {
+        "type": 0,
+        "value": " "
+      },
+      {
+        "type": 1,
+        "value": "units"
+      },
+      {
+        "type": 0,
+        "value": ", Q3: "
+      },
+      {
+        "type": 1,
+        "value": "q3"
+      },
+      {
+        "type": 0,
+        "value": " "
+      },
+      {
+        "type": 1,
+        "value": "units"
       }
     ],
     "chooseValuePlaceholder": [
@@ -324,6 +200,12 @@
       {
         "type": 0,
         "value": "Cost Management MFE"
+      }
+    ],
+    "cpu": [
+      {
+        "type": 0,
+        "value": "CPU"
       }
     ],
     "currencyAbbreviations": [
@@ -401,6 +283,18 @@
       {
         "type": 0,
         "value": "Current configuration"
+      }
+    ],
+    "currentCpuUtilization": [
+      {
+        "type": 0,
+        "value": "Current CPU utilization"
+      }
+    ],
+    "currentMemoryUtilization": [
+      {
+        "type": 0,
+        "value": "Current memory utilization"
       }
     ],
     "dataTableAriaLabel": [
@@ -1214,6 +1108,12 @@
         "value": "https://github.com/project-koku/koku-ui-mfe"
       }
     ],
+    "limit": [
+      {
+        "type": 0,
+        "value": "Limit"
+      }
+    ],
     "loadingStateDesc": [
       {
         "type": 0,
@@ -1224,6 +1124,12 @@
       {
         "type": 0,
         "value": "Looking for sources..."
+      }
+    ],
+    "memory": [
+      {
+        "type": 0,
+        "value": "Memory"
       }
     ],
     "names": [
@@ -1741,22 +1647,28 @@
         "value": "value"
       }
     ],
-    "readOnly": [
-      {
-        "type": 0,
-        "value": "Read only"
-      }
-    ],
-    "readOnlyPermissions": [
-      {
-        "type": 0,
-        "value": "You have read only permissions"
-      }
-    ],
     "recommendedConfiguration": [
       {
         "type": 0,
         "value": "Recommended configuration"
+      }
+    ],
+    "recommendedLimit": [
+      {
+        "type": 0,
+        "value": "Recommended limit"
+      }
+    ],
+    "recommendedRequest": [
+      {
+        "type": 0,
+        "value": "Recommended request"
+      }
+    ],
+    "request": [
+      {
+        "type": 0,
+        "value": "Request"
       }
     ],
     "selectableTableAriaLabel": [
@@ -1775,16 +1687,6 @@
       {
         "type": 0,
         "value": "Selectable table row"
-      }
-    ],
-    "selected": [
-      {
-        "type": 1,
-        "value": "value"
-      },
-      {
-        "type": 0,
-        "value": " selected"
       }
     ],
     "settingsErrorDesc": [
@@ -1821,52 +1723,6 @@
       {
         "type": 0,
         "value": "Suggestions"
-      }
-    ],
-    "toolBarBulkSelectAll": [
-      {
-        "type": 0,
-        "value": "Select all ("
-      },
-      {
-        "type": 1,
-        "value": "value"
-      },
-      {
-        "type": 0,
-        "value": " items)"
-      }
-    ],
-    "toolBarBulkSelectAriaDeselect": [
-      {
-        "type": 0,
-        "value": "Deselect all items"
-      }
-    ],
-    "toolBarBulkSelectAriaSelect": [
-      {
-        "type": 0,
-        "value": "Select all items"
-      }
-    ],
-    "toolBarBulkSelectNone": [
-      {
-        "type": 0,
-        "value": "Select none (0 items)"
-      }
-    ],
-    "toolBarBulkSelectPage": [
-      {
-        "type": 0,
-        "value": "Select page ("
-      },
-      {
-        "type": 1,
-        "value": "value"
-      },
-      {
-        "type": 0,
-        "value": " items)"
       }
     ],
     "typeaheadAriaClear": [
@@ -2020,6 +1876,79 @@
           }
         },
         "type": 5,
+        "value": "units"
+      }
+    ],
+    "units": [
+      {
+        "options": {
+          "cores": {
+            "value": [
+              {
+                "type": 0,
+                "value": "cores"
+              }
+            ]
+          },
+          "ei": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Ei"
+              }
+            ]
+          },
+          "gi": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Gi"
+              }
+            ]
+          },
+          "ki": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Ki"
+              }
+            ]
+          },
+          "mi": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Mi"
+              }
+            ]
+          },
+          "mib": {
+            "value": [
+              {
+                "type": 0,
+                "value": "MiB"
+              }
+            ]
+          },
+          "other": {
+            "value": []
+          }
+        },
+        "type": 5,
+        "value": "units"
+      }
+    ],
+    "valueUnits": [
+      {
+        "type": 1,
+        "value": "value"
+      },
+      {
+        "type": 0,
+        "value": " "
+      },
+      {
+        "type": 1,
         "value": "units"
       }
     ],
