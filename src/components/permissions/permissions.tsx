@@ -9,7 +9,6 @@ import { Loading } from 'routes/components/page/loading';
 import { NotAuthorized } from 'routes/components/page/notAuthorized';
 import { NotAvailable } from 'routes/components/page/notAvailable';
 import { createMapStateToProps, FetchStatus } from 'store/common';
-import { featureFlagsSelectors } from 'store/featureFlags';
 import { userAccessQuery, userAccessSelectors } from 'store/userAccess';
 import type { ChromeComponentProps } from 'utils/chrome';
 import { withChrome } from 'utils/chrome';
@@ -21,9 +20,6 @@ interface PermissionsOwnProps extends ChromeComponentProps {
 }
 
 interface PermissionsStateProps {
-  isFinsightsFeatureEnabled?: boolean;
-  isIbmFeatureEnabled?: boolean;
-  isRosFeatureEnabled?: boolean;
   userAccess: UserAccess;
   userAccessError: AxiosError;
   userAccessFetchStatus: FetchStatus;
@@ -35,7 +31,6 @@ type PermissionsProps = PermissionsOwnProps & PermissionsStateProps;
 const PermissionsBase: React.FC<PermissionsProps> = ({
   children = null,
   // chrome,
-  isRosFeatureEnabled,
   userAccess,
   userAccessError,
   userAccessFetchStatus,
@@ -45,7 +40,7 @@ const PermissionsBase: React.FC<PermissionsProps> = ({
       return false;
     }
 
-    const ros = isRosFeatureEnabled && hasRosAccess(userAccess);
+    const ros = hasRosAccess(userAccess);
 
     switch (pathname) {
       case formatPath(routes.ocmOverview.path):
@@ -89,9 +84,6 @@ const mapStateToProps = createMapStateToProps<PermissionsOwnProps, PermissionsSt
   );
 
   return {
-    isFinsightsFeatureEnabled: featureFlagsSelectors.selectIsFinsightsFeatureEnabled(state),
-    isIbmFeatureEnabled: featureFlagsSelectors.selectIsIbmFeatureEnabled(state),
-    isRosFeatureEnabled: featureFlagsSelectors.selectIsRosFeatureEnabled(state),
     userAccess,
     userAccessError,
     userAccessFetchStatus,

@@ -20,7 +20,7 @@ class WelcomeStateBase extends React.Component<WelcomeStateBaseOwnProps, any> {
     return (
       <EmptyState variant={EmptyStateVariant.lg} className="pf-m-redhat-font">
         <EmptyStateHeader
-          titleText={<>{intl.formatMessage(messages.welcomeTitle)}</>}
+          titleText={intl.formatMessage(messages.welcomeTitle)}
           icon={<EmptyStateIcon icon={PlusCircleIcon} />}
           headingLevel="h5"
         />

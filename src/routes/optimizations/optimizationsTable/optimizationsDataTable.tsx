@@ -179,7 +179,6 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
       emptyState={<NoOptimizationsState />}
       filterBy={filterBy}
       isLoading={isLoading}
-      isSelectable={false}
       onSort={handleOnSort}
       orderBy={orderBy}
       rows={rows}
