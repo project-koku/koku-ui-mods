@@ -15,8 +15,9 @@ type OptimizationsLinkStagingProps = OptimizationsLinkStagingOwnProps;
 const OptimizationsLinkStaging: React.FC<OptimizationsLinkStagingProps> = () => {
   const location = useLocation();
 
-  const groupBy = 'project';
-  const groupByValue = 'kube-system';
+  // Test filters
+  const clusterFilter = 'aws';
+  const projectFilter = 'openshift';
 
   const state = {
     ...(location.state && location.state),
@@ -27,13 +28,13 @@ const OptimizationsLinkStaging: React.FC<OptimizationsLinkStagingProps> = () => 
 
   const linkPath = getBreakdownPath({
     basePath: formatPath(routes.optimizationsTable.path),
-    groupBy,
-    id: groupByValue,
+    groupBy: 'project',
+    id: 'openshift-kube-apiserver', // groupByValue
   });
 
   return (
     <PageSection isFilled>
-      <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} linkPath={linkPath} linkState={state} />
+      <OptimizationsLink cluster={clusterFilter} project={projectFilter} linkPath={linkPath} linkState={state} />
     </PageSection>
   );
 };
