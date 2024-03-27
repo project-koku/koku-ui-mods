@@ -150,7 +150,7 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
             <Card isPlain>
               <CardTitle>
                 <Title headingLevel="h2" size={TitleSizes.lg}>
-                  {intl.formatMessage(messages.currentCpuUtilization)}
+                  {intl.formatMessage(messages.cpuUtilization)}
                 </Title>
               </CardTitle>
               <CardBody>{getChart(UsageType.cpuUsage, RecommendationType.cpu)}</CardBody>
@@ -168,7 +168,7 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
         <Card isPlain>
           <CardTitle>
             <Title headingLevel="h2" size={TitleSizes.lg}>
-              {intl.formatMessage(messages.currentMemoryUtilization)}
+              {intl.formatMessage(messages.memoryUtilization)}
             </Title>
           </CardTitle>
           <CardBody>{getChart(UsageType.memoryUsage, RecommendationType.memory)}</CardBody>
