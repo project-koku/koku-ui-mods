@@ -28,11 +28,12 @@ import { OptimizationsToolbar } from './optimizationsToolbar';
 interface OptimizationsTableOwnProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
-  groupBy?: string;
-  groupByValue?: string;
-  isProject?: boolean;
+  cluster?: string | string[];
+  hideCluster?: boolean;
+  hideProject?: boolean;
   linkPath?: string;
   linkState?: any;
+  project?: string | string[];
 }
 
 export interface OptimizationsTableStateProps {
@@ -43,9 +44,9 @@ export interface OptimizationsTableStateProps {
 }
 
 export interface OptimizationsTableMapProps {
-  groupBy?: string;
-  groupByValue?: string;
+  cluster?: string | string[];
   query?: RosQuery;
+  project?: string | string[];
 }
 
 type OptimizationsTableProps = OptimizationsTableOwnProps;
@@ -64,11 +65,12 @@ const reportPathsType = RosPathsType.recommendations as any;
 const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
   breadcrumbLabel,
   breadcrumbPath,
-  groupBy,
-  groupByValue,
-  isProject,
+  cluster,
+  hideCluster,
+  hideProject,
   linkPath,
   linkState,
+  project,
 }) => {
   const intl = useIntl();
   const location = useLocation();
@@ -76,8 +78,8 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
   const queryState = getQueryState(location, 'optimizations');
   const [query, setQuery] = useState({ ...baseQuery, ...(queryState && queryState) });
   const { report, reportError, reportFetchStatus, reportQueryString } = useMapToProps({
-    groupBy,
-    groupByValue,
+    cluster,
+    project,
     query,
   });
 
@@ -119,7 +121,6 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
         breadcrumbLabel={breadcrumbLabel}
         breadcrumbPath={breadcrumbPath}
         filterBy={query.filter_by}
-        groupBy={groupBy}
         isLoading={reportFetchStatus === FetchStatus.inProgress}
         onSort={(sortType, isSortAscending) => handleOnSort(sortType, isSortAscending)}
         orderBy={query.order_by}
@@ -139,9 +140,10 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
 
     return (
       <OptimizationsToolbar
+        hideCluster={hideCluster}
+        hideProject={hideProject}
         isDisabled={isDisabled}
         itemsPerPage={itemsPerPage}
-        isProject={isProject}
         itemsTotal={itemsTotal}
         onFilterAdded={filter => handleOnFilterAdded(filter)}
         onFilterRemoved={filter => handleOnFilterRemoved(filter)}
@@ -205,16 +207,15 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
 };
 
 // eslint-disable-next-line no-empty-pattern
-const useMapToProps = ({ groupBy, groupByValue, query }: OptimizationsTableMapProps): OptimizationsTableStateProps => {
+const useMapToProps = ({ cluster, project, query }: OptimizationsTableMapProps): OptimizationsTableStateProps => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
 
   const order_by = getOrderById(query) || getOrderById(baseQuery);
   const order_how = getOrderByValue(query) || getOrderByValue(baseQuery);
 
   const reportQuery = {
-    ...(groupBy && {
-      [groupBy]: groupByValue, // Flattened project filter
-    }),
+    ...(cluster && { cluster }), // Flattened cluster filter
+    ...(project && { project }), // Flattened project filter
     ...query.filter_by, // Flattened filter by
     limit: query.limit,
     offset: query.offset,
