@@ -25,16 +25,23 @@ const OptimizationsDetailsStaging: React.FC<OptimizationsDetailsStagingProps> = 
   const intl = useIntl();
   const queryFromRoute = useQueryFromRoute();
 
-  const groupBy = queryFromRoute?.group_by ? getGroupById(queryFromRoute) : 'project';
-  const groupByValue = queryFromRoute?.group_by ? getGroupByValue(queryFromRoute) : 'openshift';
+  // The groupBy and groupByValue is the project, cluster, node, or tag name shown in the OCP Details breakdown page
+  const groupBy = queryFromRoute?.group_by ? getGroupById(queryFromRoute) : undefined;
+  const groupByValue = queryFromRoute?.group_by ? getGroupByValue(queryFromRoute) : 'openshift-kube-apiserver';
+
+  // Test filters
+  const clusterFilter = 'aws';
+  const projectFilter = 'openshift';
 
   return (
     <PageSection isFilled>
       <OptimizationsTable
         breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: groupByValue })}
         breadcrumbPath={formatPath(`${routes.optimizationsTable.path}${location.search}`)}
-        groupBy={groupBy}
-        groupByValue={groupByValue}
+        cluster={clusterFilter}
+        hideCluster={groupBy === 'cluster'}
+        hideProject={groupBy === 'project'}
+        project={projectFilter}
         linkPath={formatPath(routes.optimizationsBreakdown.path)}
       />
     </PageSection>

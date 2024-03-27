@@ -8,8 +8,9 @@ import { BasicToolbar } from 'routes/components/dataToolbar';
 import type { Filter } from 'routes/utils/filter';
 
 interface OptimizationsToolbarOwnProps {
+  hideCluster?: boolean;
+  hideProject?: boolean;
   isDisabled?: boolean;
-  isProject?: boolean;
   itemsPerPage?: number;
   itemsTotal?: number;
   onFilterAdded(filter: Filter);
@@ -35,7 +36,7 @@ class OptimizationsToolbarBase extends React.Component<OptimizationsToolbarProps
   }
 
   private getCategoryOptions = (): ToolbarChipGroup[] => {
-    const { intl, isProject = true } = this.props;
+    const { hideCluster, hideProject, intl } = this.props;
 
     const options = [
       { name: intl.formatMessage(messages.filterByValues, { value: 'container' }), key: 'container' },
@@ -56,7 +57,8 @@ class OptimizationsToolbarBase extends React.Component<OptimizationsToolbarProps
         ],
       },
     ];
-    return isProject ? options : options.filter(option => option.key !== 'project');
+    const filteredOptions = hideCluster ? options.filter(option => option.key !== 'cluster') : options;
+    return hideProject ? filteredOptions.filter(option => option.key !== 'project') : filteredOptions;
   };
 
   public render() {

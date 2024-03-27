@@ -19,7 +19,8 @@ interface OptimizationsDataTableOwnProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
   filterBy?: any;
-  groupBy?: string;
+  hideCluster?: boolean;
+  hideProject?: boolean;
   isLoading?: boolean;
   onSort(value: string, isSortAscending: boolean);
   orderBy?: any;
@@ -36,7 +37,8 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
   breadcrumbLabel,
   breadcrumbPath,
   filterBy,
-  groupBy,
+  hideCluster,
+  hideProject,
   isLoading,
   onSort,
   orderBy,
@@ -63,7 +65,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
         ...(hasData && { isSortable: true }),
       },
       {
-        hidden: groupBy === 'project',
+        hidden: hideProject,
         name: intl.formatMessage(messages.optimizationsNames, { value: 'project' }),
         orderBy: 'project',
         ...(hasData && { isSortable: true }),
@@ -79,7 +81,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
         ...(hasData && { isSortable: true }),
       },
       {
-        hidden: groupBy === 'cluster',
+        hidden: hideCluster,
         name: intl.formatMessage(messages.optimizationsNames, { value: 'cluster' }),
         orderBy: 'cluster',
         ...(hasData && { isSortable: true }),
@@ -125,7 +127,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
                 </Link>
               ),
             },
-            { value: project, hidden: groupBy === 'project' },
+            { value: project, hidden: hideProject },
             { value: workload },
             { value: workloadType },
             {
@@ -141,7 +143,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
                   )}
                 </>
               ),
-              hidden: groupBy === 'cluster',
+              hidden: hideCluster,
             },
             { value: lastReported, style: styles.lastItem },
           ],
