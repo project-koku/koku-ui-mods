@@ -5,19 +5,16 @@ import { OptimizationsBadge } from 'routes/optimizations/optimizationsBadge';
 import { MfeOptimizationsWrapper } from './mfeOptimizationsWrapper';
 
 export interface OptimizationsBadgeOwnProps {
-  groupBy?: string;
-  groupByValue?: string;
+  cluster?: string | string[];
+  project?: string | string[];
 }
 
 type OptimizationsBadgeProps = OptimizationsBadgeOwnProps;
 
-const MfeOptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({
-  groupBy,
-  groupByValue,
-}: OptimizationsBadgeOwnProps) => {
+const MfeOptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({ cluster, project }: OptimizationsBadgeOwnProps) => {
   return (
     <MfeOptimizationsWrapper>
-      <OptimizationsBadge groupBy={groupBy} groupByValue={groupByValue} />
+      <OptimizationsBadge cluster={cluster} project={project} />
     </MfeOptimizationsWrapper>
   );
 };

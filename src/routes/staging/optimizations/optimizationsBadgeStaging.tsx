@@ -9,9 +9,13 @@ interface OptimizationsBadgeStagingOwnProps {
 type OptimizationsBadgeStagingProps = OptimizationsBadgeStagingOwnProps;
 
 const OptimizationsBadgeStaging: React.FC<OptimizationsBadgeStagingProps> = () => {
+  // Test filters
+  const clusterFilter = 'aws';
+  const projectFilter = 'openshift';
+
   return (
     <PageSection isFilled>
-      <OptimizationsBadge groupBy="project" groupByValue="openshift" />
+      <OptimizationsBadge cluster={clusterFilter} project={projectFilter} />
     </PageSection>
   );
 };
