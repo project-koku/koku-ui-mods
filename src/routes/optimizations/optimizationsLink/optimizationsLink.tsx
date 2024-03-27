@@ -12,10 +12,10 @@ import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
 
 export interface OptimizationsLinkOwnProps {
-  groupBy?: string;
-  groupByValue?: string;
+  cluster?: string | string[];
   linkPath?: string;
   linkState?: any;
+  project?: string | string[];
 }
 
 export interface OptimizationsLinkStateProps {
@@ -31,12 +31,12 @@ const reportPathsType = RosPathsType.recommendations;
 const reportType = RosType.ros;
 
 const OptimizationsLink: React.FC<OptimizationsLinkProps> = ({
-  groupBy,
-  groupByValue,
+  cluster,
   linkPath,
   linkState,
+  project,
 }: OptimizationsLinkOwnProps) => {
-  const { report } = useMapToProps({ groupBy, groupByValue });
+  const { report } = useMapToProps({ cluster, project });
 
   const count = report?.meta ? report.meta.count : 0;
 
@@ -55,11 +55,12 @@ const OptimizationsLink: React.FC<OptimizationsLinkProps> = ({
   );
 };
 
-const useMapToProps = ({ groupBy, groupByValue }: OptimizationsLinkOwnProps): OptimizationsLinkStateProps => {
+const useMapToProps = ({ cluster, project }: OptimizationsLinkOwnProps): OptimizationsLinkStateProps => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
 
   const reportQuery = {
-    ...(groupBy && groupByValue && { [groupBy]: groupByValue }), // project filter
+    ...(cluster && { cluster }), // Flattened cluster filter
+    ...(project && { project }), // Flattened project filter
   };
   const reportQueryString = getQuery(reportQuery);
   const report: any = useSelector((state: RootState) =>
@@ -73,10 +74,10 @@ const useMapToProps = ({ groupBy, groupByValue }: OptimizationsLinkOwnProps): Op
   );
 
   useEffect(() => {
-    if (groupByValue && !reportError && reportFetchStatus !== FetchStatus.inProgress) {
+    if ((cluster || project) && !reportError && reportFetchStatus !== FetchStatus.inProgress) {
       dispatch(rosActions.fetchRosReport(reportPathsType, reportType, reportQueryString));
     }
-  }, [groupByValue, reportQueryString]);
+  }, [cluster, project, reportQueryString]);
 
   return {
     report,

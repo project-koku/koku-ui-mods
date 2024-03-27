@@ -7,11 +7,12 @@ import { MfeOptimizationsWrapper } from './mfeOptimizationsWrapper';
 export interface OptimizationsDetailsOwnProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
-  groupBy?: string;
-  groupByValue?: string;
-  isProject?: boolean;
+  cluster?: string[];
+  hideCluster?: boolean;
+  hideProject?: boolean;
   linkPath?: string;
   linkState?: any;
+  project?: string[];
 }
 
 type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
@@ -19,22 +20,24 @@ type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
 const MfeOptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
   breadcrumbLabel,
   breadcrumbPath,
-  groupBy,
-  groupByValue,
-  isProject,
+  cluster,
+  hideCluster,
+  hideProject,
   linkPath,
   linkState,
+  project,
 }: OptimizationsDetailsOwnProps) => {
   return (
     <MfeOptimizationsWrapper>
       <OptimizationsTable
         breadcrumbLabel={breadcrumbLabel}
         breadcrumbPath={breadcrumbPath}
-        groupBy={groupBy}
-        groupByValue={groupByValue}
-        isProject={isProject}
+        cluster={cluster}
+        hideCluster={hideCluster}
+        hideProject={hideProject}
         linkPath={linkPath}
         linkState={linkState}
+        project={project}
       />
     </MfeOptimizationsWrapper>
   );
