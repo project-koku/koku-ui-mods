@@ -4,23 +4,23 @@ import { OptimizationsLink } from 'routes/optimizations/optimizationsLink';
 import { MfeOptimizationsWrapper } from './mfeOptimizationsWrapper';
 
 export interface OptimizationsBadgeOwnProps {
-  groupBy?: string;
-  groupByValue?: string;
+  cluster?: string | string[];
   linkPath?: string;
   linkState?: any;
+  project?: string | string[];
 }
 
 type OptimizationsBadgeProps = OptimizationsBadgeOwnProps;
 
 const MfeOptimizationsBadge: React.FC<OptimizationsBadgeProps> = ({
-  groupBy,
-  groupByValue,
+  cluster,
   linkPath,
   linkState,
+  project,
 }: OptimizationsBadgeOwnProps) => {
   return (
     <MfeOptimizationsWrapper>
-      <OptimizationsLink groupBy={groupBy} groupByValue={groupByValue} linkState={linkState} linkPath={linkPath} />
+      <OptimizationsLink cluster={cluster} project={project} linkState={linkState} linkPath={linkPath} />
     </MfeOptimizationsWrapper>
   );
 };
