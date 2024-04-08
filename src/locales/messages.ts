@@ -64,6 +64,11 @@ export default defineMessages({
     description: 'CPU',
     id: 'cpu',
   },
+  cpuUtilization: {
+    defaultMessage: 'CPU utilization',
+    description: 'CPU utilization',
+    id: 'cpuUtilization',
+  },
   currencyAbbreviations: {
     defaultMessage:
       '{symbol, select, ' +
@@ -80,16 +85,6 @@ export default defineMessages({
     defaultMessage: 'Current configuration',
     description: 'Current configuration',
     id: 'currentConfiguration',
-  },
-  currentCpuUtilization: {
-    defaultMessage: 'Current CPU utilization',
-    description: 'Current CPU utilization',
-    id: 'currentCpuUtilization',
-  },
-  currentMemoryUtilization: {
-    defaultMessage: 'Current memory utilization',
-    description: 'Current memory utilization',
-    id: 'currentMemoryUtilization',
   },
   dataTableAriaLabel: {
     defaultMessage: 'Details table',
@@ -285,6 +280,11 @@ export default defineMessages({
     defaultMessage: 'Memory',
     description: 'Memory',
     id: 'memory',
+  },
+  memoryUtilization: {
+    defaultMessage: 'Memory utilization',
+    description: 'Memory utilization',
+    id: 'memoryUtilization',
   },
   names: {
     defaultMessage: '{count, plural, one {Name} other {Names}}',
