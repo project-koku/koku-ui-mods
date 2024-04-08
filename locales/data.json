@@ -208,6 +208,12 @@
         "value": "CPU"
       }
     ],
+    "cpuUtilization": [
+      {
+        "type": 0,
+        "value": "CPU utilization"
+      }
+    ],
     "currencyAbbreviations": [
       {
         "options": {
@@ -283,18 +289,6 @@
       {
         "type": 0,
         "value": "Current configuration"
-      }
-    ],
-    "currentCpuUtilization": [
-      {
-        "type": 0,
-        "value": "Current CPU utilization"
-      }
-    ],
-    "currentMemoryUtilization": [
-      {
-        "type": 0,
-        "value": "Current memory utilization"
       }
     ],
     "dataTableAriaLabel": [
@@ -1130,6 +1124,12 @@
       {
         "type": 0,
         "value": "Memory"
+      }
+    ],
+    "memoryUtilization": [
+      {
+        "type": 0,
+        "value": "Memory utilization"
       }
     ],
     "names": [
