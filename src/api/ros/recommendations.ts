@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axiosInstance } from 'api';
 
 import type { RosData, RosMeta, RosReport } from './ros';
 import { RosType } from './ros';
@@ -97,12 +97,12 @@ export const RosTypePaths: Partial<Record<RosType, string>> = {
 export function runRosReport(reportType: RosType, query: string) {
   const path = RosTypePaths[reportType];
   const queryString = query ? `/${query}` : '';
-  return axios.get<RecommendationReport>(`${path}${queryString}`);
+  return axiosInstance.get<RecommendationReport>(`${path}${queryString}`);
 }
 
 // This fetches a recommendations list
 export function runRosReports(reportType: RosType, query: string) {
   const path = RosTypePaths[reportType];
   const queryString = query ? `?${query}` : '';
-  return axios.get<RecommendationReport>(`${path}${queryString}`);
+  return axiosInstance.get<RecommendationReport>(`${path}${queryString}`);
 }
