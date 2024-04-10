@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axiosInstance } from 'api';
 
 import type { PagedMetaData, PagedResponse } from './api';
 
@@ -73,5 +73,5 @@ export const enum ProviderType {
 
 export function fetchProviders(query: string) {
   const queryString = query ? `?${query}` : '';
-  return axios.get<Providers>(`sources/${queryString}`);
+  return axiosInstance.get<Providers>(`sources/${queryString}`);
 }
