@@ -1,8 +1,7 @@
 # Koku microfrontend (MFE) with Module Federation
 
-
 [![Apache 2.0][license-badge]](https://github.com/project-koku/koku-ui-mfe/blob/main/LICENSE)
-[![CI Status][build-badge]](https://github.com/project-koku/koku-ui-mfe/actions/workflows/tag_release.yml)
+[![CI Status][build-badge]](https://github.com/project-koku/koku-ui-mfe/actions/workflows/ci.yml?query=branch%3Amain)
 [![codecov][codecov-badge]](https://codecov.io/gh/project-koku/koku-ui-mfe)
 
 React.js app for Cost Management.
@@ -117,7 +116,7 @@ npm start:csb:mfe
 
 This [RELEASE][release-doc] doc describes how to release Koku MFE to each staging environment.
 
-[build-badge]: https://github.com/project-koku/koku-ui-mfe/actions/workflows/tag_release.yml/badge.svg
+[build-badge]: https://github.com/project-koku/koku-ui-mfe/actions/workflows/ci.yml/badge.svg?branch=main
 [codecov-badge]: https://codecov.io/gh/project-koku/koku-ui-mfe/graph/badge.svg?token=1hjFIy1cRe
 [Jira]: https://issues.redhat.com/projects/COST/
 [koku-ui-readme]: https://github.com/project-koku/koku-ui#readme
