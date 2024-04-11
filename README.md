@@ -12,6 +12,7 @@ User interface is based on [Patternfly].
 Submit issues in [Jira].
 
 ## Requirements
+
 * [NodeJS v18.15+][nodejs]
 * [npm v9.5+][npm]
 
@@ -29,6 +30,7 @@ sudo bash scripts/patch-etc-hosts.sh
 ```
 
 ## Getting Started
+
 1. Install requirements listed above.
 2. Setup `/etc/hosts` entries listed above.
 3. Clone the repository, and open a terminal in the base of this project.
