@@ -1,9 +1,9 @@
 # Koku microfrontend (MFE) with Module Federation
 
 
-[![Apache 2.0][license-badge]](https://github.com/project-koku/koku-ui/blob/main/LICENSE)
-[![CI Status][build-badge]](https://github.com/project-koku/koku-ui/actions/workflows/tag_release.yml)
-[![codecov][codecov-badge]](https://codecov.io/gh/project-koku/koku-ui)
+[![Apache 2.0][license-badge]](https://github.com/project-koku/koku-ui-mfe/blob/main/LICENSE)
+[![CI Status][build-badge]](https://github.com/project-koku/koku-ui-mfe/actions/workflows/tag_release.yml)
+[![codecov][codecov-badge]](https://codecov.io/gh/project-koku/koku-ui-mfe)
 
 React.js app for Cost Management.
 
@@ -45,6 +45,7 @@ npm test
 ```
 
 ## Running Koku MFE against a hosted Koku API, using webpack proxy
+
 Note that this approach currently supports the Insights stage-beta, stage-stable, prod-beta, and prod-stable environments.
 
 1. Start development server
@@ -65,7 +66,7 @@ https://stage.foo.redhat.com:1337/beta/staging/cost-management
 
 ### Running Koku MFE with local Cloud Services Backend
 
-See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
+Refer to the [serving files locally][serving-files-locally] section of cloud services config for more details
 
 1. Serve files locally from Cloud Services Backend repo
 ```
@@ -79,7 +80,7 @@ npm start:csb
 
 ### Running Koku MFE with local Koku UI
 
-See https://github.com/project-koku/koku-ui
+Refer to the [koku-ui README][koku-ui-readme] for more details
 
 1. Start development server in Koku MFE repo
 ```
@@ -93,8 +94,7 @@ npm start:mfe
 
 ### Running Koku MFE with local Koku UI and Cloud Services Backend
 
-See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
-and https://github.com/project-koku/koku-ui
+Refer to the [serving files locally][serving-files-locally] section of cloud services config and the [koku-ui README][koku-ui-readme] for more details
 
 1. Serve files locally from Cloud Services Backend repo
 ```
@@ -116,13 +116,13 @@ npm start:csb:mfe
 This [RELEASE][release-doc] doc describes how to release Koku MFE to each staging environment.
 
 [build-badge]: https://github.com/project-koku/koku-ui-mfe/actions/workflows/tag_release.yml/badge.svg
-[license-badge]: https://img.shields.io/github/license/project-koku/koku-ui-mfe.svg?longCache=true
 [codecov-badge]: https://codecov.io/gh/project-koku/koku-ui-mfe/graph/badge.svg?token=1hjFIy1cRe
-
-[koku-readme]: https://github.com/project-koku/koku#readme
+[Jira]: https://issues.redhat.com/projects/COST/
+[koku-ui-readme]: https://github.com/project-koku/koku-ui#readme
+[license-badge]: https://img.shields.io/github/license/project-koku/koku-ui-mfe.svg?longCache=true
 [nodejs]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/
 [patch-etc-hosts]: https://github.com/RedHatInsights/insights-proxy/blob/master/scripts/patch-etc-hosts.sh
 [Patternfly]: https://www.patternfly.org/
 [release-doc]: https://github.com/project-koku/koku-ui-mfe/blob/main/RELEASE.md
-[npm]: https://www.npmjs.com/
-[Jira]: https://issues.redhat.com/projects/COST/
+[serving-files-locally]: https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
