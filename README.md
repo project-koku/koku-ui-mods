@@ -1,21 +1,23 @@
 # Koku microfrontend (MFE) with Module Federation
 
-[![AGPLv3][license-badge]][license]
-[![Build Status][build-badge]][build]
+[![Apache 2.0][license-badge]](https://github.com/project-koku/koku-ui-mfe/blob/main/LICENSE)
+[![CI Status][build-badge]](https://github.com/project-koku/koku-ui-mfe/actions/workflows/ci.yml?query=branch%3Amain)
+[![codecov][codecov-badge]](https://codecov.io/gh/project-koku/koku-ui-mfe)
 
 React.js app for Cost Management.
 
-User interface is based on Patternfly [![Patternfly][pf-logo]][patternfly]
+User interface is based on [Patternfly].
 
-To submit an issue, please visit https://issues.redhat.com/projects/COST/
+Submit issues in [Jira].
 
 ## Requirements
+
 * [NodeJS v18.15+][nodejs]
 * [npm v9.5+][npm]
 
-## Setup /etc/hosts entries (do this once)
+## Setup `hosts` entries (do this once)
 
-Edit the /etc/hosts file and add the following entries
+Edit the `/etc/hosts` file and add the following entries
 ```
 127.0.0.1 prod.foo.redhat.com
 127.0.0.1 stage.foo.redhat.com
@@ -27,8 +29,9 @@ sudo bash scripts/patch-etc-hosts.sh
 ```
 
 ## Getting Started
+
 1. Install requirements listed above.
-2. Setup /etc/hosts entries listed above. 
+2. Setup `/etc/hosts` entries listed above.
 3. Clone the repository, and open a terminal in the base of this project.
 4. Run the command `npm install` to install all the dependencies.
 
@@ -43,6 +46,7 @@ npm test
 ```
 
 ## Running Koku MFE against a hosted Koku API, using webpack proxy
+
 Note that this approach currently supports the Insights stage-beta, stage-stable, prod-beta, and prod-stable environments.
 
 1. Start development server
@@ -63,7 +67,7 @@ https://stage.foo.redhat.com:1337/beta/staging/cost-management
 
 ### Running Koku MFE with local Cloud Services Backend
 
-See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
+Refer to the [serving files locally][serving-files-locally] section of cloud services config for more details
 
 1. Serve files locally from Cloud Services Backend repo
 ```
@@ -77,7 +81,7 @@ npm start:csb
 
 ### Running Koku MFE with local Koku UI
 
-See https://github.com/project-koku/koku-ui
+Refer to the [koku-ui README][koku-ui-readme] for more details
 
 1. Start development server in Koku MFE repo
 ```
@@ -91,8 +95,7 @@ npm start:mfe
 
 ### Running Koku MFE with local Koku UI and Cloud Services Backend
 
-See https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
-and https://github.com/project-koku/koku-ui
+Refer to the [serving files locally][serving-files-locally] section of cloud services config and the [koku-ui README][koku-ui-readme] for more details
 
 1. Serve files locally from Cloud Services Backend repo
 ```
@@ -113,12 +116,14 @@ npm start:csb:mfe
 
 This [RELEASE][release-doc] doc describes how to release Koku MFE to each staging environment.
 
-[koku-readme]: https://github.com/project-koku/koku#readme
-[license-badge]: https://img.shields.io/github/license/project-koku/koku-ui-mfe.svg?longCache=true&style=for-the-badge
-[license]: https://github.com/project-koku/koku-ui-mfe/blob/main/LICENSE
+[build-badge]: https://github.com/project-koku/koku-ui-mfe/actions/workflows/ci.yml/badge.svg?branch=main
+[codecov-badge]: https://codecov.io/gh/project-koku/koku-ui-mfe/graph/badge.svg?token=1hjFIy1cRe
+[Jira]: https://issues.redhat.com/projects/COST/
+[koku-ui-readme]: https://github.com/project-koku/koku-ui#readme
+[license-badge]: https://img.shields.io/github/license/project-koku/koku-ui-mfe.svg?longCache=true
 [nodejs]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/
 [patch-etc-hosts]: https://github.com/RedHatInsights/insights-proxy/blob/master/scripts/patch-etc-hosts.sh
-[pf-logo]: https://www.patternfly.org/v4/images/logo.4189e7eb1a0741ea2b3b51b80d33c4cb.svg
-[patternfly]: https://www.patternfly.org/
+[Patternfly]: https://www.patternfly.org/
 [release-doc]: https://github.com/project-koku/koku-ui-mfe/blob/main/RELEASE.md
-[npm]: https://https://www.npmjs.com/
+[serving-files-locally]: https://github.com/RedHatInsights/chrome-service-backend/blob/main/docs/cloud-services-config.md#serving-files-locally
