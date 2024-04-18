@@ -15,19 +15,19 @@ export const data = {
       recommendations: {
         notifications: {
           '111101': {
-            type: 'info',
-            message: 'Short Term Recommendations Available',
             code: 111101,
-          },
-          '111103': {
+            message: 'Short Term Recommendations Available',
             type: 'info',
-            message: 'Long Term Recommendations Available',
-            code: 111103,
           },
           '111102': {
-            type: 'info',
-            message: 'Medium Term Recommendations Available',
             code: 111102,
+            message: 'Medium Term Recommendations Available',
+            type: 'info',
+          },
+          '111103': {
+            code: 111103,
+            message: 'Long Term Recommendations Available',
+            type: 'info',
           },
         },
         monitoring_end_time: '2024-01-21T00:00:00.000Z',
@@ -58,14 +58,14 @@ export const data = {
             duration_in_hours: 24.0,
             notifications: {
               '112101': {
-                type: 'info',
-                message: 'Cost Recommendations Available',
                 code: 112101,
+                message: 'Cost Recommendations Available',
+                type: 'info',
               },
               '112102': {
-                type: 'info',
-                message: 'Performance Recommendations Available',
                 code: 112102,
+                message: 'Performance Recommendations Available',
+                type: 'info',
               },
             },
             monitoring_start_time: '2024-01-20T00:00:00.000Z',
@@ -117,7 +117,7 @@ export const data = {
                     },
                   },
                 },
-                notifications: {},
+                // notifications: {},
               },
               performance: {
                 pods_count: 7,
@@ -166,7 +166,7 @@ export const data = {
                     },
                   },
                 },
-                notifications: {},
+                // notifications: {},
               },
             },
             plots: {
@@ -251,14 +251,14 @@ export const data = {
             duration_in_hours: 168.0,
             notifications: {
               '112101': {
-                type: 'info',
-                message: 'Cost Recommendations Available',
                 code: 112101,
+                message: 'Cost Recommendations Available',
+                type: 'info',
               },
               '112102': {
-                type: 'info',
-                message: 'Performance Recommendations Available',
                 code: 112102,
+                message: 'Performance Recommendations Available',
+                type: 'info',
               },
             },
             monitoring_start_time: '2024-01-14T00:00:00.000Z',
@@ -310,7 +310,7 @@ export const data = {
                     },
                   },
                 },
-                notifications: {},
+                // notifications: {},
               },
               performance: {
                 pods_count: 7,
@@ -359,7 +359,18 @@ export const data = {
                     },
                   },
                 },
-                notifications: {},
+                notifications: {
+                  '323004': {
+                    code: 323004,
+                    message: 'Workload is optimised wrt CPU REQUESTS, no changes needed',
+                    type: 'notice',
+                  },
+                  '323005': {
+                    code: 323005,
+                    message: 'Workload is optimised wrt CPU LIMITS, no changes needed',
+                    type: 'notice',
+                  },
+                },
               },
             },
             plots: {
@@ -557,7 +568,7 @@ export const data = {
                     },
                   },
                 },
-                notifications: {},
+                // notifications: {},
               },
               performance: {
                 pods_count: 7,
@@ -606,7 +617,18 @@ export const data = {
                     },
                   },
                 },
-                notifications: {},
+                notifications: {
+                  '323004': {
+                    code: 323004,
+                    message: 'Workload is optimised wrt CPU REQUESTS, no changes needed',
+                    type: 'notice',
+                  },
+                  '323005': {
+                    code: 323005,
+                    message: 'Workload is optimised wrt CPU LIMITS, no changes needed',
+                    type: 'notice',
+                  },
+                },
               },
             },
             plots: {

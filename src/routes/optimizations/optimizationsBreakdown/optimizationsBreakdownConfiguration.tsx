@@ -16,7 +16,7 @@ import {
 } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import type { RecommendationTerm } from 'api/ros/recommendations';
-import type { RecommendationItems } from 'api/ros/recommendations';
+import type { Recommendations } from 'api/ros/recommendations';
 import type { RecommendationValues } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React, { useState } from 'react';
@@ -31,7 +31,7 @@ import { styles } from './optimizationsBreakdown.styles';
 interface OptimizationsBreakdownConfigurationOwnProps {
   currentInterval?: Interval.short_term | Interval.medium_term | Interval.long_term;
   optimizationType?: OptimizationType;
-  recommendations?: RecommendationItems;
+  recommendations?: Recommendations;
 }
 
 type OptimizationsBreakdownConfigurationProps = OptimizationsBreakdownConfigurationOwnProps;

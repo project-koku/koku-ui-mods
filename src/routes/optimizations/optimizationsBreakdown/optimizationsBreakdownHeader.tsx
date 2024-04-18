@@ -44,9 +44,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
 }) => {
   const intl = useIntl();
   const location = useLocation();
-
-  const terms = report?.recommendations ? report.recommendations.recommendation_terms : undefined;
-  const showWarningIcon = hasWarning(terms);
+  const showWarningIcon = hasWarning(report?.recommendations);
 
   const getBackToLink = () => {
     return (
@@ -116,7 +114,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
           isDisabled={isDisabled}
           onSelect={onSelect}
           optimizationType={optimizationType}
-          terms={terms}
+          recommendations={report?.recommendations}
         />
       </div>
     </header>
