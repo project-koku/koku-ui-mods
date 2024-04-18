@@ -1,7 +1,7 @@
 import './optimizationsBreakdown.scss';
 
 import { Card, CardBody, CardTitle, Divider, Grid, GridItem, Title, TitleSizes } from '@patternfly/react-core';
-import type { RecommendationItems, RecommendationTerm } from 'api/ros/recommendations';
+import type { Recommendations, RecommendationTerm } from 'api/ros/recommendations';
 import { format } from 'date-fns';
 import messages from 'locales/messages';
 import React from 'react';
@@ -15,7 +15,7 @@ import { chartStyles, styles } from './optimizationsBreakdownUtilization.styles'
 interface OptimizationsBreakdownUtilizationOwnProps {
   currentInterval?: Interval.short_term | Interval.medium_term | Interval.long_term;
   optimizationType?: OptimizationType;
-  recommendations?: RecommendationItems;
+  recommendations?: Recommendations;
 }
 
 type OptimizationsBreakdownUtilizationProps = OptimizationsBreakdownUtilizationOwnProps;

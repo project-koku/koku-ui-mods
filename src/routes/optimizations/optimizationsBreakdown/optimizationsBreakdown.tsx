@@ -20,7 +20,13 @@ import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
 import { breadcrumbLabelKey } from 'utils/props';
-import { getNotifications, hasRecommendation, Interval, OptimizationType } from 'utils/recomendations';
+import {
+  getNotifications,
+  hasNotifications,
+  hasRecommendation,
+  Interval,
+  OptimizationType,
+} from 'utils/recomendations';
 
 import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
@@ -64,22 +70,41 @@ const reportPathsType = RosPathsType.recommendation as any;
 const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
   const { breadcrumbLabel, breadcrumbPath, isUtilizationFlagEnabled, report, reportFetchStatus } = useMapToProps();
   const [activeTabKey, setActiveTabKey] = useState(0);
-  const [optimizationType] = useState(OptimizationType.cost);
   const intl = useIntl();
+
+  const getOptimizationType = () => {
+    switch (activeTabKey) {
+      case 1:
+        return OptimizationType.performance;
+      case 0:
+      default:
+        return OptimizationType.cost;
+    }
+  };
 
   const getDefaultInterval = () => {
     let result = Interval.short_term;
     const terms = report?.recommendations?.recommendation_terms;
+    const optimizationType = getOptimizationType();
 
     if (!terms) {
       return result;
     }
 
-    if (hasRecommendation(terms?.short_term?.recommendation_engines?.[optimizationType]?.config)) {
+    if (
+      hasRecommendation(terms?.short_term?.recommendation_engines?.[optimizationType]?.config) ||
+      hasNotifications(report?.recommendations, Interval.short_term, optimizationType)
+    ) {
       result = Interval.short_term;
-    } else if (hasRecommendation(terms?.medium_term?.recommendation_engines?.[optimizationType]?.config)) {
+    } else if (
+      hasRecommendation(terms?.medium_term?.recommendation_engines?.[optimizationType]?.config) ||
+      hasNotifications(report?.recommendations, Interval.medium_term, optimizationType)
+    ) {
       result = Interval.medium_term;
-    } else if (hasRecommendation(terms?.long_term?.recommendation_engines?.[optimizationType]?.config)) {
+    } else if (
+      hasRecommendation(terms?.long_term?.recommendation_engines?.[optimizationType]?.config) ||
+      hasNotifications(report?.recommendations, Interval.long_term, optimizationType)
+    ) {
       result = Interval.long_term;
     }
     return result as Interval;
@@ -88,15 +113,11 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
   const [currentInterval, setCurrentInterval] = useState(getDefaultInterval());
 
   const getAlert = () => {
-    let notifications;
-    if (report?.recommendations?.recommendation_terms?.[currentInterval]) {
-      notifications = getNotifications(report.recommendations.recommendation_terms[currentInterval]);
-    }
+    const notifications = getNotifications(report?.recommendations, currentInterval, getOptimizationType());
 
-    if (notifications?.length === 0) {
+    if (notifications.length === 0) {
       return null;
     }
-
     return (
       <div style={styles.alertContainer}>
         <Alert isInline variant="warning" title={intl.formatMessage(messages.notificationsAlertTitle)}>
@@ -218,7 +239,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
         currentInterval={currentInterval}
         isDisabled={isLoading}
         onSelect={handleOnSelect}
-        optimizationType={optimizationType}
+        optimizationType={getOptimizationType()}
         report={report}
       />
       <div style={styles.tabs}>{getTabs(availableTabs)}</div>
