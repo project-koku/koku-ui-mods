@@ -6,7 +6,7 @@ import { parseQuery } from 'api/queries/query';
 import type { RecommendationReportData } from 'api/ros/recommendations';
 import { RosPathsType, RosType } from 'api/ros/ros';
 import type { AxiosError } from 'axios';
-import { useIsUtilizationFlagEnabled } from 'components/featureToggle';
+import { useIsBoxPlotToggleEnabled } from 'components/featureToggle';
 import messages from 'locales/messages';
 import type { RefObject } from 'react';
 import React, { useEffect, useState } from 'react';
@@ -56,7 +56,7 @@ interface OptimizationsBreakdownStateProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
   report?: RecommendationReportData;
-  isUtilizationFlagEnabled?: boolean;
+  isBoxPlotToggleEnabled?: boolean;
   reportError?: AxiosError;
   reportFetchStatus?: FetchStatus;
   reportQueryString?: string;
@@ -68,7 +68,7 @@ const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendation as any;
 
 const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
-  const { breadcrumbLabel, breadcrumbPath, isUtilizationFlagEnabled, report, reportFetchStatus } = useMapToProps();
+  const { breadcrumbLabel, breadcrumbPath, isBoxPlotToggleEnabled, report, reportFetchStatus } = useMapToProps();
   const [activeTabKey, setActiveTabKey] = useState(0);
   const intl = useIntl();
 
@@ -174,7 +174,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
             optimizationType={tab}
             recommendations={report?.recommendations}
           />
-          {isUtilizationFlagEnabled && (
+          {isBoxPlotToggleEnabled && (
             <div style={styles.utilizationContainer}>
               <OptimizationsBreakdownUtilization
                 currentInterval={currentInterval}
@@ -289,15 +289,15 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   }, [reportQueryString]);
 
   // Todo: Update to use new API response
-  const isUtilizationFlagEnabled = useIsUtilizationFlagEnabled();
-  if (isUtilizationFlagEnabled) {
+  const isBoxPlotToggleEnabled = useIsBoxPlotToggleEnabled();
+  if (isBoxPlotToggleEnabled) {
     report = data.data[0];
   }
 
   return {
     breadcrumbLabel: queryFromRoute[breadcrumbLabelKey],
     breadcrumbPath: location?.state?.optimizations ? location.state.optimizations.breadcrumbPath : undefined,
-    isUtilizationFlagEnabled,
+    isBoxPlotToggleEnabled,
     report,
     reportError,
     reportFetchStatus,
