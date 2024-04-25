@@ -370,6 +370,16 @@ export const data = {
                     message: 'Workload is optimised wrt CPU LIMITS, no changes needed',
                     type: 'notice',
                   },
+                  '324003': {
+                    code: 324003,
+                    message: 'Workload is optimised wrt MEMORY REQUESTS, no changes needed',
+                    type: 'notice',
+                  },
+                  '324004': {
+                    code: 324004,
+                    message: 'Workload is optimised wrt MEMORY LIMITS, no changes needed',
+                    type: 'notice',
+                  },
                 },
               },
             },
