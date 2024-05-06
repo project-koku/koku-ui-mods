@@ -194,3 +194,33 @@ export const hasWarning = (recommendations: Recommendations, isFilterNotificatio
   const filteredNotifications = isFilterNotifications ? filterNotifications(notifications) : notifications;
   return filteredNotifications.length > 0;
 };
+
+export const isIntervalOptimized = (
+  recommendations: Recommendations,
+  interval: Interval,
+  optimizationType: OptimizationType
+) => {
+  let cpuLimitsOptimised = false;
+  let cpuRequestsOptimised = false;
+  let memoryRequestsOptimised = false;
+  let memoryLimitsOptimised = false;
+
+  const notifications = getNotifications(recommendations, interval, optimizationType);
+  notifications.forEach(notification => {
+    switch (notification.code) {
+      case 323005:
+        cpuLimitsOptimised = true;
+        break;
+      case 323004:
+        cpuRequestsOptimised = true;
+        break;
+      case 324003:
+        memoryRequestsOptimised = true;
+        break;
+      case 324004:
+        memoryLimitsOptimised = true;
+        break;
+    }
+  });
+  return cpuLimitsOptimised && cpuRequestsOptimised && memoryRequestsOptimised && memoryLimitsOptimised;
+};

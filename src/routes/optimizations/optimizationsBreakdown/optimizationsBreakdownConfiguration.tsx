@@ -21,9 +21,10 @@ import type { RecommendationValues } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
+import { OptimizedState } from 'routes/components/state/optimizedState';
 import { formatOptimization, formatPercentage } from 'utils/format';
 import type { OptimizationType } from 'utils/recomendations';
-import { ConfigType, hasRecommendationValues, Interval } from 'utils/recomendations';
+import { ConfigType, hasRecommendationValues, Interval, isIntervalOptimized } from 'utils/recomendations';
 import YAML from 'yaml';
 
 import { styles } from './optimizationsBreakdown.styles';
@@ -381,6 +382,8 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     return cpuLimitsWarning || cpuRequestsWarning || memoryLimitsWarning || memoryRequestsWarning;
   };
 
+  const isOptimized = isIntervalOptimized(recommendations, currentInterval, optimizationType);
+
   return (
     <Grid hasGutter>
       <GridItem xl={6}>
@@ -395,12 +398,20 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
       </GridItem>
       <GridItem xl={6}>
         <Card>
-          <CardTitle>
-            <Title headingLevel="h2" size={TitleSizes.lg}>
-              {intl.formatMessage(messages.recommendedConfiguration)}
-            </Title>
-          </CardTitle>
-          <CardBody>{getRecommendedConfigCodeBlock()}</CardBody>
+          {isOptimized ? (
+            <CardBody style={styles.optimizedState}>
+              <OptimizedState />
+            </CardBody>
+          ) : (
+            <>
+              <CardTitle>
+                <Title headingLevel="h2" size={TitleSizes.lg}>
+                  {intl.formatMessage(messages.recommendedConfiguration)}
+                </Title>
+              </CardTitle>
+              <CardBody>{getRecommendedConfigCodeBlock()}</CardBody>
+            </>
+          )}
         </Card>
       </GridItem>
     </Grid>
