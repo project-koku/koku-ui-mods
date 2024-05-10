@@ -44,7 +44,7 @@ export const enum UsageType {
   memoryUsage = 'memoryUsage',
 }
 
-// Filter notifications that should not be associated with a warning icon
+// Filter notifications (e.g., optimized notices) that should not be associated with a warning icon
 //
 // Notification codes
 // https://github.com/kruize/autotune/blob/master/design/NotificationCodes.md#detailed-codes
@@ -77,7 +77,7 @@ export const filterDuplicateNotifications = (notifications: Notification[]) => {
   return newNotifications;
 };
 
-// Returns notifications for the given term and parent nodes
+// Returns notifications for the given interval, including any parent notifications
 export const getNotifications = (
   recommendations: Recommendations,
   interval: Interval,
@@ -143,12 +143,30 @@ export const getRecommendationEngineNotifications = (engine: RecommendationEngin
   return Object.keys(engine?.notifications).map(key => engine.notifications[key]);
 };
 
+// Returns notifications for given interval
 export const hasNotifications = (
   recommendations: Recommendations,
   interval: Interval,
   optimizationType: OptimizationType
 ) => {
   return getNotifications(recommendations, interval, optimizationType).length > 0;
+};
+
+// Returns true if there are notifications at any interval, unless filtering (e.g., to omit optimized notices)
+export const hasNotificationsWarning = (recommendations: Recommendations, isFilterNotifications = false) => {
+  if (!recommendations) {
+    return false;
+  }
+  const notifications = filterDuplicateNotifications([
+    ...getNotifications(recommendations, Interval.short_term, OptimizationType.cost, false),
+    ...getNotifications(recommendations, Interval.short_term, OptimizationType.performance, false),
+    ...getNotifications(recommendations, Interval.medium_term, OptimizationType.cost, false),
+    ...getNotifications(recommendations, Interval.medium_term, OptimizationType.performance, false),
+    ...getNotifications(recommendations, Interval.long_term, OptimizationType.cost, false),
+    ...getNotifications(recommendations, Interval.long_term, OptimizationType.performance, false),
+  ]);
+  const filteredNotifications = isFilterNotifications ? filterNotifications(notifications) : notifications;
+  return filteredNotifications.length > 0;
 };
 
 export const hasRecommendation = (values: RecommendationValues) => {
@@ -176,23 +194,6 @@ export const hasRecommendationValues = (
     result = Object.keys(values[key1][key2]).length > 0;
   }
   return result;
-};
-
-// Returns true if there are notifications at any level, unless filtering for the warning icon
-export const hasWarning = (recommendations: Recommendations, isFilterNotifications = false) => {
-  if (!recommendations) {
-    return false;
-  }
-  const notifications = filterDuplicateNotifications([
-    ...getNotifications(recommendations, Interval.short_term, OptimizationType.cost, false),
-    ...getNotifications(recommendations, Interval.short_term, OptimizationType.performance, false),
-    ...getNotifications(recommendations, Interval.medium_term, OptimizationType.cost, false),
-    ...getNotifications(recommendations, Interval.medium_term, OptimizationType.performance, false),
-    ...getNotifications(recommendations, Interval.long_term, OptimizationType.cost, false),
-    ...getNotifications(recommendations, Interval.long_term, OptimizationType.performance, false),
-  ]);
-  const filteredNotifications = isFilterNotifications ? filterNotifications(notifications) : notifications;
-  return filteredNotifications.length > 0;
 };
 
 export const isIntervalOptimized = (
