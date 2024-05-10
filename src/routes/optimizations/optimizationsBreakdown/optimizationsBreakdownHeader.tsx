@@ -16,7 +16,7 @@ import { useIntl } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 import { getTimeFromNow } from 'utils/dates';
 import type { OptimizationType } from 'utils/recomendations';
-import { hasWarning } from 'utils/recomendations';
+import { hasNotificationsWarning } from 'utils/recomendations';
 
 import { styles } from './optimizationsBreakdownHeader.styles';
 import { OptimizationsBreakdownToolbar } from './optimizationsBreakdownToolbar';
@@ -44,7 +44,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
 }) => {
   const intl = useIntl();
   const location = useLocation();
-  const showWarningIcon = hasWarning(report?.recommendations);
+  const showWarningIcon = hasNotificationsWarning(report?.recommendations);
 
   const getBackToLink = () => {
     return (
