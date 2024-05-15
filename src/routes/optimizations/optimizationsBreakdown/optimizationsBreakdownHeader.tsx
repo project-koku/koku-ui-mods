@@ -14,9 +14,9 @@ import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
+import type { OptimizationType } from 'utils/commonTypes';
 import { getTimeFromNow } from 'utils/dates';
-import type { OptimizationType } from 'utils/recomendations';
-import { hasNotificationsWarning } from 'utils/recomendations';
+import { hasNotificationsWarning } from 'utils/notifications';
 
 import { styles } from './optimizationsBreakdownHeader.styles';
 import { OptimizationsBreakdownToolbar } from './optimizationsBreakdownToolbar';

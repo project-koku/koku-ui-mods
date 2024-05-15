@@ -3,8 +3,10 @@ import type { Recommendations } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React from 'react';
 import { PerspectiveSelect } from 'routes/components/perspective/perspectiveSelect';
-import type { OptimizationType } from 'utils/recomendations';
-import { hasNotifications, hasRecommendation, Interval } from 'utils/recomendations';
+import type { OptimizationType } from 'utils/commonTypes';
+import { Interval } from 'utils/commonTypes';
+import { hasNotifications } from 'utils/notifications';
+import { hasRecommendation } from 'utils/recomendations';
 
 interface OptimizationsBreakdownToolbarOwnProps {
   currentInterval?: string;

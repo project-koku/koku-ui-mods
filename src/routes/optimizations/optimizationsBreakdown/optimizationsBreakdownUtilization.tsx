@@ -1,13 +1,14 @@
 import './optimizationsBreakdown.scss';
 
 import { Card, CardBody, CardTitle, Divider, Grid, GridItem, Title, TitleSizes } from '@patternfly/react-core';
-import type { Recommendations, RecommendationTerm } from 'api/ros/recommendations';
+import type { Recommendations } from 'api/ros/recommendations';
 import { format } from 'date-fns';
 import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
-import type { OptimizationType } from 'utils/recomendations';
-import { Interval, RecommendationType, ResourceType, UsageType } from 'utils/recomendations';
+import type { OptimizationType } from 'utils/commonTypes';
+import { Interval, RecommendationType, ResourceType, UsageType } from 'utils/commonTypes';
+import { getRecommendationTerm } from 'utils/recomendations';
 
 import { OptimizationsBreakdownChart } from './optimizationsBreakdownChart';
 import { chartStyles, styles } from './optimizationsBreakdownUtilization.styles';
@@ -32,7 +33,7 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
     resourceType: ResourceType,
     usageDatum
   ) => {
-    const term = getRecommendationTerm();
+    const term = getRecommendationTerm(recommendations, currentInterval);
     const values = term?.recommendation_engines?.[optimizationType]?.config?.[resourceType]?.[recommendationType];
 
     const datum = [];
@@ -60,7 +61,7 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
   };
 
   const createUsageDatum = (usageType: UsageType) => {
-    const term = getRecommendationTerm();
+    const term = getRecommendationTerm(recommendations, currentInterval);
     const plotsData = term?.plots?.plots_data || [];
 
     const datum = [];
@@ -77,7 +78,7 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
       });
     }
     // Pad dates if plots_data is missing
-    if (datum.length === 0) {
+    if (datum.length === 0 && recommendations?.monitoring_end_time) {
       if (currentInterval === Interval.short_term) {
         const today = new Date(recommendations?.monitoring_end_time);
         for (let hour = 24; hour > 0; hour -= 6) {
@@ -103,26 +104,6 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
       }
     }
     return datum;
-  };
-
-  const getRecommendationTerm = (): RecommendationTerm => {
-    if (!recommendations) {
-      return undefined;
-    }
-
-    let result;
-    switch (currentInterval) {
-      case Interval.short_term:
-        result = recommendations?.recommendation_terms?.short_term;
-        break;
-      case Interval.medium_term:
-        result = recommendations?.recommendation_terms?.medium_term;
-        break;
-      case Interval.long_term:
-        result = recommendations?.recommendation_terms?.long_term;
-        break;
-    }
-    return result;
   };
 
   const getChart = (usageType: UsageType, recommendationType: RecommendationType) => {

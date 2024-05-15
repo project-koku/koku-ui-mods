@@ -22,9 +22,11 @@ import messages from 'locales/messages';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { OptimizedState } from 'routes/components/state/optimizedState';
+import type { OptimizationType } from 'utils/commonTypes';
+import { ConfigType, Interval } from 'utils/commonTypes';
 import { formatOptimization, formatPercentage } from 'utils/format';
-import type { OptimizationType } from 'utils/recomendations';
-import { ConfigType, hasRecommendationValues, Interval, isIntervalOptimized } from 'utils/recomendations';
+import { isIntervalOptimized } from 'utils/notifications';
+import { hasRecommendationValues } from 'utils/recomendations';
 import YAML from 'yaml';
 
 import { styles } from './optimizationsBreakdown.styles';
