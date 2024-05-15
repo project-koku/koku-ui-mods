@@ -13,7 +13,7 @@ import { styles } from 'routes/components/dataTable/dataTable.styles';
 import { NoOptimizationsState } from 'routes/components/page/noOptimizations/noOptimizationsState';
 import { getOptimizationsBreakdownPath } from 'routes/utils/paths';
 import { getTimeFromNow } from 'utils/dates';
-import { hasNotificationsWarning } from 'utils/recomendations';
+import { hasNotificationsWarning } from 'utils/notifications';
 
 interface OptimizationsDataTableOwnProps {
   breadcrumbLabel?: string;

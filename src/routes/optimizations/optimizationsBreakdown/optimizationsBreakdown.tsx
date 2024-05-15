@@ -19,16 +19,12 @@ import { Loading } from 'routes/components/page/loading';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
+import { Interval, OptimizationType } from 'utils/commonTypes';
+import { getNotifications, hasNotifications } from 'utils/notifications';
 import { breadcrumbLabelKey } from 'utils/props';
-import {
-  getNotifications,
-  hasNotifications,
-  hasRecommendation,
-  Interval,
-  OptimizationType,
-} from 'utils/recomendations';
+import { hasRecommendation } from 'utils/recomendations';
+import { getRecommendationTerm } from 'utils/recomendations';
 
-import { data } from './data';
 import { styles } from './optimizationsBreakdown.styles';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
@@ -167,6 +163,9 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
 
     const currentTab = getIdKeyForTab(tab);
     if (currentTab === OptimizationType.cost || currentTab === OptimizationType.performance) {
+      const term = getRecommendationTerm(report?.recommendations, currentInterval);
+      const plotsData = term?.plots?.plots_data;
+
       return (
         <>
           <OptimizationsBreakdownConfiguration
@@ -174,7 +173,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
             optimizationType={tab}
             recommendations={report?.recommendations}
           />
-          {isBoxPlotToggleEnabled && (
+          {plotsData && isBoxPlotToggleEnabled && (
             <div style={styles.utilizationContainer}>
               <OptimizationsBreakdownUtilization
                 currentInterval={currentInterval}
@@ -272,7 +271,7 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
   const location = useLocation();
 
   const reportQueryString = queryFromRoute ? queryFromRoute.id : ''; // Flatten ID
-  let report: any = useSelector((state: RootState) =>
+  const report: any = useSelector((state: RootState) =>
     rosSelectors.selectRos(state, reportPathsType, reportType, reportQueryString)
   );
   const reportFetchStatus = useSelector((state: RootState) =>
@@ -288,16 +287,10 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
     }
   }, [reportQueryString]);
 
-  // Todo: Update to use new API response
-  const isBoxPlotToggleEnabled = useIsBoxPlotToggleEnabled();
-  if (isBoxPlotToggleEnabled) {
-    report = data.data[0];
-  }
-
   return {
     breadcrumbLabel: queryFromRoute[breadcrumbLabelKey],
     breadcrumbPath: location?.state?.optimizations ? location.state.optimizations.breadcrumbPath : undefined,
-    isBoxPlotToggleEnabled,
+    isBoxPlotToggleEnabled: useIsBoxPlotToggleEnabled(),
     report,
     reportError,
     reportFetchStatus,

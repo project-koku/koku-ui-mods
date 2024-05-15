@@ -24,8 +24,8 @@ import {
   isSeriesHidden,
 } from 'routes/components/charts/common/chartUtils';
 import ChartTheme from 'routes/components/charts/theme';
+import { RecommendationType } from 'utils/commonTypes';
 import { unitsLookupKey } from 'utils/format';
-import { RecommendationType } from 'utils/recomendations';
 
 import { chartStyles } from './optimizationsBreakdownChart.styles';
 
