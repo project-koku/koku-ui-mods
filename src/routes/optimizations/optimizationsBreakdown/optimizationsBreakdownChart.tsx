@@ -7,6 +7,7 @@ import {
   ChartBoxPlot,
   ChartLegend,
   ChartLegendTooltip,
+  ChartScatter,
   createContainer,
   getInteractiveLegendEvents,
 } from '@patternfly/react-charts';
@@ -15,7 +16,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import type { ChartSeries } from 'routes/components/charts/common/chartUtils';
 import {
-  getChartNames,
   getDomain,
   getLegendData,
   getResizeObserver,
@@ -86,27 +86,84 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
       : undefined;
   };
 
-  const getChart = (serie: ChartSeries, index: number) => {
-    if (serie.childName === 'usage') {
-      return (
-        <ChartBoxPlot
-          boxWidth={width < 475 ? 15 : undefined}
-          data={!hiddenSeries.has(index) ? serie.data : [{ y: [null] }]}
-          key={serie.childName}
-          name={serie.childName}
-          style={serie.style}
-        />
-      );
+  const getLimitChart = () => {
+    return series?.map((serie, index) => {
+      if (serie.childName === 'limit') {
+        return (
+          <ChartArea
+            data={!hiddenSeries.has(index) ? serie.data : [{ y: null }]}
+            interpolation="monotoneX"
+            key={serie.childName}
+            name={serie.childName}
+            style={serie.style}
+          />
+        );
+      }
+    });
+  };
+
+  const getRequestChart = () => {
+    return series?.map((serie, index) => {
+      if (serie.childName === 'request') {
+        return (
+          <ChartArea
+            data={!hiddenSeries.has(index) ? serie.data : [{ y: null }]}
+            interpolation="monotoneX"
+            key={serie.childName}
+            name={serie.childName}
+            style={serie.style}
+          />
+        );
+      }
+    });
+  };
+
+  const getScatterChart = () => {
+    return series?.map((serie, index) => {
+      if (serie.childName === 'scatter') {
+        return (
+          <ChartScatter
+            data={!hiddenSeries.has(index - 1) ? serie.data : [{ y: null }]}
+            key={serie.childName}
+            name={serie.childName}
+            style={serie.style}
+          />
+        );
+      }
+    });
+  };
+
+  const getUsageChart = () => {
+    return series?.map((serie, index) => {
+      if (serie.childName === 'usage') {
+        return (
+          <ChartBoxPlot
+            boxWidth={width < 475 ? 15 : undefined}
+            data={!hiddenSeries.has(index) ? serie.data : [{ y: [null] }]}
+            key={serie.childName}
+            name={serie.childName}
+            style={serie.style}
+          />
+        );
+      }
+    });
+  };
+
+  // Returns groups of chart names associated with each data series
+  const getChartNames = () => {
+    const result = [];
+
+    if (series) {
+      series.map(serie => {
+        // Each group of chart names are hidden / shown together
+        if (serie.childName === 'usage') {
+          result.push([serie.childName, 'scatter']);
+        } else if (serie.childName !== 'scatter') {
+          result.push(serie.childName);
+        }
+      });
     }
-    return (
-      <ChartArea
-        data={!hiddenSeries.has(index) ? serie.data : [{ y: null }]}
-        interpolation="monotoneX"
-        key={serie.childName}
-        name={serie.childName}
-        style={serie.style}
-      />
-    );
+    return result as any;
   };
 
   // Returns CursorVoronoiContainer component
@@ -116,14 +173,24 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
 
     const labelFormatter = datum => {
       const formatValue = val => (val !== undefined ? val : '');
-      if (datum && (datum._min || datum._max || datum._median || datum._q1 || datum._q3)) {
+      if (datum.childName === 'scatter') {
+        return null;
+      } else if (
+        datum.childName === 'usage' &&
+        (datum._min !== undefined ||
+          datum._max !== undefined ||
+          datum._median !== undefined ||
+          datum._q1 !== undefined ||
+          datum._q3 !== undefined ||
+          datum.yVal !== null)
+      ) {
         return intl.formatMessage(messages.chartUsageTooltip, {
           br: '\n',
-          min: formatValue(datum._min),
-          max: formatValue(datum._max),
-          median: formatValue(datum._median),
-          q1: formatValue(datum._q1),
-          q3: formatValue(datum._q3),
+          min: formatValue(datum._min || datum.yVal),
+          max: formatValue(datum._max || datum.yVal),
+          median: formatValue(datum._median || datum.yVal),
+          q1: formatValue(datum._q1 || datum.yVal),
+          q3: formatValue(datum._q3 || datum.yVal),
           units: intl.formatMessage(messages.units, { units: unitsLookupKey(datum.units) }),
         });
       }
@@ -152,7 +219,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
   // Returns onMouseOver, onMouseOut, and onClick events for the interactive legend
   const getEvents = () => {
     const result = getInteractiveLegendEvents({
-      chartNames: getChartNames(series),
+      chartNames: getChartNames(),
       isHidden: index => isSeriesHidden(hiddenSeries, index),
       legendName: `${name}-legend`,
       onLegendClick: props => handleOnLegendClick(props.index),
@@ -252,9 +319,21 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
       });
     }
     if (usageData && usageData.length) {
+      const boxPlotData = [];
+      usageData.map((datum: any) => {
+        if (datum.y.every((val, i, arr) => val === arr[0])) {
+          boxPlotData.push({
+            ...datum,
+            yVal: datum.y[0],
+            y: [null],
+          });
+        } else {
+          boxPlotData.push(datum);
+        }
+      });
       newSeries.push({
         childName: 'usage',
-        data: usageData,
+        data: boxPlotData as any,
         legendItem: {
           name: intl.formatMessage(recommendationType === RecommendationType.cpu ? messages.cpu : messages.memory),
           symbol: {
@@ -273,6 +352,29 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
           q3: {
             fill: chartStyles.usageColorScale[1],
           },
+        } as any,
+      });
+
+      // Show dots in place of box plot when all values are equal
+      const scatterData = [];
+      usageData.map((datum: any) => {
+        if (datum.y.every((val, i, arr) => val === arr[0])) {
+          scatterData.push({
+            ...datum,
+            y: datum.y[0],
+          });
+        } else {
+          scatterData.push({
+            ...datum,
+            y: null,
+          });
+        }
+      });
+      newSeries.push({
+        childName: 'scatter',
+        data: scatterData as any,
+        style: {
+          data: { fill: chartStyles.usageColorScale[1] },
         } as any,
       });
     }
@@ -301,13 +403,12 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
       <div style={{ height: chartHeight }}>
         <Chart
           containerComponent={cloneContainer()}
-          domain={getDomain(series, hiddenSeries)}
+          domain={getDomain(series, hiddenSeries, 1)}
           domainPadding={{ x: [30, 30] }}
           events={getEvents()}
           height={chartHeight}
           legendAllowWrap={handleLegendAllowWrap}
           legendComponent={getLegend()}
-          // legendData={getLegendData(series, hiddenSeries)}
           legendPosition="bottom"
           name={name}
           padding={getPadding()}
@@ -316,10 +417,10 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
         >
           <ChartAxis fixLabelOverlap />
           <ChartAxis dependentAxis showGrid />
-          {series &&
-            series.map((s, index) => {
-              return getChart(s, index);
-            })}
+          {getRequestChart()}
+          {getLimitChart()}
+          {getScatterChart()}
+          {getUsageChart()}
         </Chart>
       </div>
     </div>
