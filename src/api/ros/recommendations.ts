@@ -27,6 +27,9 @@ export interface RecommendationValues {
 
 export interface RecommendationEngine {
   config: RecommendationValues;
+  notifications?: {
+    [key: string]: Notification;
+  };
   pods_count?: number;
   variation: RecommendationValues;
 }
@@ -46,10 +49,6 @@ export interface RecommendationTerm {
   notifications?: {
     [key: string]: Notification;
   };
-  recommendation_engines?: {
-    cost: RecommendationEngine;
-    performance: RecommendationEngine;
-  };
   plots?: {
     datapoints?: number;
     plots_data?: {
@@ -59,6 +58,10 @@ export interface RecommendationTerm {
       };
     };
   };
+  recommendation_engines?: {
+    cost: RecommendationEngine;
+    performance: RecommendationEngine;
+  };
 }
 
 export interface RecommendationTerms {
@@ -67,7 +70,7 @@ export interface RecommendationTerms {
   short_term?: RecommendationTerm;
 }
 
-export interface RecommendationItems {
+export interface Recommendations {
   current?: RecommendationValues;
   monitoring_end_time?: string;
   notifications?: {
@@ -77,7 +80,7 @@ export interface RecommendationItems {
 }
 
 export interface RecommendationReportData extends RosData {
-  recommendations?: RecommendationItems;
+  recommendations?: Recommendations;
 }
 
 export interface RecommendationReportMeta extends RosMeta {

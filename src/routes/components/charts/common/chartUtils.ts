@@ -38,14 +38,15 @@ export const getChartNames = (series: ChartSeries[]) => {
   return result as any;
 };
 
-export const getDomain = (series: ChartSeries[], hiddenSeries: Set<number>) => {
+// Note: A series may be grouped in order to be hidden / shown together
+export const getDomain = (series: ChartSeries[], hiddenSeries: Set<number>, groupedSeriesCount = 0) => {
   const domain: { x?: DomainTuple; y?: DomainTuple } = { y: [0, 1] };
   let maxValue = -1;
   let minValue = -1;
 
   if (series) {
     // Don't use zero domain
-    if (series.length === hiddenSeries.size) {
+    if (series.length - groupedSeriesCount === hiddenSeries.size) {
       domain.x = [0, 1];
       hiddenSeries = new Set();
     }
@@ -78,14 +79,17 @@ export const getLegendData = (series: ChartSeries[], hiddenSeries: Set<number>, 
   if (!series) {
     return undefined;
   }
-  const result = series.map((s, index) => {
-    const data = {
-      childName: s.childName,
-      ...s.legendItem, // name property
-      ...(tooltip && { name: s.legendItem.tooltip }), // Override name property for tooltip
-      ...getInteractiveLegendItemStyles(hiddenSeries.has(index)), // hidden styles
-    };
-    return data;
+  const result = [];
+  series.map((s, index) => {
+    if (s.legendItem) {
+      const data = {
+        childName: s.childName,
+        ...s.legendItem, // name property
+        ...(tooltip && { name: s.legendItem.tooltip }), // Override name property for tooltip
+        ...getInteractiveLegendItemStyles(hiddenSeries.has(index)), // hidden styles
+      };
+      result.push(data);
+    }
   });
   return result;
 };

@@ -16,6 +16,9 @@ export const styles = {
   currentActions: {
     height: '36px',
   },
+  optimizedState: {
+    minHeight: '285px',
+  },
   pagination: {
     backgroundColor: global_BackgroundColor_light_100.value,
     paddingBottom: global_spacer_md.value,

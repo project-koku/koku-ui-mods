@@ -59,6 +59,8 @@
   "optimizationsShortTerm": "Last 24 hrs",
   "optimizationsValue": "{value}{units}",
   "optimizationsValues": "{value, select, cluster {Cluster name} container {Container name} last_reported {Last reported} project {Project name} workload {Workload name} workload_type {Workload type} other {}}",
+  "optimizedStateDesc": "Good job optimizing the current configuration.",
+  "optimizedStateTitle": "You have reached recommended state!",
   "pageTitleDefault": "Cost Management MFE | OpenShift",
   "pageTitleOptimizations": "Optimizations - Cost Management | OpenShift",
   "paginationTitle": "{placement, select, top {{title} top pagination} bottom {{title} bottom pagination} other {{title} pagination}}",
