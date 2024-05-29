@@ -13,7 +13,7 @@ import { styles } from 'routes/components/dataTable/dataTable.styles';
 import { NoOptimizationsState } from 'routes/components/page/noOptimizations/noOptimizationsState';
 import { getOptimizationsBreakdownPath } from 'routes/utils/paths';
 import { getTimeFromNow } from 'utils/dates';
-import { hasWarning } from 'utils/recomendations';
+import { hasNotificationsWarning } from 'utils/notifications';
 
 interface OptimizationsDataTableOwnProps {
   breadcrumbLabel?: string;
@@ -102,7 +102,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
         const project = item.project ? item.project : '';
         const workload = item.workload ? item.workload : '';
         const workloadType = item.workload_type ? item.workload_type : '';
-        const showWarningIcon = hasWarning(item?.recommendations?.recommendation_terms);
+        const showWarningIcon = hasNotificationsWarning(item?.recommendations, true);
 
         newRows.push({
           cells: [

@@ -16,14 +16,17 @@ import {
 } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import type { RecommendationTerm } from 'api/ros/recommendations';
-import type { RecommendationItems } from 'api/ros/recommendations';
+import type { Recommendations } from 'api/ros/recommendations';
 import type { RecommendationValues } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
+import { OptimizedState } from 'routes/components/state/optimizedState';
+import type { OptimizationType } from 'utils/commonTypes';
+import { ConfigType, Interval } from 'utils/commonTypes';
 import { formatOptimization, formatPercentage } from 'utils/format';
-import type { OptimizationType } from 'utils/recomendations';
-import { ConfigType, hasRecommendationValues, Interval } from 'utils/recomendations';
+import { isIntervalOptimized } from 'utils/notifications';
+import { hasRecommendationValues } from 'utils/recomendations';
 import YAML from 'yaml';
 
 import { styles } from './optimizationsBreakdown.styles';
@@ -31,7 +34,7 @@ import { styles } from './optimizationsBreakdown.styles';
 interface OptimizationsBreakdownConfigurationOwnProps {
   currentInterval?: Interval.short_term | Interval.medium_term | Interval.long_term;
   optimizationType?: OptimizationType;
-  recommendations?: RecommendationItems;
+  recommendations?: Recommendations;
 }
 
 type OptimizationsBreakdownConfigurationProps = OptimizationsBreakdownConfigurationOwnProps;
@@ -381,6 +384,8 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     return cpuLimitsWarning || cpuRequestsWarning || memoryLimitsWarning || memoryRequestsWarning;
   };
 
+  const isOptimized = isIntervalOptimized(recommendations, currentInterval, optimizationType);
+
   return (
     <Grid hasGutter>
       <GridItem xl={6}>
@@ -395,12 +400,20 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
       </GridItem>
       <GridItem xl={6}>
         <Card>
-          <CardTitle>
-            <Title headingLevel="h2" size={TitleSizes.lg}>
-              {intl.formatMessage(messages.recommendedConfiguration)}
-            </Title>
-          </CardTitle>
-          <CardBody>{getRecommendedConfigCodeBlock()}</CardBody>
+          {isOptimized ? (
+            <CardBody style={styles.optimizedState}>
+              <OptimizedState />
+            </CardBody>
+          ) : (
+            <>
+              <CardTitle>
+                <Title headingLevel="h2" size={TitleSizes.lg}>
+                  {intl.formatMessage(messages.recommendedConfiguration)}
+                </Title>
+              </CardTitle>
+              <CardBody>{getRecommendedConfigCodeBlock()}</CardBody>
+            </>
+          )}
         </Card>
       </GridItem>
     </Grid>
