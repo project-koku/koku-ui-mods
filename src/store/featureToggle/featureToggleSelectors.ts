@@ -6,6 +6,6 @@ export const selectFeatureToggleState = (state: RootState) => state[stateKey];
 
 export const selectHasFeatureToggle = (state: RootState) => selectFeatureToggleState(state).hasFeatureToggle;
 
-export const selectIsDebugFlagEnabled = (state: RootState) => selectFeatureToggleState(state).isDebugFlagEnabled;
-export const selectIsUtilizationFlagEnabled = (state: RootState) =>
-  selectFeatureToggleState(state).isUtilizationFlagEnabled;
+export const selectIsDebugToggleEnabled = (state: RootState) => selectFeatureToggleState(state).isDebugToggleEnabled;
+export const selectIsBoxPlotToggleEnabled = (state: RootState) =>
+  selectFeatureToggleState(state).isBoxPlotToggleEnabled;
