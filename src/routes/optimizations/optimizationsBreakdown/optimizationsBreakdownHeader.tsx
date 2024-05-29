@@ -14,9 +14,9 @@ import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
+import type { OptimizationType } from 'utils/commonTypes';
 import { getTimeFromNow } from 'utils/dates';
-import type { OptimizationType } from 'utils/recomendations';
-import { hasWarning } from 'utils/recomendations';
+import { hasNotificationsWarning } from 'utils/notifications';
 
 import { styles } from './optimizationsBreakdownHeader.styles';
 import { OptimizationsBreakdownToolbar } from './optimizationsBreakdownToolbar';
@@ -44,9 +44,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
 }) => {
   const intl = useIntl();
   const location = useLocation();
-
-  const terms = report?.recommendations ? report.recommendations.recommendation_terms : undefined;
-  const showWarningIcon = hasWarning(terms);
+  const showWarningIcon = hasNotificationsWarning(report?.recommendations);
 
   const getBackToLink = () => {
     return (
@@ -116,7 +114,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
           isDisabled={isDisabled}
           onSelect={onSelect}
           optimizationType={optimizationType}
-          terms={terms}
+          recommendations={report?.recommendations}
         />
       </div>
     </header>

@@ -1,18 +1,20 @@
 import type { Query } from 'api/queries/query';
-import type { RecommendationTerms } from 'api/ros/recommendations';
+import type { Recommendations } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React from 'react';
 import { PerspectiveSelect } from 'routes/components/perspective/perspectiveSelect';
-import type { OptimizationType } from 'utils/recomendations';
-import { hasNotification, hasRecommendation, Interval } from 'utils/recomendations';
+import type { OptimizationType } from 'utils/commonTypes';
+import { Interval } from 'utils/commonTypes';
+import { hasNotifications } from 'utils/notifications';
+import { hasRecommendation } from 'utils/recomendations';
 
 interface OptimizationsBreakdownToolbarOwnProps {
   currentInterval?: string;
   isDisabled?: boolean;
   onSelect?: (value: string) => void;
   query?: Query;
-  terms?: RecommendationTerms;
   optimizationType?: OptimizationType;
+  recommendations?: Recommendations;
 }
 
 type OptimizationsBreakdownToolbarProps = OptimizationsBreakdownToolbarOwnProps;
@@ -21,29 +23,30 @@ const OptimizationsBreakdownToolbar: React.FC<OptimizationsBreakdownToolbarProps
   currentInterval,
   isDisabled,
   onSelect,
-  terms,
   optimizationType,
+  recommendations,
 }) => {
   const getOptions = () => {
+    const terms = recommendations?.recommendation_terms;
     return [
       {
         isDisabled:
           !hasRecommendation(terms?.short_term?.recommendation_engines?.[optimizationType]?.config) &&
-          !hasNotification(terms?.short_term),
+          !hasNotifications(recommendations, Interval.short_term, optimizationType),
         label: messages.optimizationsShortTerm,
         value: Interval.short_term,
       },
       {
         isDisabled:
           !hasRecommendation(terms?.medium_term?.recommendation_engines?.[optimizationType]?.config) &&
-          !hasNotification(terms?.medium_term),
+          !hasNotifications(recommendations, Interval.medium_term, optimizationType),
         label: messages.optimizationsMediumTerm,
         value: Interval.medium_term,
       },
       {
         isDisabled:
           !hasRecommendation(terms?.long_term?.recommendation_engines?.[optimizationType]?.config) &&
-          !hasNotification(terms?.long_term),
+          !hasNotifications(recommendations, Interval.long_term, optimizationType),
         label: messages.optimizationsLongTerm,
         value: Interval.long_term,
       },
