@@ -419,6 +419,16 @@ export default defineMessages({
     description: 'Selected items for export',
     id: 'optimizationsValues',
   },
+  optimizedStateDesc: {
+    defaultMessage: 'Good job optimizing the current configuration.',
+    description: 'Good job optimizing the current configuration.',
+    id: 'optimizedStateDesc',
+  },
+  optimizedStateTitle: {
+    defaultMessage: 'You have reached recommended state!',
+    description: 'You have reached recommended state!',
+    id: 'optimizedStateTitle',
+  },
   pageTitleDefault: {
     defaultMessage: 'Cost Management MFE | OpenShift',
     description: 'Cost Management MFE | OpenShift',

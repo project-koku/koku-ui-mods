@@ -1,64 +1,26 @@
-import type { Notification, RecommendationTerm, RecommendationTerms } from 'api/ros/recommendations';
 import type { RecommendationValues } from 'api/ros/recommendations';
+import type { Recommendations, RecommendationTerm } from 'api/ros/recommendations';
 
-// eslint-disable-next-line no-shadow
-export const enum ConfigType {
-  current = 'current',
-  recommended = 'recommended',
-}
+import { Interval } from './commonTypes';
 
-// eslint-disable-next-line no-shadow
-export const enum Interval {
-  short_term = 'short_term', // last 24 hrs
-  medium_term = 'medium_term', // last 7 days
-  long_term = 'long_term', // last 15 days
-}
-
-// eslint-disable-next-line no-shadow
-export const enum EngineType {
-  config = 'config',
-  variation = 'variation',
-}
-
-// eslint-disable-next-line no-shadow
-export const enum OptimizationType {
-  cost = 'cost',
-  performance = 'performance',
-}
-
-// eslint-disable-next-line no-shadow
-export const enum RecommendationType {
-  cpu = 'cpu',
-  memory = 'memory',
-}
-
-// eslint-disable-next-line no-shadow
-export const enum ResourceType {
-  limits = 'limits',
-  requests = 'requests',
-}
-
-// eslint-disable-next-line no-shadow
-export const enum UsageType {
-  cpuUsage = 'cpuUsage',
-  memoryUsage = 'memoryUsage',
-}
-
-export const filterNotifications = (notifications: Notification[]) => {
-  return notifications?.filter(notification => notification.code !== 112101 && notification.code !== 112102);
-};
-
-export const getNotifications = (term: RecommendationTerm): Notification[] => {
-  if (!term?.notifications) {
+export const getRecommendationTerm = (recommendations: Recommendations, interval: Interval): RecommendationTerm => {
+  if (!recommendations) {
     return undefined;
   }
-  const notifications = Object.keys(term.notifications).map(key => term.notifications[key]);
-  return filterNotifications(notifications);
-};
 
-export const hasNotification = (term: RecommendationTerm) => {
-  const notifications = getNotifications(term);
-  return notifications?.length > 0;
+  let result;
+  switch (interval) {
+    case Interval.short_term:
+      result = recommendations?.recommendation_terms?.short_term;
+      break;
+    case Interval.medium_term:
+      result = recommendations?.recommendation_terms?.medium_term;
+      break;
+    case Interval.long_term:
+      result = recommendations?.recommendation_terms?.long_term;
+      break;
+  }
+  return result;
 };
 
 export const hasRecommendation = (values: RecommendationValues) => {
@@ -86,11 +48,4 @@ export const hasRecommendationValues = (
     result = Object.keys(values[key1][key2]).length > 0;
   }
   return result;
-};
-
-export const hasWarning = (terms: RecommendationTerms) => {
-  if (!terms) {
-    return false;
-  }
-  return hasNotification(terms.short_term) || hasNotification(terms.medium_term) || hasNotification(terms.long_term);
 };

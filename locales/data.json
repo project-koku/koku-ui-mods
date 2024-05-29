@@ -1440,6 +1440,18 @@
         "value": "value"
       }
     ],
+    "optimizedStateDesc": [
+      {
+        "type": 0,
+        "value": "Good job optimizing the current configuration."
+      }
+    ],
+    "optimizedStateTitle": [
+      {
+        "type": 0,
+        "value": "You have reached recommended state!"
+      }
+    ],
     "pageTitleDefault": [
       {
         "type": 0,
