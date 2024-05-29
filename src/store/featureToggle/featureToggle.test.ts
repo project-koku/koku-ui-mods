@@ -16,6 +16,6 @@ test('default state', async () => {
 
 test('Utilization feature is enabled', async () => {
   const store = createUIStore();
-  store.dispatch(actions.setFeatureToggle({ isUtilizationFlagEnabled: true }));
-  expect(featureToggleSelectors.selectIsUtilizationFlagEnabled(store.getState())).toBe(true);
+  store.dispatch(actions.setFeatureToggle({ isBoxPlotToggleEnabled: true }));
+  expect(featureToggleSelectors.selectIsBoxPlotToggleEnabled(store.getState())).toBe(true);
 });

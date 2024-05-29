@@ -25,13 +25,21 @@ export function getMaxMinValues(datums: ChartDatum[]) {
         datum.y0 !== undefined
           ? Math.max(datum.y, datum.y0)
           : Array.isArray(datum.y)
-            ? Math.max(...(datum.y[0] !== null ? datum.y : [0]))
+            ? datum.y[0] !== null
+              ? Math.max(...datum.y)
+              : (datum as any).yVal // For boxplot, which is hidden via `datum.y[0] = null` when all values are equal
+                ? (datum as any).yVal
+                : 0
             : datum.y;
       const minY =
         datum.y0 !== undefined
           ? Math.min(datum.y, datum.y0)
           : Array.isArray(datum.y)
-            ? Math.min(...(datum.y[0] !== null ? datum.y : [0]))
+            ? datum.y[0] !== null
+              ? Math.min(...datum.y)
+              : (datum as any).yVal // For boxplot, which is hidden via `datum.y[0] = null` when all values are equal
+                ? (datum as any).yVal
+                : 0
             : datum.y;
       if (maxY > max) {
         max = maxY;
