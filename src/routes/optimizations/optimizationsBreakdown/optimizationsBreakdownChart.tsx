@@ -186,11 +186,11 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
       ) {
         return intl.formatMessage(messages.chartUsageTooltip, {
           br: '\n',
-          min: formatValue(datum._min || datum.yVal),
-          max: formatValue(datum._max || datum.yVal),
-          median: formatValue(datum._median || datum.yVal),
-          q1: formatValue(datum._q1 || datum.yVal),
-          q3: formatValue(datum._q3 || datum.yVal),
+          min: formatValue(datum._min !== undefined ? datum._min : datum.yVal),
+          max: formatValue(datum._max !== undefined ? datum._max : datum.yVal),
+          median: formatValue(datum._median !== undefined ? datum._median : datum.yVal),
+          q1: formatValue(datum._q1 !== undefined ? datum._q1 : datum.yVal),
+          q3: formatValue(datum._q3 !== undefined ? datum._q3 : datum.yVal),
           units: intl.formatMessage(messages.units, { units: unitsLookupKey(datum.units) }),
         });
       }
