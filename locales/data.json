@@ -303,6 +303,18 @@
         "value": "Processing data to generate a list of all services that sums to a total cost..."
       }
     ],
+    "docsGettingStarted": [
+      {
+        "type": 0,
+        "value": "https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift"
+      }
+    ],
+    "docsOptimizations": [
+      {
+        "type": 0,
+        "value": "https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros"
+      }
+    ],
     "emptyFilterStateSubtitle": [
       {
         "type": 0,

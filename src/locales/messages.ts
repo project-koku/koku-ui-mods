@@ -96,6 +96,20 @@ export default defineMessages({
     description: 'Processing data to generate a list of all services that sums to a total cost...',
     id: 'detailsEmptyState',
   },
+  docsGettingStarted: {
+    defaultMessage:
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift',
+    description:
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift',
+    id: 'docsGettingStarted',
+  },
+  docsOptimizations: {
+    defaultMessage:
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros',
+    description:
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros',
+    id: 'docsOptimizations',
+  },
   emptyFilterStateSubtitle: {
     defaultMessage: 'Sorry, no data with the given filter was found.',
     description: 'Sorry, no data with the given filter was found.',
