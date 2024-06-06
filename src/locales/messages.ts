@@ -2,6 +2,11 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  actualUsage: {
+    defaultMessage: 'Actual usage ({dateRange})',
+    description: 'Actual usage (Jan 1-31)',
+    id: 'actualUsage',
+  },
   breakdownBackToOptimizations: {
     defaultMessage: 'Back to optimizations',
     description: 'Back to optimizations',
@@ -95,6 +100,20 @@ export default defineMessages({
     defaultMessage: 'Processing data to generate a list of all services that sums to a total cost...',
     description: 'Processing data to generate a list of all services that sums to a total cost...',
     id: 'detailsEmptyState',
+  },
+  docsGettingStarted: {
+    defaultMessage:
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift',
+    description:
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift',
+    id: 'docsGettingStarted',
+  },
+  docsOptimizations: {
+    defaultMessage:
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros',
+    description:
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros',
+    id: 'docsOptimizations',
   },
   emptyFilterStateSubtitle: {
     defaultMessage: 'Sorry, no data with the given filter was found.',
@@ -483,13 +502,13 @@ export default defineMessages({
     id: 'recommendedConfiguration',
   },
   recommendedLimit: {
-    defaultMessage: 'Recommended limit',
-    description: 'Recommended limit',
+    defaultMessage: 'Recommended limit ({dateRange})',
+    description: 'Recommended limit (Jan 1-31)',
     id: 'recommendedLimit',
   },
   recommendedRequest: {
-    defaultMessage: 'Recommended request',
-    description: 'Recommended request',
+    defaultMessage: 'Recommended request ({dateRange})',
+    description: 'Recommended request (Jan 1-31)',
     id: 'recommendedRequest',
   },
   request: {
@@ -577,6 +596,11 @@ export default defineMessages({
       'other {}}',
     description: 'return the proper unit label based on key: "units"',
     id: 'units',
+  },
+  usage: {
+    defaultMessage: 'Usage',
+    description: 'Usage',
+    id: 'usage',
   },
   valueUnits: {
     defaultMessage: '{value} {units}',

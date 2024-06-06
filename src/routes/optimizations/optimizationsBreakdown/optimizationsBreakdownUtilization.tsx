@@ -49,11 +49,13 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
       ? [
           {
             ...datum[0],
+            key: undefined, // Don't use date here
             x: 0, // Extends threshold lines to chart edge
           },
           ...datum,
           {
             ...datum[0],
+            key: undefined, // Don't use date here
             x: 100,
           },
         ]
@@ -117,7 +119,6 @@ const OptimizationsBreakdownUtilization: React.FC<OptimizationsBreakdownUtilizat
         limitData={limitDatum}
         name={`utilization-${usageType}`}
         requestData={requestDatum}
-        recommendationType={recommendationType}
         usageData={usageDatum}
       />
     );

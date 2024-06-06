@@ -1,5 +1,19 @@
 {
   "en": {
+    "actualUsage": [
+      {
+        "type": 0,
+        "value": "Actual usage ("
+      },
+      {
+        "type": 1,
+        "value": "dateRange"
+      },
+      {
+        "type": 0,
+        "value": ")"
+      }
+    ],
     "breakdownBackToOptimizations": [
       {
         "type": 0,
@@ -301,6 +315,18 @@
       {
         "type": 0,
         "value": "Processing data to generate a list of all services that sums to a total cost..."
+      }
+    ],
+    "docsGettingStarted": [
+      {
+        "type": 0,
+        "value": "https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift"
+      }
+    ],
+    "docsOptimizations": [
+      {
+        "type": 0,
+        "value": "https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros"
       }
     ],
     "emptyFilterStateSubtitle": [
@@ -1668,13 +1694,29 @@
     "recommendedLimit": [
       {
         "type": 0,
-        "value": "Recommended limit"
+        "value": "Recommended limit ("
+      },
+      {
+        "type": 1,
+        "value": "dateRange"
+      },
+      {
+        "type": 0,
+        "value": ")"
       }
     ],
     "recommendedRequest": [
       {
         "type": 0,
-        "value": "Recommended request"
+        "value": "Recommended request ("
+      },
+      {
+        "type": 1,
+        "value": "dateRange"
+      },
+      {
+        "type": 0,
+        "value": ")"
       }
     ],
     "request": [
@@ -1948,6 +1990,12 @@
         },
         "type": 5,
         "value": "units"
+      }
+    ],
+    "usage": [
+      {
+        "type": 0,
+        "value": "Usage"
       }
     ],
     "valueUnits": [

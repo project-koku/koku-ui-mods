@@ -1,3 +1,4 @@
+import type { MessageDescriptor } from '@formatjs/intl/src/types';
 import { intl } from 'components/i18n';
 import messages from 'locales/messages';
 import type { FormatOptions } from 'utils/format';
@@ -14,6 +15,50 @@ export interface ChartDatum {
   x: string | number;
   y: number;
   y0?: number;
+}
+
+export function getDatumDateRange(datums: ChartDatum[]): [Date, Date] {
+  // Find the first populated (non-null) day
+  let firstDay = 0;
+  for (let i = firstDay; i < datums.length; i++) {
+    if (datums[i]?.key && datums[i]?.y !== null) {
+      firstDay = i;
+      break;
+    }
+  }
+
+  // Find the last populated (non-null) day
+  let lastDay = datums.length - 1;
+  for (let i = lastDay; i >= 0; i--) {
+    if (datums[i]?.key && datums[i].y !== null) {
+      lastDay = i;
+      break;
+    }
+  }
+
+  const start = new Date(datums[firstDay].key);
+  const end = new Date(datums[lastDay].key);
+  return [start, end];
+}
+
+export function getDateRangeString(
+  datums: ChartDatum[],
+  key: MessageDescriptor,
+  isSameDate: boolean = false,
+  noDataKey: MessageDescriptor = messages.chartNoData
+) {
+  if (!(datums?.length && key)) {
+    return intl.formatMessage(noDataKey);
+  }
+
+  const [start, end] = getDatumDateRange(datums);
+  const dateRange = intl.formatDateTimeRange(isSameDate ? end : start, end, {
+    day: 'numeric',
+    month: 'short',
+  });
+  return intl.formatMessage(key, {
+    dateRange,
+  });
 }
 
 export function getMaxMinValues(datums: ChartDatum[]) {
@@ -71,7 +116,7 @@ export function isInt(n) {
   return result && n >= 0;
 }
 
-// Returns true if non negative float
+// Returns true if non-negative float
 export function isFloat(n) {
   const result = Number(n) === n && n % 1 !== 0;
   return result && n >= 0;
