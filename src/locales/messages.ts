@@ -2,6 +2,11 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
+  actualUsage: {
+    defaultMessage: 'Actual usage ({dateRange})',
+    description: 'Actual usage (Jan 1-31)',
+    id: 'actualUsage',
+  },
   breakdownBackToOptimizations: {
     defaultMessage: 'Back to optimizations',
     description: 'Back to optimizations',
@@ -497,13 +502,13 @@ export default defineMessages({
     id: 'recommendedConfiguration',
   },
   recommendedLimit: {
-    defaultMessage: 'Recommended limit',
-    description: 'Recommended limit',
+    defaultMessage: 'Recommended limit ({dateRange})',
+    description: 'Recommended limit (Jan 1-31)',
     id: 'recommendedLimit',
   },
   recommendedRequest: {
-    defaultMessage: 'Recommended request',
-    description: 'Recommended request',
+    defaultMessage: 'Recommended request ({dateRange})',
+    description: 'Recommended request (Jan 1-31)',
     id: 'recommendedRequest',
   },
   request: {
@@ -591,6 +596,11 @@ export default defineMessages({
       'other {}}',
     description: 'return the proper unit label based on key: "units"',
     id: 'units',
+  },
+  usage: {
+    defaultMessage: 'Usage',
+    description: 'Usage',
+    id: 'usage',
   },
   valueUnits: {
     defaultMessage: '{value} {units}',
