@@ -110,9 +110,9 @@ export default defineMessages({
   },
   docsOptimizations: {
     defaultMessage:
-      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros',
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift/optimizations-ros',
     description:
-      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros',
+      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift/optimizations-ros',
     id: 'docsOptimizations',
   },
   emptyFilterStateSubtitle: {
@@ -280,6 +280,11 @@ export default defineMessages({
     description: 'https://github.com/project-koku/koku-ui-mfe',
     id: 'kokuMfeUrl',
   },
+  learnMore: {
+    defaultMessage: 'Learn more',
+    description: 'Learn more',
+    id: 'learnMore',
+  },
   limit: {
     defaultMessage: 'Limit',
     description: 'Limit',
@@ -317,9 +322,9 @@ export default defineMessages({
   },
   noOptimizationsDesc: {
     defaultMessage:
-      'Resource Optimization is now available in preview for select customers. If your organization wants to participate, tell us through the Feedback button, which is purple and located on the right.  Otherwise, there is not enough data available to generate an optimization.',
+      'Resource Optimization is now available in preview for select customers. If your organization wants to participate, tell us through the Feedback button, which is purple and located on the right. Otherwise, there is not enough data available to generate an optimization.',
     description:
-      'Resource Optimization is now available in preview for select customers. If your organization wants to participate, tell us through the Feedback button, which is purple and located on the right.  Otherwise, there is not enough data available to generate an optimization.',
+      'Resource Optimization is now available in preview for select customers. If your organization wants to participate, tell us through the Feedback button, which is purple and located on the right. Otherwise, there is not enough data available to generate an optimization.',
     id: 'noOptimizationsDesc',
   },
   noOptimizationsTitle: {
@@ -331,6 +336,28 @@ export default defineMessages({
     defaultMessage: 'No results found',
     description: 'No results found',
     id: 'noResultsFound',
+  },
+  notConfiguredCli: {
+    defaultMessage: 'In the CLI, run {clipboard}',
+    description: 'In the CLI, run {clipboard}',
+    id: 'notConfiguredCli',
+  },
+  notConfiguredDesc: {
+    defaultMessage:
+      'To receive resource optimization recommendations for your namespaces, you must first enable each namespace.',
+    description:
+      'To receive resource optimization recommendations for your namespaces, you must first enable each namespace.',
+    id: 'notConfiguredDesc',
+  },
+  notConfiguredNamespace: {
+    defaultMessage: 'To enable a namespace, label it with {clipboard}',
+    description: 'To enable a namespace, label it with {clipboard}',
+    id: 'notConfiguredNamespace',
+  },
+  notConfiguredTitle: {
+    defaultMessage: 'Optimizations not configured yet',
+    description: 'Optimizations not configured yet',
+    id: 'notConfiguredTitle',
   },
   notificationsAlertTitle: {
     defaultMessage: 'Duration based notifications',
@@ -357,11 +384,6 @@ export default defineMessages({
     description: 'Optimization details',
     id: 'optimizationsDetails',
   },
-  optimizationsInfo: {
-    defaultMessage: 'Assess and monitor your usage so you can optimize your OpenShift resources.',
-    description: 'Assess and monitor your usage so you can optimize your OpenShift resources.',
-    id: 'optimizationsInfo',
-  },
   optimizationsInfoArialLabel: {
     defaultMessage: 'A description of optimizations',
     description: 'A description of optimizations',
@@ -371,6 +393,16 @@ export default defineMessages({
     defaultMessage: 'A dialog with a description of optimizations',
     description: 'A dialog with a description of optimizations',
     id: 'optimizationsInfoButtonArialLabel',
+  },
+  optimizationsInfoDesc: {
+    defaultMessage: 'To receive these recommendations, you must first enable your namespaces.',
+    description: 'To receive these recommendations, you must first enable your namespaces.',
+    id: 'optimizationsInfoDesc',
+  },
+  optimizationsInfoTitle: {
+    defaultMessage: 'Assess and monitor usage from all of your clusters and provides optimization recommendations.',
+    description: 'Assess and monitor usage from all of your clusters and provides optimization recommendations.',
+    id: 'optimizationsInfoTitle',
   },
   optimizationsLoadingStateDesc: {
     defaultMessage: 'Searching for your optimizations. Do not refresh the browser',

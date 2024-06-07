@@ -326,7 +326,7 @@
     "docsOptimizations": [
       {
         "type": 0,
-        "value": "https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/g[…]d_with_resource_optimization_for_openshift/optimizations-ros"
+        "value": "https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift/optimizations-ros"
       }
     ],
     "emptyFilterStateSubtitle": [
@@ -1128,6 +1128,12 @@
         "value": "https://github.com/project-koku/koku-ui-mfe"
       }
     ],
+    "learnMore": [
+      {
+        "type": 0,
+        "value": "Learn more"
+      }
+    ],
     "limit": [
       {
         "type": 0,
@@ -1210,6 +1216,48 @@
       {
         "type": 0,
         "value": "No results found"
+      }
+    ],
+    "notConfiguredChanges": [
+      {
+        "type": 0,
+        "value": "Changes will be reflected within 24 hours. "
+      },
+      {
+        "type": 1,
+        "value": "learnMore"
+      }
+    ],
+    "notConfiguredCli": [
+      {
+        "type": 0,
+        "value": "In the CLI, run "
+      },
+      {
+        "type": 1,
+        "value": "clipboard"
+      }
+    ],
+    "notConfiguredDesc": [
+      {
+        "type": 0,
+        "value": "To receive resource optimization recommendations for your namespaces, you must first enable each namespace."
+      }
+    ],
+    "notConfiguredNamespace": [
+      {
+        "type": 0,
+        "value": "To enable a namespace, label it with "
+      },
+      {
+        "type": 1,
+        "value": "clipboard"
+      }
+    ],
+    "notConfiguredTitle": [
+      {
+        "type": 0,
+        "value": "Optimizations not configured yet"
       }
     ],
     "notificationsAlertTitle": [
