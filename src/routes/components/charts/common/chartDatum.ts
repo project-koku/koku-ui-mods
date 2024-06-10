@@ -62,8 +62,8 @@ export function getDateRangeString(
 }
 
 export function getMaxMinValues(datums: ChartDatum[]) {
-  let max = -1;
-  let min = -1;
+  let max = null;
+  let min = null;
   if (datums && datums.length) {
     datums.forEach(datum => {
       const maxY =
@@ -72,9 +72,9 @@ export function getMaxMinValues(datums: ChartDatum[]) {
           : Array.isArray(datum.y)
             ? datum.y[0] !== null
               ? Math.max(...datum.y)
-              : (datum as any).yVal // For boxplot, which is hidden via `datum.y[0] = null` when all values are equal
+              : (datum as any).yVal !== null // For boxplot, which is hidden via `datum.y[0] = null` when all values are equal
                 ? (datum as any).yVal
-                : 0
+                : null
             : datum.y;
       const minY =
         datum.y0 !== undefined
@@ -84,12 +84,12 @@ export function getMaxMinValues(datums: ChartDatum[]) {
               ? Math.min(...datum.y)
               : (datum as any).yVal // For boxplot, which is hidden via `datum.y[0] = null` when all values are equal
                 ? (datum as any).yVal
-                : 0
+                : null
             : datum.y;
-      if (maxY > max) {
+      if ((max === null || maxY > max) && maxY !== null) {
         max = maxY;
       }
-      if ((min === -1 || minY < min) && minY !== null) {
+      if ((min === null || minY < min) && minY !== null) {
         min = minY;
       }
     });
