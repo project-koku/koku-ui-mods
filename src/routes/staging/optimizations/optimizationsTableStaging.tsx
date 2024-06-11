@@ -30,8 +30,8 @@ const OptimizationsDetailsStaging: React.FC<OptimizationsDetailsStagingProps> = 
   const groupByValue = queryFromRoute?.group_by ? getGroupByValue(queryFromRoute) : 'openshift-kube-apiserver';
 
   // Test filters
-  const clusterFilter = 'test';
-  const projectFilter = 'Yuptoo';
+  const clusterFilter = 'aws';
+  const projectFilter = 'openshift';
 
   return (
     <PageSection isFilled>

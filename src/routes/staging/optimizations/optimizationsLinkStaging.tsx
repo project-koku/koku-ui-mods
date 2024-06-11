@@ -16,8 +16,8 @@ const OptimizationsLinkStaging: React.FC<OptimizationsLinkStagingProps> = () => 
   const location = useLocation();
 
   // Test filters
-  const clusterFilter = 'test';
-  const projectFilter = 'Yuptoo';
+  const clusterFilter = 'aws';
+  const projectFilter = 'openshift';
 
   const state = {
     ...(location.state && location.state),
