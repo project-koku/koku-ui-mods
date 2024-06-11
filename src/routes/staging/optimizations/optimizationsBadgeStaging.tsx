@@ -10,8 +10,8 @@ type OptimizationsBadgeStagingProps = OptimizationsBadgeStagingOwnProps;
 
 const OptimizationsBadgeStaging: React.FC<OptimizationsBadgeStagingProps> = () => {
   // Test filters
-  const clusterFilter = 'test';
-  const projectFilter = 'Yuptoo';
+  const clusterFilter = 'aws';
+  const projectFilter = 'openshift';
 
   return (
     <PageSection isFilled>
