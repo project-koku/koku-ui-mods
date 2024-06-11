@@ -41,8 +41,8 @@ export const getChartNames = (series: ChartSeries[]) => {
 // Note: A series may be grouped in order to be hidden / shown together
 export const getDomain = (series: ChartSeries[], hiddenSeries: Set<number>, groupedSeriesCount = 0) => {
   const domain: { x?: DomainTuple; y?: DomainTuple } = { y: [0, 1] };
-  let maxValue = -1;
-  let minValue = -1;
+  let maxValue = null;
+  let minValue = null;
 
   if (series) {
     // Don't use zero domain
@@ -53,17 +53,17 @@ export const getDomain = (series: ChartSeries[], hiddenSeries: Set<number>, grou
     series.forEach((s: any, index) => {
       if (!isSeriesHidden(hiddenSeries, index) && s.data && s.data.length !== 0) {
         const { max, min } = getMaxMinValues(s.data);
-        maxValue = Math.max(maxValue, max);
-        if (minValue === -1) {
+        if ((maxValue === null || max > maxValue) && max !== null) {
+          maxValue = max;
+        }
+        if ((minValue === null || min < minValue) && min !== null) {
           minValue = min;
-        } else {
-          minValue = Math.min(minValue, min);
         }
       }
     });
   }
 
-  const threshold = maxValue * 0.1;
+  const threshold = maxValue * 0.05;
   const max = maxValue > 0 ? Math.ceil(maxValue + threshold) : 0;
   const _min = minValue > 0 ? Math.max(0, Math.floor(minValue - threshold)) : 0;
   const min = _min > 0 ? _min : 0;
