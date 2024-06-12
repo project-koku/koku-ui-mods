@@ -29,10 +29,13 @@ const OptimizationsDetailsHeader: React.FC<OptimizationsDetailsHeaderProps> = ()
                   <p>{intl.formatMessage(messages.optimizationsInfoTitle)}</p>
                   <br />
                   <p>
-                    {intl.formatMessage(messages.optimizationsInfoDesc)}&nbsp;
-                    <a href={intl.formatMessage(messages.docsOptimizations)} rel="noreferrer" target="_blank">
-                      {intl.formatMessage(messages.learnMore)}
-                    </a>
+                    {intl.formatMessage(messages.optimizationsInfoDesc, {
+                      learnMore: (
+                        <a href={intl.formatMessage(messages.docsOptimizations)} rel="noreferrer" target="_blank">
+                          {intl.formatMessage(messages.learnMore)}
+                        </a>
+                      ),
+                    })}
                   </p>
                 </>
               }

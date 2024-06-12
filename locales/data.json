@@ -1218,16 +1218,6 @@
         "value": "No results found"
       }
     ],
-    "notConfiguredChanges": [
-      {
-        "type": 0,
-        "value": "Changes will be reflected within 24 hours. "
-      },
-      {
-        "type": 1,
-        "value": "learnMore"
-      }
-    ],
     "notConfiguredCli": [
       {
         "type": 0,
@@ -1326,12 +1316,6 @@
         "value": "count"
       }
     ],
-    "optimizationsInfo": [
-      {
-        "type": 0,
-        "value": "Assess and monitor your usage so you can optimize your OpenShift resources."
-      }
-    ],
     "optimizationsInfoArialLabel": [
       {
         "type": 0,
@@ -1342,6 +1326,22 @@
       {
         "type": 0,
         "value": "A dialog with a description of optimizations"
+      }
+    ],
+    "optimizationsInfoDesc": [
+      {
+        "type": 0,
+        "value": "To receive these recommendations, you must first enable your namespaces. "
+      },
+      {
+        "type": 1,
+        "value": "learnMore"
+      }
+    ],
+    "optimizationsInfoTitle": [
+      {
+        "type": 0,
+        "value": "Assess and monitor usage from all of your clusters and provides optimization recommendations."
       }
     ],
     "optimizationsLoadingStateDesc": [
