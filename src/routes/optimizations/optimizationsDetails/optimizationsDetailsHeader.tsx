@@ -24,7 +24,18 @@ const OptimizationsDetailsHeader: React.FC<OptimizationsDetailsHeaderProps> = ()
             <Popover
               aria-label={intl.formatMessage(messages.optimizationsInfoArialLabel)}
               enableFlip
-              bodyContent={<p style={styles.infoTitle}>{intl.formatMessage(messages.optimizationsInfo)}</p>}
+              bodyContent={
+                <>
+                  <p>{intl.formatMessage(messages.optimizationsInfoTitle)}</p>
+                  <br />
+                  <p>
+                    {intl.formatMessage(messages.optimizationsInfoDesc)}&nbsp;
+                    <a href={intl.formatMessage(messages.docsOptimizations)} rel="noreferrer" target="_blank">
+                      {intl.formatMessage(messages.learnMore)}
+                    </a>
+                  </p>
+                </>
+              }
             >
               <Button
                 aria-label={intl.formatMessage(messages.optimizationsInfoButtonArialLabel)}
