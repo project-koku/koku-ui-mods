@@ -395,8 +395,8 @@ export default defineMessages({
     id: 'optimizationsInfoButtonArialLabel',
   },
   optimizationsInfoDesc: {
-    defaultMessage: 'To receive these recommendations, you must first enable your namespaces.',
-    description: 'To receive these recommendations, you must first enable your namespaces.',
+    defaultMessage: 'To receive these recommendations, you must first enable your namespaces. {learnMore}',
+    description: 'To receive these recommendations, you must first enable your namespaces. {learnMore}',
     id: 'optimizationsInfoDesc',
   },
   optimizationsInfoTitle: {
