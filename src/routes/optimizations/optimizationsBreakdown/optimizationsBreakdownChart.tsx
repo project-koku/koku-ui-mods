@@ -14,6 +14,7 @@ import {
 import messages from 'locales/messages';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
+import { getDateRangeString } from 'routes/components/charts/common';
 import type { ChartSeries } from 'routes/components/charts/common/chartUtils';
 import {
   getDomain,
@@ -24,7 +25,6 @@ import {
   isSeriesHidden,
 } from 'routes/components/charts/common/chartUtils';
 import ChartTheme from 'routes/components/charts/theme';
-import { RecommendationType } from 'utils/commonTypes';
 import { unitsLookupKey } from 'utils/format';
 
 import { chartStyles } from './optimizationsBreakdownChart.styles';
@@ -34,7 +34,6 @@ interface OptimizationsBreakdownChartOwnProps {
   limitData?: any;
   name?: string;
   padding?: any;
-  recommendationType: RecommendationType;
   requestData?: any;
   usageData?: any;
 }
@@ -46,7 +45,6 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
   name,
   limitData,
   padding,
-  recommendationType,
   requestData,
   usageData,
 }) => {
@@ -186,11 +184,11 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
       ) {
         return intl.formatMessage(messages.chartUsageTooltip, {
           br: '\n',
-          min: formatValue(datum._min || datum.yVal),
-          max: formatValue(datum._max || datum.yVal),
-          median: formatValue(datum._median || datum.yVal),
-          q1: formatValue(datum._q1 || datum.yVal),
-          q3: formatValue(datum._q3 || datum.yVal),
+          min: formatValue(datum._min !== undefined ? datum._min : datum.yVal),
+          max: formatValue(datum._max !== undefined ? datum._max : datum.yVal),
+          median: formatValue(datum._median !== undefined ? datum._median : datum.yVal),
+          q1: formatValue(datum._q1 !== undefined ? datum._q1 : datum.yVal),
+          q3: formatValue(datum._q3 !== undefined ? datum._q3 : datum.yVal),
           units: intl.formatMessage(messages.units, { units: unitsLookupKey(datum.units) }),
         });
       }
@@ -283,7 +281,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
         childName: 'request',
         data: requestData,
         legendItem: {
-          name: intl.formatMessage(messages.recommendedRequest),
+          name: getDateRangeString(requestData, messages.recommendedRequest, true),
           symbol: {
             fill: chartStyles.requestColorScale[0],
             type: 'square',
@@ -303,7 +301,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
         childName: 'limit',
         data: limitData,
         legendItem: {
-          name: intl.formatMessage(messages.recommendedLimit),
+          name: getDateRangeString(limitData, messages.recommendedLimit, true),
           symbol: {
             fill: chartStyles.limitColorScale[0],
             type: 'square',
@@ -335,12 +333,12 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
         childName: 'usage',
         data: boxPlotData as any,
         legendItem: {
-          name: intl.formatMessage(recommendationType === RecommendationType.cpu ? messages.cpu : messages.memory),
+          name: getDateRangeString(limitData, messages.actualUsage),
           symbol: {
             fill: chartStyles.usageColorScale[1],
             type: 'square',
           },
-          tooltip: intl.formatMessage(recommendationType === RecommendationType.cpu ? messages.cpu : messages.memory),
+          tooltip: intl.formatMessage(messages.usage),
         },
         style: {
           median: {

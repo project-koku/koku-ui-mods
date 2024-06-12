@@ -29,7 +29,7 @@ const OptimizationsLinkStaging: React.FC<OptimizationsLinkStagingProps> = () => 
   const linkPath = getBreakdownPath({
     basePath: formatPath(routes.optimizationsTable.path),
     groupBy: 'project',
-    id: 'openshift-kube-apiserver', // groupByValue
+    id: 'openshift', // groupByValue
   });
 
   return (

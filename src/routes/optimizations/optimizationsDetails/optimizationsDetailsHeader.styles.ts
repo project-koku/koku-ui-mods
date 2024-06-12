@@ -16,9 +16,6 @@ export const styles = {
   infoIcon: {
     fontSize: global_FontSize_md.value,
   },
-  infoTitle: {
-    fontWeight: 'bold',
-  },
   title: {
     paddingBottom: global_spacer_sm.var,
   },
