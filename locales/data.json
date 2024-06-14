@@ -1257,7 +1257,7 @@
     "notConfiguredTitle": [
       {
         "type": 0,
-        "value": "Optimizations not configured yet"
+        "value": "Optimizations may not be configured"
       }
     ],
     "notificationsAlertTitle": [
@@ -1326,12 +1326,6 @@
         "value": "count"
       }
     ],
-    "optimizationsInfo": [
-      {
-        "type": 0,
-        "value": "Assess and monitor your usage so you can optimize your OpenShift resources."
-      }
-    ],
     "optimizationsInfoArialLabel": [
       {
         "type": 0,
@@ -1342,6 +1336,22 @@
       {
         "type": 0,
         "value": "A dialog with a description of optimizations"
+      }
+    ],
+    "optimizationsInfoDesc": [
+      {
+        "type": 0,
+        "value": "To receive these recommendations, you must first enable your namespaces. "
+      },
+      {
+        "type": 1,
+        "value": "learnMore"
+      }
+    ],
+    "optimizationsInfoTitle": [
+      {
+        "type": 0,
+        "value": "Assess and monitor usage from all of your clusters and provides optimization recommendations."
       }
     ],
     "optimizationsLoadingStateDesc": [
