@@ -12,7 +12,6 @@ import { useLocation } from 'react-router-dom';
 import type { AnyAction } from 'redux';
 import type { ThunkDispatch } from 'redux-thunk';
 import { Loading } from 'routes/components/page/loading';
-import { NoOptimizations } from 'routes/components/page/noOptimizations';
 import { NotAvailable } from 'routes/components/page/notAvailable';
 import { NotConfigured } from 'routes/components/page/notConfigured';
 import { styles } from 'routes/optimizations/optimizationsBreakdown/optimizationsBreakdown.styles';
@@ -187,10 +186,6 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
     return <NotAvailable title={intl.formatMessage(messages.optimizations)} />;
   }
   if (!query.filter_by && !hasOptimizations && reportFetchStatus === FetchStatus.complete) {
-    return <NoOptimizations />;
-  }
-  const test = false;
-  if (test) {
     return <NotConfigured />;
   }
   return (
@@ -211,7 +206,6 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
   );
 };
 
-// eslint-disable-next-line no-empty-pattern
 const useMapToProps = ({ cluster, project, query }: OptimizationsTableMapProps): OptimizationsTableStateProps => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
 
