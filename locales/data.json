@@ -1218,6 +1218,16 @@
         "value": "No results found"
       }
     ],
+    "notConfiguredChanges": [
+      {
+        "type": 0,
+        "value": "Changes will be reflected within 24 hours. "
+      },
+      {
+        "type": 1,
+        "value": "learnMore"
+      }
+    ],
     "notConfiguredCli": [
       {
         "type": 0,
@@ -1247,7 +1257,7 @@
     "notConfiguredTitle": [
       {
         "type": 0,
-        "value": "Optimizations not configured yet"
+        "value": "Optimizations may not be configured"
       }
     ],
     "notificationsAlertTitle": [
