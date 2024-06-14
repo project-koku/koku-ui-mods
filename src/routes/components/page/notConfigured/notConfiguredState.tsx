@@ -59,9 +59,13 @@ const NotConfiguredState: React.FC<NotConfiguredStateProps> = () => {
       </EmptyStateBody>
       <EmptyStateBody>{intl.formatMessage(messages.notConfiguredCli, { clipboard: getCliClipboard() })}</EmptyStateBody>
       <EmptyStateBody>
-        <a href={intl.formatMessage(messages.docsOptimizations)} rel="noreferrer" target="_blank">
-          {intl.formatMessage(messages.learnMore)}
-        </a>
+        {intl.formatMessage(messages.notConfiguredChanges, {
+          learnMore: (
+            <a href={intl.formatMessage(messages.docsOptimizations)} rel="noreferrer" target="_blank">
+              {intl.formatMessage(messages.learnMore)}
+            </a>
+          ),
+        })}
       </EmptyStateBody>
     </EmptyState>
   );

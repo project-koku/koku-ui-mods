@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
@@ -337,6 +336,11 @@ export default defineMessages({
     description: 'No results found',
     id: 'noResultsFound',
   },
+  notConfiguredChanges: {
+    defaultMessage: 'Changes will be reflected within 24 hours. {learnMore}',
+    description: 'Changes will be reflected within 24 hours. {learnMore}',
+    id: 'notConfiguredChanges',
+  },
   notConfiguredCli: {
     defaultMessage: 'In the CLI, run {clipboard}',
     description: 'In the CLI, run {clipboard}',
@@ -355,8 +359,8 @@ export default defineMessages({
     id: 'notConfiguredNamespace',
   },
   notConfiguredTitle: {
-    defaultMessage: 'Optimizations not configured yet',
-    description: 'Optimizations not configured yet',
+    defaultMessage: 'Optimizations may not be configured',
+    description: 'Optimizations may not be configured',
     id: 'notConfiguredTitle',
   },
   notificationsAlertTitle: {
@@ -395,8 +399,8 @@ export default defineMessages({
     id: 'optimizationsInfoButtonArialLabel',
   },
   optimizationsInfoDesc: {
-    defaultMessage: 'To receive these recommendations, you must first enable your namespaces.',
-    description: 'To receive these recommendations, you must first enable your namespaces.',
+    defaultMessage: 'To receive these recommendations, you must first enable your namespaces. {learnMore}',
+    description: 'To receive these recommendations, you must first enable your namespaces. {learnMore}',
     id: 'optimizationsInfoDesc',
   },
   optimizationsInfoTitle: {
