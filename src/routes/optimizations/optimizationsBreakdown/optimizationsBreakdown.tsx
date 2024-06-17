@@ -264,7 +264,6 @@ const useQueryFromRoute = () => {
   return parseQuery<Query>(location.search);
 };
 
-// eslint-disable-next-line no-empty-pattern
 const useMapToProps = (): OptimizationsBreakdownStateProps => {
   const dispatch: ThunkDispatch<RootState, any, AnyAction> = useDispatch();
   const queryFromRoute = useQueryFromRoute();
