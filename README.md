@@ -14,6 +14,14 @@ Submit issues in [Jira].
 
 * [NodeJS v18.15+][nodejs]
 * [npm v9.5+][npm]
+* [Podman][podman]
+
+After installing Podman, create and start your VM.
+
+```
+podman machine init
+podman machine start
+```
 
 ## Setup `hosts` entries (do this once)
 
