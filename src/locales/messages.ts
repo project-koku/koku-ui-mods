@@ -102,16 +102,14 @@ export default defineMessages({
   },
   docsGettingStarted: {
     defaultMessage:
-      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift',
-    description:
-      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift',
+      'https://docs.redhat.com/en/documentation/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift',
+    description: 'Getting started with resource optimization for OpenShift',
     id: 'docsGettingStarted',
   },
   docsOptimizations: {
     defaultMessage:
-      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift/optimizations-ros',
-    description:
-      'https://access.redhat.com/documentation/en-us/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift/optimizations-ros',
+      'https://docs.redhat.com/en/documentation/cost_management_service/1-latest/html/getting_started_with_resource_optimization_for_openshift/optimizations-ros',
+    description: 'Resource optimization for OpenShift optimization reports',
     id: 'docsOptimizations',
   },
   emptyFilterStateSubtitle: {
