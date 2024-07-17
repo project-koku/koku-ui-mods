@@ -51,8 +51,10 @@ interface OptimizationsBreakdownOwnProps {
 interface OptimizationsBreakdownStateProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
-  report?: RecommendationReportData;
   isBoxPlotToggleEnabled?: boolean;
+  isOptimizationsDetails?: boolean;
+  projectPath?: string; // Project path (i.e., OCP details breakdown path)
+  report?: RecommendationReportData;
   reportError?: AxiosError;
   reportFetchStatus?: FetchStatus;
   reportQueryString?: string;
@@ -64,7 +66,15 @@ const reportType = RosType.ros as any;
 const reportPathsType = RosPathsType.recommendation as any;
 
 const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
-  const { breadcrumbLabel, breadcrumbPath, isBoxPlotToggleEnabled, report, reportFetchStatus } = useMapToProps();
+  const {
+    breadcrumbLabel,
+    breadcrumbPath,
+    isBoxPlotToggleEnabled,
+    isOptimizationsDetails,
+    projectPath,
+    report,
+    reportFetchStatus,
+  } = useMapToProps();
   const [activeTabKey, setActiveTabKey] = useState(0);
   const intl = useIntl();
 
@@ -237,8 +247,10 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
         breadcrumbPath={breadcrumbPath}
         currentInterval={currentInterval}
         isDisabled={isLoading}
+        isOptimizationsDetails={isOptimizationsDetails}
         onSelect={handleOnSelect}
         optimizationType={getOptimizationType()}
+        projectPath={projectPath}
         report={report}
       />
       <div style={styles.tabs}>{getTabs(availableTabs)}</div>
@@ -286,10 +298,15 @@ const useMapToProps = (): OptimizationsBreakdownStateProps => {
     }
   }, [reportQueryString]);
 
+  const isOptimizationsDetails = queryFromRoute?.isOptimizationsDetails === 'true';
+
   return {
     breadcrumbLabel: queryFromRoute[breadcrumbLabelKey],
-    breadcrumbPath: location?.state?.optimizations ? location.state.optimizations.breadcrumbPath : undefined,
+    breadcrumbPath:
+      location?.state?.[isOptimizationsDetails ? 'optimizations' : 'optimizationsBreakdown']?.breadcrumbPath,
     isBoxPlotToggleEnabled: useIsBoxPlotToggleEnabled(),
+    isOptimizationsDetails,
+    projectPath: location?.state?.optimizations?.projectPath,
     report,
     reportError,
     reportFetchStatus,
