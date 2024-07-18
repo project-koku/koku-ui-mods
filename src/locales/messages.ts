@@ -472,6 +472,16 @@ export default defineMessages({
     description: 'Selected items for export',
     id: 'optimizationsValues',
   },
+  optimizationsViewAll: {
+    defaultMessage: 'View all optimizations for this project',
+    description: 'View all optimizations for this project',
+    id: 'optimizationsViewAll',
+  },
+  optimizationsViewAllDisabled: {
+    defaultMessage: 'This project has not reported data this month.',
+    description: 'This project has not reported data this month.',
+    id: 'optimizationsViewAllDisabled',
+  },
   optimizedStateDesc: {
     defaultMessage: 'Good job optimizing the current configuration.',
     description: 'Good job optimizing the current configuration.',

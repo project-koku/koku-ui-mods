@@ -31,9 +31,11 @@ interface OptimizationsTableOwnProps {
   cluster?: string | string[];
   hideCluster?: boolean;
   hideProject?: boolean;
-  linkPath?: string;
-  linkState?: any;
+  isOptimizationsDetails?: boolean;
+  linkPath?: string; // Optimizations breakdown link path
+  linkState?: any; // Optimizations breakdown link state
   project?: string | string[];
+  projectPath?: string; // Project path (i.e., OCP details breakdown path)
 }
 
 export interface OptimizationsTableStateProps {
@@ -68,14 +70,16 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
   cluster,
   hideCluster,
   hideProject,
+  isOptimizationsDetails,
   linkPath,
   linkState,
   project,
+  projectPath,
 }) => {
   const intl = useIntl();
   const location = useLocation();
 
-  const queryState = getQueryState(location, 'optimizations');
+  const queryState = getQueryState(location, projectPath ? 'optimizations' : 'optimizationsBreakdown');
   const [query, setQuery] = useState({ ...baseQuery, ...(queryState && queryState) });
   const { report, reportError, reportFetchStatus, reportQueryString } = useMapToProps({
     cluster,
@@ -85,7 +89,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
 
   // Clear queryState, returned from breakdown page, after query has been initialized
   useEffect(() => {
-    clearQueryState(location, 'optimizations');
+    clearQueryState(location, 'optimizationsBreakdown');
   }, [reportQueryString]);
 
   const getPagination = (isDisabled = false, isBottom = false) => {
@@ -122,6 +126,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
         breadcrumbPath={breadcrumbPath}
         filterBy={query.filter_by}
         isLoading={reportFetchStatus === FetchStatus.inProgress}
+        isOptimizationsDetails={isOptimizationsDetails}
         onSort={(sortType, isSortAscending) => handleOnSort(sortType, isSortAscending)}
         orderBy={query.order_by}
         query={query}
@@ -129,6 +134,7 @@ const OptimizationsTable: React.FC<OptimizationsTableProps> = ({
         reportQueryString={reportQueryString}
         linkPath={linkPath}
         linkState={linkState}
+        projectPath={projectPath}
       />
     );
   };

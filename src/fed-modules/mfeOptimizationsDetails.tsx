@@ -6,8 +6,9 @@ import { MfeOptimizationsWrapper } from './mfeOptimizationsWrapper';
 export interface OptimizationsDetailsOwnProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
-  linkPath?: string;
-  linkState?: any;
+  linkPath?: string; // Optimizations breakdown link path
+  linkState?: any; // Optimizations breakdown link state
+  projectPath?: string; // Project path (i.e., OCP details breakdown path)
 }
 
 type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
@@ -17,6 +18,7 @@ const MfeOptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
   breadcrumbPath,
   linkPath,
   linkState,
+  projectPath,
 }: OptimizationsDetailsOwnProps) => {
   return (
     <MfeOptimizationsWrapper>
@@ -25,6 +27,7 @@ const MfeOptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
         breadcrumbPath={breadcrumbPath}
         linkPath={linkPath}
         linkState={linkState}
+        projectPath={projectPath}
       />
     </MfeOptimizationsWrapper>
   );
