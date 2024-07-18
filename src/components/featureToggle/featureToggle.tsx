@@ -8,6 +8,7 @@ import { featureToggleActions } from 'store/featureToggle';
 export const enum FeatureToggle {
   boxPlot = 'cost-management.mfe.box-plot', // https://issues.redhat.com/browse/COST-4619
   debug = 'cost-management.mfe.debug',
+  projectLink = 'cost-management.mfe.project-link', // https://issues.redhat.com/browse/COST-4527 '
 }
 
 const useIsToggleEnabled = (toggle: FeatureToggle) => {
@@ -23,6 +24,10 @@ export const useIsBoxPlotToggleEnabled = () => {
   return useIsToggleEnabled(FeatureToggle.boxPlot);
 };
 
+export const useIsProjectLinkToggleEnabled = () => {
+  return useIsToggleEnabled(FeatureToggle.projectLink);
+};
+
 // The FeatureToggle component saves feature toggles in store for places where Unleash hooks not available
 const useFeatureToggle = () => {
   const dispatch = useDispatch();
@@ -30,6 +35,7 @@ const useFeatureToggle = () => {
 
   const isDebugToggleEnabled = useIsDebugToggleEnabled();
   const isBoxPlotToggleEnabled = useIsBoxPlotToggleEnabled();
+  const isProjectLinkToggleEnabled = useIsProjectLinkToggleEnabled();
 
   const fetchUser = callback => {
     auth.getUser().then(user => {
@@ -43,13 +49,14 @@ const useFeatureToggle = () => {
       featureToggleActions.setFeatureToggle({
         isDebugToggleEnabled,
         isBoxPlotToggleEnabled,
+        isProjectLinkToggleEnabled,
       })
     );
     if (isDebugToggleEnabled) {
       // eslint-disable-next-line no-console
       fetchUser(identity => console.log('User identity:', identity));
     }
-  }, [isDebugToggleEnabled, isBoxPlotToggleEnabled]);
+  }, [isDebugToggleEnabled, isBoxPlotToggleEnabled, isProjectLinkToggleEnabled]);
 };
 
 export default useFeatureToggle;

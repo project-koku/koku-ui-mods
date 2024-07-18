@@ -3,6 +3,7 @@ import { getQuery } from 'api/queries/query';
 import type { OcpReport } from 'api/reports/ocpReports';
 import { ReportPathsType, ReportType } from 'api/reports/report';
 import type { AxiosError } from 'axios';
+import { useIsProjectLinkToggleEnabled } from 'components/featureToggle';
 import messages from 'locales/messages';
 import React, { useEffect } from 'react';
 import { useIntl } from 'react-intl';
@@ -26,6 +27,7 @@ interface OptimizationsBreakdownProjectLinkOwnProps {
 }
 
 interface OptimizationsBreakdownProjectLinkStateProps {
+  isProjectLinkToggleEnabled?: boolean;
   report?: OcpReport;
   reportError?: AxiosError;
   reportFetchStatus?: FetchStatus;
@@ -44,9 +46,17 @@ const OptimizationsBreakdownProjectLink: React.FC<OptimizationsBreakdownProjectL
   linkPath,
   project,
 }) => {
-  const { report } = useMapToProps({ project, linkPath });
+  const { isProjectLinkToggleEnabled, report } = useMapToProps({ project, linkPath });
   const location = useLocation();
   const intl = useIntl();
+
+  // Is stand alone?
+  if (!linkPath || !isOptimizationsDetails || !isProjectLinkToggleEnabled) {
+    return project;
+  }
+  if (!report) {
+    return null;
+  }
 
   const getComputedItems = () => {
     return getUnsortedComputedReportItems({
@@ -54,15 +64,6 @@ const OptimizationsBreakdownProjectLink: React.FC<OptimizationsBreakdownProjectL
       idKey: 'project',
     } as any);
   };
-
-  // Is stand alone?
-  if (!linkPath || !isOptimizationsDetails) {
-    return project;
-  }
-  if (!report) {
-    return null;
-  }
-
   const computedItems = getComputedItems();
   const isDisabled = computedItems.length === 0;
   const breakdownPath = getBreakdownPath({
@@ -123,6 +124,7 @@ const useMapToProps = ({ project, linkPath }): OptimizationsBreakdownProjectLink
   }, [linkPath, reportQueryString]);
 
   return {
+    isProjectLinkToggleEnabled: useIsProjectLinkToggleEnabled(),
     report,
     reportError,
     reportFetchStatus,
