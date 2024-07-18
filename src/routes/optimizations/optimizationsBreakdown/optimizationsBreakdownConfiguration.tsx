@@ -160,8 +160,12 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
     if (typeof oldNumber !== 'number' || typeof newNumber !== 'number') {
       return 0;
     }
+    if (oldNumber === 0) {
+      return 0;
+    }
     const changeValue = newNumber - oldNumber;
-    return (changeValue / oldNumber) * 100;
+    const test = (changeValue / oldNumber) * 100;
+    return test;
   };
 
   const getRecommendedActions = () => {
@@ -275,10 +279,11 @@ const OptimizationsBreakdownConfiguration: React.FC<OptimizationsBreakdownConfig
 
     // Calculate percentage change
     const percentage = getPercentage(currentVal, recommendedVal);
-    return intl.formatMessage(messages.percentPlus, {
+    const test = intl.formatMessage(messages.percentPlus, {
       count: percentage > 0 ? 1 : 0,
       value: formatPercentage(percentage),
     });
+    return test;
   };
 
   const getVariationConfig = config => {
