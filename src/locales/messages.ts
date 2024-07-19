@@ -633,13 +633,36 @@ export default defineMessages({
       '{units, select, ' +
       'cores {cores} ' +
       'ei {Ei} ' +
+      'eib {EiB} ' +
       'gi {Gi} ' +
+      'gib {GiB} ' +
       'ki {Ki} ' +
+      'kib {KiB} ' +
       'mi {Mi} ' +
       'mib {MiB} ' +
+      'm {m} ' +
+      'millicores {millicores} ' +
       'other {}}',
     description: 'return the proper unit label based on key: "units"',
     id: 'units',
+  },
+  unitsK8: {
+    defaultMessage:
+      '{units, select, ' +
+      'cores {} ' +
+      'ei {Ei} ' +
+      'eib {Ei} ' +
+      'gi {Gi} ' +
+      'gib {Gi} ' +
+      'ki {Ki} ' +
+      'kib {Ki} ' +
+      'mi {Mi} ' +
+      'mib {Mi} ' +
+      'm {m} ' +
+      'millicores {m} ' +
+      'other {}}',
+    description: 'return the Kubernetes unit label based on key: "units"',
+    id: 'unitsK8',
   },
   usage: {
     defaultMessage: 'Usage',
