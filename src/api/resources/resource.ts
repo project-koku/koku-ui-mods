@@ -7,9 +7,8 @@ export interface ResourceData {
   value?: string | string[];
 }
 
-export interface Resource extends PagedResponse<ResourceData, PagedMetaData> {}
+export type Resource = PagedResponse<ResourceData, PagedMetaData>;
 
-// eslint-disable-next-line no-shadow
 export const enum ResourceType {
   account = 'account',
   aws_category = 'aws_category',
@@ -26,7 +25,6 @@ export const enum ResourceType {
   subscriptionGuid = 'subscription_guid',
 }
 
-// eslint-disable-next-line no-shadow
 export const enum ResourcePathsType {
   ocp = 'ocp',
   ocpCloud = 'ocp_cloud',

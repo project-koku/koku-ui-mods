@@ -98,88 +98,87 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
       },
     ];
 
-    hasData &&
-      report.data.map(item => {
-        const cluster = item.cluster_alias ? item.cluster_alias : item.cluster_uuid ? item.cluster_uuid : '';
-        const container = item.container ? item.container : '';
-        const lastReported = getTimeFromNow(item.last_reported);
-        const project = item.project ? item.project : '';
-        const workload = item.workload ? item.workload : '';
-        const workloadType = item.workload_type ? item.workload_type : '';
-        const showWarningIcon = hasNotificationsWarning(item?.recommendations, true);
+    report?.data.map(item => {
+      const cluster = item.cluster_alias ? item.cluster_alias : item.cluster_uuid ? item.cluster_uuid : '';
+      const container = item.container ? item.container : '';
+      const lastReported = getTimeFromNow(item.last_reported);
+      const project = item.project ? item.project : '';
+      const workload = item.workload ? item.workload : '';
+      const workloadType = item.workload_type ? item.workload_type : '';
+      const showWarningIcon = hasNotificationsWarning(item?.recommendations, true);
 
-        const optimizationsBreakdownPath = getOptimizationsBreakdownPath({
-          basePath: linkPath,
-          breadcrumbLabel,
-          id: item.id,
-          isOptimizationsDetails,
-          title: container,
-        });
-
-        const newLinkState = {
-          ...(linkState && linkState),
-          // OCP details breakdown page
-          details: {
-            ...(linkState?.details && linkState?.details),
-            ...(projectPath && {
-              breadcrumbPath: optimizationsBreakdownPath, // Path back to optimizations breakdown page
-            }),
-          },
-          // Optimizations page
-          optimizations: {
-            ...(linkState?.optimizations && linkState?.optimizations),
-            ...(isOptimizationsDetails && {
-              ...query,
-              breadcrumbPath, // Path back to optimizations details page
-            }),
-            ...(projectPath && { projectPath }), // Path to OCP details breakdown page
-          },
-          // Optimizations breakdown page
-          optimizationsBreakdown: {
-            ...(linkState?.optimizationsBreakdown && linkState?.optimizationsBreakdown),
-            ...(!isOptimizationsDetails && {
-              ...query,
-              breadcrumbPath, // Path back to optimizations details page
-            }),
-          },
-        };
-
-        newRows.push({
-          cells: [
-            {
-              value: (
-                <Link to={optimizationsBreakdownPath} state={newLinkState}>
-                  {container}
-                </Link>
-              ),
-            },
-            { value: project, hidden: hideProject },
-            { value: workload },
-            { value: workloadType },
-            {
-              value: (
-                <>
-                  {cluster}
-                  {showWarningIcon && (
-                    <span style={styles.warningIcon}>
-                      <Icon status="warning">
-                        <ExclamationTriangleIcon />
-                      </Icon>
-                    </span>
-                  )}
-                </>
-              ),
-              hidden: hideCluster,
-            },
-            { value: lastReported, style: styles.lastItem },
-          ],
-          optimization: {
-            container: item.container,
-            id: item.id,
-            project,
-          },
-        });
+      const optimizationsBreakdownPath = getOptimizationsBreakdownPath({
+        basePath: linkPath,
+        breadcrumbLabel,
+        id: item.id,
+        isOptimizationsDetails,
+        title: container,
       });
+
+      const newLinkState = {
+        ...(linkState && linkState),
+        // OCP details breakdown page
+        details: {
+          ...(linkState?.details && linkState?.details),
+          ...(projectPath && {
+            breadcrumbPath: optimizationsBreakdownPath, // Path back to optimizations breakdown page
+          }),
+        },
+        // Optimizations page
+        optimizations: {
+          ...(linkState?.optimizations && linkState?.optimizations),
+          ...(isOptimizationsDetails && {
+            ...query,
+            breadcrumbPath, // Path back to optimizations details page
+          }),
+          ...(projectPath && { projectPath }), // Path to OCP details breakdown page
+        },
+        // Optimizations breakdown page
+        optimizationsBreakdown: {
+          ...(linkState?.optimizationsBreakdown && linkState?.optimizationsBreakdown),
+          ...(!isOptimizationsDetails && {
+            ...query,
+            breadcrumbPath, // Path back to optimizations details page
+          }),
+        },
+      };
+
+      newRows.push({
+        cells: [
+          {
+            value: (
+              <Link to={optimizationsBreakdownPath} state={newLinkState}>
+                {container}
+              </Link>
+            ),
+          },
+          { value: project, hidden: hideProject },
+          { value: workload },
+          { value: workloadType },
+          {
+            value: (
+              <>
+                {cluster}
+                {showWarningIcon && (
+                  <span style={styles.warningIcon}>
+                    <Icon status="warning">
+                      <ExclamationTriangleIcon />
+                    </Icon>
+                  </span>
+                )}
+              </>
+            ),
+            hidden: hideCluster,
+          },
+          { value: lastReported, style: styles.lastItem },
+        ],
+        optimization: {
+          container: item.container,
+          id: item.id,
+          project,
+        },
+      });
+    });
 
     const filteredColumns = (newColumns as any[]).filter(column => !column.hidden);
     const filteredRows = newRows.map(({ ...row }) => {
