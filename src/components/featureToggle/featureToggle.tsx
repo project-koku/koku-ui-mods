@@ -4,7 +4,6 @@ import { useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { featureToggleActions } from 'store/featureToggle';
 
-// eslint-disable-next-line no-shadow
 export const enum FeatureToggle {
   boxPlot = 'cost-management.mfe.box-plot', // https://issues.redhat.com/browse/COST-4619
   debug = 'cost-management.mfe.debug',

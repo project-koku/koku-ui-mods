@@ -19,14 +19,12 @@ export interface RosMeta extends PagedMetaData {
   offset?: number;
 }
 
-export interface RosReport extends PagedResponse<RosData, RosMeta> {}
+export type RosReport = PagedResponse<RosData, RosMeta>;
 
-// eslint-disable-next-line no-shadow
 export const enum RosType {
   ros = 'ros',
 }
 
-// eslint-disable-next-line no-shadow
 export const enum RosPathsType {
   recommendation = 'recommendation',
   recommendations = 'recommendations',
