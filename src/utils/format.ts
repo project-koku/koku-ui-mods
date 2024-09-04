@@ -151,7 +151,7 @@ export const formatPercentage: PercentageFormatter = (
     maximumFractionDigits: 2,
   }
 ) => {
-  return value.toLocaleString(getLocale(), options);
+  return value?.toLocaleString(getLocale(), options);
 };
 
 // Formats cost model markup with 0 to 10 decimals
@@ -163,7 +163,7 @@ export const formatPercentageMarkup: PercentageFormatter = (
     maximumFractionDigits: 10,
   }
 ) => {
-  return value.toLocaleString(getLocale(), options);
+  return value?.toLocaleString(getLocale(), options);
 };
 
 // Format optimization metrics
@@ -174,8 +174,7 @@ export const formatOptimization: PercentageFormatter = (
     maximumFractionDigits: 20, // Allow the API to set the number of decimal places
   }
 ) => {
-  const val = value.toLocaleString(getLocale(), options);
-  return val;
+  return value?.toLocaleString(getLocale(), options);
 };
 
 export const formatUsage: UnitsFormatter = (
@@ -185,7 +184,7 @@ export const formatUsage: UnitsFormatter = (
     maximumFractionDigits: 2,
   }
 ) => {
-  return value.toLocaleString(getLocale(), options);
+  return value?.toLocaleString(getLocale(), options);
 };
 
 // Returns true if given percentage or currency format is valid for current locale
@@ -232,7 +231,7 @@ export const unFormat = (value: string) => {
 };
 
 const unknownTypeFormatter = (value: number, options: FormatOptions) => {
-  return value.toLocaleString(getLocale(), options);
+  return value?.toLocaleString(getLocale(), options);
 };
 
 // Returns i18n key for given units
@@ -242,8 +241,13 @@ export const unitsLookupKey = (units): string => {
   switch (lookup) {
     case 'cores':
     case 'ei':
+    case 'eib':
     case 'gi':
+    case 'gib':
     case 'ki':
+    case 'kib':
+    case 'm':
+    case 'millicores':
     case 'mi':
     case 'mib':
       return lookup;

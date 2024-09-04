@@ -1524,6 +1524,18 @@
         "value": "value"
       }
     ],
+    "optimizationsViewAll": [
+      {
+        "type": 0,
+        "value": "View all optimizations for this project"
+      }
+    ],
+    "optimizationsViewAllDisabled": [
+      {
+        "type": 0,
+        "value": "This project has not reported data this month."
+      }
+    ],
     "optimizedStateDesc": [
       {
         "type": 0,
@@ -2010,6 +2022,14 @@
               }
             ]
           },
+          "eib": {
+            "value": [
+              {
+                "type": 0,
+                "value": "EiB"
+              }
+            ]
+          },
           "gi": {
             "value": [
               {
@@ -2018,11 +2038,35 @@
               }
             ]
           },
+          "gib": {
+            "value": [
+              {
+                "type": 0,
+                "value": "GiB"
+              }
+            ]
+          },
           "ki": {
             "value": [
               {
                 "type": 0,
                 "value": "Ki"
+              }
+            ]
+          },
+          "kib": {
+            "value": [
+              {
+                "type": 0,
+                "value": "KiB"
+              }
+            ]
+          },
+          "m": {
+            "value": [
+              {
+                "type": 0,
+                "value": "m"
               }
             ]
           },
@@ -2039,6 +2083,108 @@
               {
                 "type": 0,
                 "value": "MiB"
+              }
+            ]
+          },
+          "millicores": {
+            "value": [
+              {
+                "type": 0,
+                "value": "millicores"
+              }
+            ]
+          },
+          "other": {
+            "value": []
+          }
+        },
+        "type": 5,
+        "value": "units"
+      }
+    ],
+    "unitsK8": [
+      {
+        "options": {
+          "cores": {
+            "value": []
+          },
+          "ei": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Ei"
+              }
+            ]
+          },
+          "eib": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Ei"
+              }
+            ]
+          },
+          "gi": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Gi"
+              }
+            ]
+          },
+          "gib": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Gi"
+              }
+            ]
+          },
+          "ki": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Ki"
+              }
+            ]
+          },
+          "kib": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Ki"
+              }
+            ]
+          },
+          "m": {
+            "value": [
+              {
+                "type": 0,
+                "value": "m"
+              }
+            ]
+          },
+          "mi": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Mi"
+              }
+            ]
+          },
+          "mib": {
+            "value": [
+              {
+                "type": 0,
+                "value": "Mi"
+              }
+            ]
+          },
+          "millicores": {
+            "value": [
+              {
+                "type": 0,
+                "value": "m"
               }
             ]
           },

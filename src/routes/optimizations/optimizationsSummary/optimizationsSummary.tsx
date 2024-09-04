@@ -97,7 +97,7 @@ const OptimizationsSummary: React.FC<OptimizationsSummaryProps> = ({
             <Skeleton className="skeleton" width={skeletonWidth.md} />
           </>
         ) : linkPath && count > 0 ? (
-          <Link to={linkPath} state={linkState}>
+          <Link to={linkPath} state={{ ...linkState }}>
             {description}
           </Link>
         ) : (

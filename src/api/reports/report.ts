@@ -112,9 +112,8 @@ export interface ReportMeta extends PagedMetaData {
   };
 }
 
-export interface Report extends PagedResponse<ReportData, ReportMeta> {}
+export type Report = PagedResponse<ReportData, ReportMeta>;
 
-// eslint-disable-next-line no-shadow
 export const enum ReportType {
   cost = 'cost',
   cpu = 'cpu',
@@ -127,7 +126,6 @@ export const enum ReportType {
   volume = 'volume',
 }
 
-// eslint-disable-next-line no-shadow
 export const enum ReportPathsType {
   ocp = 'ocp',
   ocpCloud = 'ocp_cloud',

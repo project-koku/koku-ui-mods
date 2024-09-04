@@ -472,6 +472,16 @@ export default defineMessages({
     description: 'Selected items for export',
     id: 'optimizationsValues',
   },
+  optimizationsViewAll: {
+    defaultMessage: 'View all optimizations for this project',
+    description: 'View all optimizations for this project',
+    id: 'optimizationsViewAll',
+  },
+  optimizationsViewAllDisabled: {
+    defaultMessage: 'This project has not reported data this month.',
+    description: 'This project has not reported data this month.',
+    id: 'optimizationsViewAllDisabled',
+  },
   optimizedStateDesc: {
     defaultMessage: 'Good job optimizing the current configuration.',
     description: 'Good job optimizing the current configuration.',
@@ -623,13 +633,36 @@ export default defineMessages({
       '{units, select, ' +
       'cores {cores} ' +
       'ei {Ei} ' +
+      'eib {EiB} ' +
       'gi {Gi} ' +
+      'gib {GiB} ' +
       'ki {Ki} ' +
+      'kib {KiB} ' +
       'mi {Mi} ' +
       'mib {MiB} ' +
+      'm {m} ' +
+      'millicores {millicores} ' +
       'other {}}',
     description: 'return the proper unit label based on key: "units"',
     id: 'units',
+  },
+  unitsK8: {
+    defaultMessage:
+      '{units, select, ' +
+      'cores {} ' +
+      'ei {Ei} ' +
+      'eib {Ei} ' +
+      'gi {Gi} ' +
+      'gib {Gi} ' +
+      'ki {Ki} ' +
+      'kib {Ki} ' +
+      'mi {Mi} ' +
+      'mib {Mi} ' +
+      'm {m} ' +
+      'millicores {m} ' +
+      'other {}}',
+    description: 'return the Kubernetes unit label based on key: "units"',
+    id: 'unitsK8',
   },
   usage: {
     defaultMessage: 'Usage',

@@ -8,8 +8,9 @@ import { OptimizationsDetailsHeader } from './optimizationsDetailsHeader';
 interface OptimizationsDetailsOwnProps {
   breadcrumbLabel?: string;
   breadcrumbPath?: string;
-  linkPath?: string;
-  linkState?: any;
+  linkPath?: string; // Optimizations breakdown link path
+  linkState?: any; // Optimizations breakdown link state
+  projectPath?: string; // Project path (i.e., OCP details breakdown path)
 }
 
 type OptimizationsDetailsProps = OptimizationsDetailsOwnProps;
@@ -19,6 +20,7 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
   breadcrumbPath,
   linkPath,
   linkState,
+  projectPath,
 }) => {
   return (
     <div style={styles.container}>
@@ -27,8 +29,10 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
         <OptimizationsTable
           breadcrumbLabel={breadcrumbLabel}
           breadcrumbPath={breadcrumbPath}
+          isOptimizationsDetails
           linkPath={linkPath}
           linkState={linkState}
+          projectPath={projectPath}
         />
       </PageSection>
     </div>

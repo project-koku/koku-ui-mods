@@ -29,7 +29,7 @@ export interface Query {
   key_only?: boolean;
   limit?: number;
   offset?: number;
-  optimizationsPath?: any;
+  isOptimizationsDetails?: any;
   optimizationsTab?: any;
   order_by?: any;
   order_how?: any;

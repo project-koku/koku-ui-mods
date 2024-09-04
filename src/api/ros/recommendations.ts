@@ -83,12 +83,8 @@ export interface RecommendationReportData extends RosData {
   recommendations?: Recommendations;
 }
 
-export interface RecommendationReportMeta extends RosMeta {
-  // TBD...
-}
-
 export interface RecommendationReport extends RosReport {
-  meta: RecommendationReportMeta;
+  meta: RosMeta;
   data: RecommendationReportData[];
 }
 
