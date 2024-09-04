@@ -80,7 +80,7 @@
     "victory-create-container": "37.0.2",
     "victory-cursor-container": "37.0.2",
     "victory-voronoi-container": "37.0.2",
-    "yaml": "^2.5.0"
+    "yaml": "^2.5.1"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
