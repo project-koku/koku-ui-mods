@@ -76,13 +76,13 @@
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "typesafe-actions": "^5.1.0",
-    "victory-brush-container": "37.0.2",
+    "victory-brush-container": "37.1.0",
     "victory-core": "37.0.2",
     "victory-create-container": "37.0.2",
     "victory-cursor-container": "37.0.2",
-    "victory-selection-container": "37.0.2",
+    "victory-selection-container": "37.1.0",
     "victory-voronoi-container": "37.0.2",
-    "victory-zoom-container": "37.0.2",
+    "victory-zoom-container": "37.1.0",
     "yaml": "^2.5.1"
   },
   "devDependencies": {
