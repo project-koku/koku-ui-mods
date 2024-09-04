@@ -267,6 +267,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
           </div>
         )}
       </PageSection>
+      .
     </div>
   );
 };
