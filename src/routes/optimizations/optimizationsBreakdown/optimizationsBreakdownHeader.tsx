@@ -19,6 +19,7 @@ import { getTimeFromNow } from 'utils/dates';
 import { hasNotificationsWarning } from 'utils/notifications';
 
 import { styles } from './optimizationsBreakdownHeader.styles';
+import { OptimizationsBreakdownProjectLink } from './optimizationsBreakdownProjectLink';
 import { OptimizationsBreakdownToolbar } from './optimizationsBreakdownToolbar';
 
 interface OptimizationsBreakdownHeaderOwnProps {
@@ -26,6 +27,8 @@ interface OptimizationsBreakdownHeaderOwnProps {
   breadcrumbPath?: string;
   currentInterval?: string;
   isDisabled?: boolean;
+  isOptimizationsDetails?: boolean;
+  projectPath?: string;
   onSelect?: (value: string) => void;
   optimizationType?: OptimizationType;
   report?: RecommendationReportData;
@@ -38,8 +41,10 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
   breadcrumbPath,
   currentInterval,
   isDisabled,
+  isOptimizationsDetails,
   onSelect,
   optimizationType,
+  projectPath,
   report,
 }) => {
   const intl = useIntl();
@@ -48,7 +53,7 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
 
   const getBackToLink = () => {
     return (
-      <Link to={breadcrumbPath} state={location.state}>
+      <Link to={breadcrumbPath} state={{ ...location.state }}>
         {breadcrumbLabel ? breadcrumbLabel : intl.formatMessage(messages.breakdownBackToOptimizations)}
       </Link>
     );
@@ -60,8 +65,8 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
     const cluster = clusterAlias ? clusterAlias : clusterUuid;
 
     const lastReported = report ? getTimeFromNow(report.last_reported) : '';
-    const project = report?.project ? report.project : '';
-    const workload = report?.workload ? report.workload : '';
+    const project = report?.project ? report.project : undefined;
+    const workload = report?.workload ? report.workload : undefined;
     const workloadType = report?.workload_type ? report.workload_type : '';
 
     return (
@@ -78,7 +83,14 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
           <TextListItem component={TextListItemVariants.dt}>
             {intl.formatMessage(messages.optimizationsValues, { value: 'project' })}
           </TextListItem>
-          <TextListItem component={TextListItemVariants.dd}>{project}</TextListItem>
+          <TextListItem component={TextListItemVariants.dd}>
+            <OptimizationsBreakdownProjectLink
+              breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: project })}
+              isOptimizationsDetails={isOptimizationsDetails}
+              linkPath={projectPath}
+              project={project}
+            />
+          </TextListItem>
           <TextListItem component={TextListItemVariants.dt}>
             {intl.formatMessage(messages.optimizationsValues, { value: 'workload_type' })}
           </TextListItem>
