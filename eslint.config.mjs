@@ -176,7 +176,7 @@ export default [{
         radix: ['error', 'as-needed'],
         'react-hooks/exhaustive-deps': 0,
         'react/display-name': 0,
-
+        'react/no-is-mounted': 0,
         'react/no-unescaped-entities': ['error', {
             forbid: ['>', '}'],
         }],
