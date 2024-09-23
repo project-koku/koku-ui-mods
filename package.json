@@ -59,7 +59,7 @@
     "@redhat-cloud-services/frontend-components-notifications": "^4.1.0",
     "@redhat-cloud-services/frontend-components-translations": "^3.2.8",
     "@redhat-cloud-services/frontend-components-utilities": "^4.0.17",
-    "@redhat-cloud-services/rbac-client": "^2.2.3",
+    "@redhat-cloud-services/rbac-client": "^2.2.4",
     "@reduxjs/toolkit": "^2.2.7",
     "@unleash/proxy-client-react": "^4.3.1",
     "axios": "^1.7.7",
@@ -103,7 +103,7 @@
     "@xstate/test": "^0.5.1",
     "aphrodite": "^2.4.0",
     "copy-webpack-plugin": "^12.0.2",
-    "eslint": "^9.10.0",
+    "eslint": "^9.11.0",
     "eslint-plugin-formatjs": "^4.14.0",
     "eslint-plugin-jest-dom": "^5.4.0",
     "eslint-plugin-jsdoc": "^50.2.4",
@@ -133,7 +133,7 @@
   },
   "overrides": {
     "@typescript-eslint/eslint-plugin": "^8.6.0",
-    "eslint": "^9.10.0",
+    "eslint": "^9.11.0",
     "redux": "^5.0.1"
   },
   "insights": {
