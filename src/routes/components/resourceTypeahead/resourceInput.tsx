@@ -50,7 +50,7 @@ const ResourceInput: React.FC<ResourceInputProps> = ({
 
   // apply focus to the text input
   const focusTextInput = () => {
-    textInputGroupRef.current.querySelector('input').focus();
+    textInputGroupRef?.current.querySelector('input').focus();
   };
 
   const getInputGroup = () => {
@@ -149,9 +149,9 @@ const ResourceInput: React.FC<ResourceInputProps> = ({
   // Close menu when a click occurs outside the menu or text input group
   const handleOnPopperClick = event => {
     if (
-      menuRef.current &&
-      !menuRef.current.contains(event.target) &&
-      !textInputGroupRef.current.contains(event.target)
+      menuRef?.current &&
+      !menuRef?.current.contains(event.target) &&
+      !textInputGroupRef?.current.contains(event.target)
     ) {
       setIsOpen(false);
     }
@@ -171,7 +171,7 @@ const ResourceInput: React.FC<ResourceInputProps> = ({
       case 'ArrowUp':
       case 'ArrowDown':
         // Allow focus on the menu and navigate using the arrow keys
-        if (menuRef.current) {
+        if (menuRef?.current) {
           const firstElement = menuRef.current.querySelector('li > button:not(:disabled)');
           (firstElement as any)?.focus();
         }
@@ -186,7 +186,7 @@ const ResourceInput: React.FC<ResourceInputProps> = ({
     <Popper
       trigger={getInputGroup()}
       popper={getMenu()}
-      appendTo={() => textInputGroupRef.current}
+      appendTo={() => textInputGroupRef?.current}
       isVisible={isOpen}
       onDocumentClick={handleOnPopperClick}
     />

@@ -279,7 +279,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
   };
 
   const handleOnResize = () => {
-    const { clientWidth = 0 } = containerRef.current || {};
+    const { clientWidth = 0 } = containerRef?.current || {};
 
     if (clientWidth !== width) {
       setWidth(clientWidth);
@@ -400,7 +400,7 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
   }, [limitData, requestData, usageData]);
 
   useEffect(() => {
-    const unobserve = getResizeObserver(containerRef.current, handleOnResize);
+    const unobserve = getResizeObserver(containerRef?.current, handleOnResize);
     return () => {
       if (unobserve) {
         unobserve();
