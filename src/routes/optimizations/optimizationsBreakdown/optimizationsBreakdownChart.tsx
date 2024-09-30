@@ -171,6 +171,24 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
 
     const labelFormatter = datum => {
       const formatValue = val => (val !== undefined ? val : '');
+      let units = datum.units;
+
+      /**
+       * The recommendations API intentionally omits CPU request and limit units when "cores".
+       *
+       * The yaml format for the resource units needs to adhere to the Kubernetes standard that is outlined here
+       * https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+       *
+       * Example. "45 millicores" is represented as "45m", 64 MiB is represented as "64Mi",
+       * 2.3 cores is represented as "2.3" (Note cores is not specified)
+       */
+      if (
+        (datum.childName === 'limit' || datum.childName === 'request' || datum.childName === 'usage') &&
+        datum.units === ''
+      ) {
+        units = unitsLookupKey('cores');
+      }
+
       if (datum.childName === 'scatter') {
         return null;
       } else if (
@@ -189,26 +207,13 @@ const OptimizationsBreakdownChart: React.FC<OptimizationsBreakdownChartProps> = 
           median: formatValue(datum._median !== undefined ? datum._median : datum.yVal),
           q1: formatValue(datum._q1 !== undefined ? datum._q1 : datum.yVal),
           q3: formatValue(datum._q3 !== undefined ? datum._q3 : datum.yVal),
-          units: intl.formatMessage(messages.units, { units: unitsLookupKey(datum.units) }),
+          units: intl.formatMessage(messages.units, { units: unitsLookupKey(units) }),
         });
       }
 
       // With box plot, datum.y will be an array
       const yVal = Array.isArray(datum.y) ? datum.y[0] : datum.y;
-      let units = datum.units;
 
-      /**
-       * The recommendations API intentionally omits CPU request and limit units when "cores".
-       *
-       * The yaml format for the resource units needs to adhere to the Kubernetes standard that is outlined here
-       * https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-       *
-       * Example. "45 millicores" is represented as "45m", 64 MiB is represented as "64Mi",
-       * 2.3 cores is represented as "2.3" (Note cores is not specified)
-       */
-      if ((datum.childName === 'limit' || datum.childName === 'request') && datum.units === '') {
-        units = unitsLookupKey('cores');
-      }
       return yVal !== null
         ? intl.formatMessage(messages.valueUnits, {
             value: yVal,
