@@ -36,7 +36,9 @@ const OptimizationsDetailsStaging: React.FC<OptimizationsDetailsStagingProps> = 
   return (
     <PageSection isFilled>
       <OptimizationsTable
-        breadcrumbLabel={intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: groupByValue })}
+        breadcrumbLabel={
+          intl.formatMessage(messages.breakdownBackToOptimizationsProject, { value: groupByValue }) as string
+        }
         breadcrumbPath={formatPath(`${routes.optimizationsTable.path}${location.search}`)}
         cluster={clusterFilter}
         hideCluster={groupBy === 'cluster'}
