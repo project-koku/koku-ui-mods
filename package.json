@@ -75,7 +75,7 @@
     "redux": "^5.0.1",
     "redux-thunk": "^3.1.0",
     "typesafe-actions": "^5.1.0",
-    "victory": "37.3.2",
+    "victory": "37.3.4",
     "yaml": "^2.6.1"
   },
   "devDependencies": {
