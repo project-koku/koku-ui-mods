@@ -57,7 +57,7 @@
     "@patternfly/react-table": "5.4.11",
     "@patternfly/react-tokens": "5.4.1",
     "@redhat-cloud-services/frontend-components": "^4.2.22",
-    "@redhat-cloud-services/frontend-components-notifications": "^4.1.1",
+    "@redhat-cloud-services/frontend-components-notifications": "^4.1.2",
     "@redhat-cloud-services/frontend-components-translations": "^3.2.11",
     "@redhat-cloud-services/frontend-components-utilities": "^5.0.3",
     "@reduxjs/toolkit": "^2.5.0",
@@ -81,7 +81,7 @@
   "devDependencies": {
     "@eslint/compat": "^1.2.4",
     "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.16.0",
+    "@eslint/js": "^9.17.0",
     "@formatjs/cli": "^6.3.14",
     "@formatjs/ecma402-abstract": "^2.3.1",
     "@formatjs/fast-memoize": "^2.2.5",
